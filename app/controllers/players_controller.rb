@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
       flash[:success] = "New player created! Welcome to the game!"
       redirect_to @player
     else
-      flash[:error] = "Unable to add your information"
+      flash[:error] = "Unable to create player"
       render :back
     end
   end
@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
     @player = Player.find_by_username(params[:id])
     if @player.update_attributes(edit_player_params)
       @player.save
-      flash[:success] = "New player created! Welcome to the game!"
+      flash[:success] = "Updated #{@player.name} successfully!"
       redirect_to @player
     else
       flash[:error] = "Unable to update player"

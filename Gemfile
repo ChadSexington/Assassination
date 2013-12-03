@@ -64,6 +64,9 @@ gem 'strong_parameters'
 # Use Nokogiri to parse html and xml
 gem 'nokogiri'
 
+# Markdown rendering
+gem 'redcarpet'
+
 # Use paperclip as an image attachment handler
 # Requires rmagick
 gem 'paperclip' 

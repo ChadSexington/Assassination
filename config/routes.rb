@@ -4,11 +4,11 @@ RailsApp::Application.routes.draw do
 #  get "player/edit"
 #  get "player/index"
   get "welcome/index"
-  get "welcome/about"
   get "welcome/handbook"
 
   match "sessions/logout" => "sessions#destroy"
   match "players/index" => "players#index"
+  match "welcome/about" => "welcome#about"
 
   resources :players
   resources :sessions
