@@ -35,8 +35,8 @@ fi
 # PAPERCLIP ASSET CONFIGURATION SHIT #
 ######################################
 
-STORED_IMAGE_ASSETS="${OPENSHIFT_DATA_DIR}assets/images" 
-LIVE_IMAGE_ASSETS="${OPENSHIFT_REPO_DIR}public/assets/images"
+STORED_IMAGE_ASSETS="${OPENSHIFT_DATA_DIR}images" 
+LIVE_IMAGE_ASSETS="${OPENSHIFT_REPO_DIR}public/images"
 
 # Ensure the image asset directory exists
 if [ ! -d "${STORED_IMAGE_ASSETS}" ]; then
