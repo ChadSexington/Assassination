@@ -36,7 +36,7 @@ fi
 ######################################
 
 STORED_IMAGE_ASSETS="${OPENSHIFT_DATA_DIR}public/images" 
-LIVE_IMAGE_ASSETS="${OPENSHIFT_REPO_DIR}public/images"
+LIVE_IMAGE_ASSETS="${OPENSHIFT_REPO_DIR}public/"
 
 # Ensure the image asset directory exists
 if [ ! -d "${STORED_IMAGE_ASSETS}" ]; then
@@ -50,7 +50,7 @@ if [ ! -d "${LIVE_IMAGE_ASSETS}" ]; then
   mkdir "${LIVE_IMAGE_ASSETS}"
 fi
 
-ln -sf "${LIVE_IMAGE_ASSETS}" "${STORED_IMAGE_ASSETS}"
+ln -sf "${STORED_IMAGE_ASSETS}" "${LIVE_IMAGE_ASSETS}"
 
 ######################################
 # http://stackoverflow.com/questions/16678669/paperclip-configuration-to-use-with-openshift/
