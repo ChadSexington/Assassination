@@ -1,23 +1,45 @@
 <%= form_for @player do |f| %>
   <% if @player.errors.any? %>
-  <div id="errorExplanation" class="well well-small">
-    <h2><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h2>
+  <div id="errorExplanation" class="well well-small" style="border-color: #FF0000">
+    <h4><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h4>
     <ul>
+    <font color="#FF0000">
     <% @player.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
+    </font>
     </ul>
   </div>
   <% end %>
-  <%= f.label "Full Player Name" %>
-    <%= f.text_field :name, :class => "span3" %>
-  <%= f.label "Red Hat Email" %>
-    <%= f.text_field :email, :class => "span3" %>
-  <%= f.label "Red Hat IRC Nick" %>
-    <%= f.text_field :irc_nick, :class => "span2" %>
-  <%= f.label "Photo" %>
-    <%= f.file_field :photo %>
-  <%= f.label "Notes" %>
+  <div class="row">
+    <div class="span6">
+      <%= f.label "Full Player Name" %>
+        <%= f.text_field :name, :class => "span3" %>
+      <%= f.label "Red Hat Email" %>
+        <%= f.text_field :email, :class => "span3" %>
+      <%= f.label "Red Hat IRC Nickname" %>
+        <%= f.text_field :irc_nick, :class => "span2" %>
+      <%= f.label "Photo" %>
+        <%= f.file_field :photo %>
+      </div>
+    <div class="span4">
+      <div class="well well-small">
+        <h4 class="text-center">All fields required except notes</h4>
+        <p class="lead">
+          <ul>
+            <li>Full Player name must be within 3-30 characters
+            <li>Email must be valid
+            <li>Photo must be present
+            <ul>
+              <li>This will make your card look much better
+            </ul>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+    <br>
+  <%= f.label "Notes (optional)" %>
     <%= f.text_area :notes, :class => "span10", :rows => "5" %>
   <br><br>
   <%#-= f.submit 'Register', :disabled => "true", :class => "btn btn-custom disabled" %>

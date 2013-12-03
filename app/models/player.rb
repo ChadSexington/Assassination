@@ -10,9 +10,11 @@ has_attached_file :photo,
   :path => "#{CONFIG[:data_dir]}public/images/:id.:extension"
 
 # Validations to ensure uniqeness and... stuff
-validates_uniqueness_of :email, :name
+validates_uniqueness_of :email, :name, :irc_nick
 validates_length_of :name, :within => 3..30
+validates_length_of :notes, :within => 0..250
 validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+validates_presence_of :email, :name, :irc_nick, :photo
 
 # Before the initial save, set attributes defined using other attributes
 before_save :define_extraneous

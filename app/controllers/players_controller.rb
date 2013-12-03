@@ -10,8 +10,7 @@ class PlayersController < ApplicationController
       flash[:success] = "New player created! Welcome to the game!"
       redirect_to @player
     else
-      flash[:error] = "Unable to create player"
-      render :back
+      render 'new'
     end
   end
 
