@@ -16,6 +16,7 @@
     <% if admin? %>
       <%= menu_item "Players", '/players/index' %>
     <% end %>
+    <%= menu_item "Handbook", '/welcome/handbook' %>
     <%= menu_item "About", '/welcome/about' %>
   <% end %>
   <%= menu_group :pull => :right do %>
@@ -48,7 +49,7 @@
 <div class="push"></div>
 </div>
 <div class="footer">
-<div class="text-bottom span2 offset12">
+<div class="text-bottom span2 offset10">
 <p>
 <a href="http://openshift.com"><img src="/assets/powered-by-openshift.png"></a>
 </p>
