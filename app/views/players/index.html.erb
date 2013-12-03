@@ -1,0 +1,6 @@
+<h1>Players</h1>
+<% @players.each do |p| %>
+  <% @player = p %>
+  <%= render 'show_player' %>
+<% end %>
+

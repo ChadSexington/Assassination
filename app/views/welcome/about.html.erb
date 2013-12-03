@@ -1,0 +1,28 @@
+<h1>About <%= CONFIG[:project_name] %></h1>
+<p class="lead">
+<%= CONFIG[:project_name] %>  is a social elimination/assasination game using nerf guns.
+</p>
+<br>
+<div class="well">
+<p>
+<h4>Summary</h4>
+<%= CONFIG[:project_name] %> is a social elimiation or assasination game utilizing nerf guns. Everyone involved is given a card. On this card is someone else who is playing. Your goal is to "take out" that person by shooting them with a nerf gun. When you "take out" someone, you will take their card. Your goal now becomes to "take out" the person on their card.<br><br>
+<quote>The last one standing wins</quote>
+</p>
+<p>
+<h4>Rules</h4>
+<ol>
+<li>This is rule number one
+<li>This is rule number two
+</ol>
+</p>
+<div class="well well-small">
+<h4 align="center" style="color: @FF0000;">If you break the rules, you will be removed from the game</h4>
+</div>
+</div>
+<% if not admin? %>
+  <div class="fixed-bottom span2 offset12">
+    <p><%= link_to 'Login', new_session_path, :class => "hidden-link" %></p>
+  </div>
+<% end %>
+

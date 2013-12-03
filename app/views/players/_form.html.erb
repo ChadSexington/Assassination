@@ -1,0 +1,15 @@
+<%= form_for @player do |f| %>
+  <%= f.label "Full Player Name" %>
+    <%= f.text_field :name, :class => "span3" %>
+  <%= f.label "Red Hat Email" %>
+    <%= f.text_field :email, :class => "span3" %>
+  <%= f.label "Red Hat IRC Nick" %>
+    <%= f.text_field :irc_nick, :class => "span2" %>
+  <%= f.label "Photo" %>
+    <%= f.file_field :photo %>
+  <%= f.label "Notes" %>
+    <%= f.text_area :notes, :class => "span10" %>
+  <br><br>
+  <%#-= f.submit 'Register', :disabled => "true", :class => "btn btn-custom disabled" %>
+  <%= f.submit 'Register', :class => "btn btn-custom" %>
+<% end %>
