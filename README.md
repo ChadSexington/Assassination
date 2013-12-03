@@ -10,3 +10,12 @@
   - This defines the content in /welcome/about. It is a markdown file, which is rendered in the browser. 
   - Convention is to use ### for section headers such as "rules" and "code of conduct".
 
+###TODO
+------------------
+- Implement user authentication. 
+- Add multiple mailers
+  - One to initiate/confirm new players
+  - One to send out new targets
+  - One to mass-mail event notices (starts and stops)
+  - Maybe more idk
+
