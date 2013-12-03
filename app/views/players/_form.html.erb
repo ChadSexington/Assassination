@@ -14,11 +14,11 @@
   <div class="row">
     <div class="span6">
       <%= f.label "Full Player Name" %>
-        <%= f.text_field :name, :class => "span3" %>
+        <%= f.text_field :name, :class => "span3", :placeholder => "Jim Whitehurst" %>
       <%= f.label "Red Hat Email" %>
-        <%= f.text_field :email, :class => "span3" %>
+        <%= f.text_field :email, :class => "span3", :placeholder => "jwhitehurst@redhat.com" %>
       <%= f.label "Red Hat IRC Nickname" %>
-        <%= f.text_field :irc_nick, :class => "span2" %>
+        <%= f.text_field :irc_nick, :class => "span2", :placeholder => "jwhitehurst" %>
       <%= f.label "Photo" %>
         <%= f.file_field :photo %>
       </div>
@@ -40,7 +40,7 @@
   </div>
     <br>
   <%= f.label "Notes (optional)" %>
-    <%= f.text_area :notes, :class => "span10", :rows => "5" %>
+    <%= f.text_area :notes, :class => "span10", :rows => "5", :placeholder => "These notes will show up on your card that is given to the other players. Write something fun (no profanities)!" %>
   <br><br>
   <%#-= f.submit 'Register', :disabled => "true", :class => "btn btn-custom disabled" %>
   <%= f.submit 'Register', :class => "btn btn-custom" %>
