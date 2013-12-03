@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
 
   def new
     @player = Player.new()
+    flash[:success] = "The game is not live. Registration will not carry over when the game starts."
   end
 
   def create
