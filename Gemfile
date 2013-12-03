@@ -65,5 +65,6 @@ gem 'strong_parameters'
 gem 'nokogiri'
 
 # Use paperclip as an image attachment handler
+# Requires rmagick
 gem 'paperclip' 
 gem 'rmagick'
