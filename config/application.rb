@@ -14,6 +14,7 @@ CONFIG = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
 CONFIG.merge! CONFIG.fetch(Rails.env, {})
 CONFIG.symbolize_keys!
 
+# This is required for paperclip to work with openshift
 if ENV['OPENSHIFT_DATA_DIR']
   CONFIG[:data_dir] = ENV['OPENSHIFT_DATA_DIR']
 end

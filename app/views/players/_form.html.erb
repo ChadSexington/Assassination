@@ -1,4 +1,14 @@
 <%= form_for @player do |f| %>
+  <% if @player.errors.any? %>
+  <div id="errorExplanation" class="well well-small">
+    <h2><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h2>
+    <ul>
+    <% @player.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
   <%= f.label "Full Player Name" %>
     <%= f.text_field :name, :class => "span3" %>
   <%= f.label "Red Hat Email" %>
