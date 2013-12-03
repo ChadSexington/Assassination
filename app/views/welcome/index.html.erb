@@ -1,12 +1,17 @@
 <div class="row">
-  <div class="hero-unit" style="word-wrap:break-word">
-    <h1><%= CONFIG[:project_name] %> </h1><h3>(The Game)</h3><br>
-    <p class="lead">
-      Register now to be part of the game!
-    </p>
-    <p>
-      <a class="btn btn-large btn-primary btn-custom" href="/players/new">Register &raquo;</a>
-    </p>
+  <div class="hero-unit" style="word-wrap:break-word; height: 280px">
+    <div class="span6">
+      <h1><%= CONFIG[:project_name] %> </h1><h3>(The Game)</h3><br>
+      <p class="lead">
+        Register now to be part of the game!
+      </p>
+      <p>
+        <a class="btn btn-large btn-primary btn-custom" href="/players/new">Register &raquo;</a>
+      </p>
+    </div>
+    <div class="span4">
+      <%= image_tag 'nerf-guns.jpg' %>
+    </div>
   </div>
 </div>
 <div class="row">
