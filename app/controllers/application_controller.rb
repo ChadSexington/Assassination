@@ -10,12 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-#    if session[:player]
-#      session[:player].email == CONFIG[:admin_email]
-#    else
-#      false
-#    end
-  true
+    if session[:player]
+      session[:player].email == CONFIG[:admin_email]
+    else
+      false
+    end
   end
   
   helper_method :logged_in?
