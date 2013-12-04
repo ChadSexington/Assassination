@@ -1,9 +1,23 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  def admin?
-    session[:password] == CONFIG[:admin_password]
+  def logged_in?
+    if session[:player]
+      return true
+    else
+      return nil
+    end
   end
+
+  def admin?
+    if session[:player]
+      session[:player].email == CONFIG[:admin_email]
+    else
+      false
+    end
+  end
+  
+  helper_method :logged_in?
   helper_method :admin?
 
 end

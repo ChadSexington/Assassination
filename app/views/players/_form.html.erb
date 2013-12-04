@@ -1,7 +1,7 @@
 <%= form_for @player do |f| %>
   <% if @player.errors.any? %>
   <div id="errorExplanation" class="well well-small" style="border-color: #FF0000">
-    <h4><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h4>
+    <h4><%= pluralize(@player.errors.count, "error") %> prohibited your player from being created:</h4>
     <ul>
     <font color="#FF0000">
     <% @player.errors.full_messages.each do |msg| %>
@@ -17,6 +17,10 @@
         <%= f.text_field :name, :class => "span3", :placeholder => "Jim Whitehurst" %>
       <%= f.label "Red Hat Email" %>
         <%= f.text_field :email, :class => "span3", :placeholder => "jwhitehurst@redhat.com" %>
+      <%= f.label "Password" %>
+        <%= f.password_field 'password', :class => "span3", :placeholder => "*************" %>
+      <%= f.label "Confirm Password" %>
+        <%= f.password_field 'password_confirmation', :class => "span3", :placeholder => "*************" %>
       <%= f.label "Red Hat IRC Nickname" %>
         <%= f.text_field :irc_nick, :class => "span2", :placeholder => "jwhitehurst" %>
       <%= f.label "Photo" %>
@@ -29,6 +33,8 @@
           <ul>
             <li>Full Player name must be within 3-30 characters
             <li>Email must be valid
+            <li>Password must be within 5-30 characters
+            <li><font color="#FF0000"><em>Do not use your Red Hat Account password.</em></font>
             <li>Photo must be present
             <ul>
               <li>This will make your card look much better

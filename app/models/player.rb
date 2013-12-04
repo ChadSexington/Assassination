@@ -1,5 +1,10 @@
 class Player < ActiveRecord::Base
 
+attr_accessor :password, :password_confirmation
+
+# This is necessary for authentication stuffs
+require 'digest/sha1'
+
 # This defines the photo attachment.
 # DO NOT change the url and path. Took hours to get this right and it corelates with many other places in the code
 has_attached_file :photo, 
@@ -12,14 +17,38 @@ has_attached_file :photo,
 # Validations to ensure uniqeness and... stuff
 validates_uniqueness_of :email, :name, :irc_nick
 validates_length_of :name, :within => 3..30
+validates_length_of :password, :within => 5..30 
+validates_confirmation_of :password
 validates_length_of :notes, :within => 0..250
 validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-validates_presence_of :email, :name, :irc_nick, :photo
+validates_presence_of :email, :name, :irc_nick, :photo, :password, :password_confirmation, :salt
 
 # Before the initial save, set attributes defined using other attributes
-before_save :define_extraneous
- 
-  def define_extraneous
+before_save :define_username, :define_hashed_password
+
+  def password=(pass)
+    @password=pass
+    self.salt = random_string(10) if not self.salt
+    self.hashed_password = Player.encrypt(@password, self.salt)
+  end
+
+  # Pass a login and password. This will then search the database for the login
+  # And then check the password to be sure it is correct
+  #
+  # If it is correct, it will RETRUN THE PLAYER
+  #
+  # if it is incorrect, it will RETURN NIL
+  def self.authenticate(email, pass)
+    player = find(:first, :conditions => ["email = ?", email])
+    return nil if not player
+    return player if Player.encrypt(pass, player.salt) == player.hashed_password
+  end
+
+  def define_hashed_password
+    puts "lolwut"
+  end
+
+  def define_username
     username = self.email.split("@").first
     self.username = username
   end
@@ -27,6 +56,19 @@ before_save :define_extraneous
 # use the username in the url instead of some integer id 
   def to_param
     self.username  
+  end
+
+private
+  
+  def self.encrypt(pass, salt)
+    Digest::SHA1.hexdigest(pass+salt)
+  end
+
+  def random_string(len)
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    newpass = ""
+    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
+    return newpass
   end
 
 end

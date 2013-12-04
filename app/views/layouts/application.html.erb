@@ -14,15 +14,31 @@
   <%= menu_group do %>
     <%= menu_item "Home", '/welcome/index' %>
     <% if admin? %>
-      <%= menu_item "Players", '/players/index' %>
+      <%= menu_item "Administration", '/administration/index' %>
     <% end %>
+    <%= menu_item "Central", '/welcome/central' %>
     <%= menu_item "Handbook", '/welcome/handbook' %>
     <%= menu_item "About", '/welcome/about' %>
   <% end %>
-  <%= menu_group :pull => :right do %>
-    <%= menu_item "Register", '/players/new' %>
-    <% if admin? %>
-      <%= menu_item "Logout", '/sessions/logout' %>
+  <% if not logged_in? %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item "Register", '/players/new' %>
+    <% end %>
+  <% end %>
+  <% if not logged_in? %>
+    <%= menu_group :pull => :right do %>
+      <form class="form-inline navbar-form" action="/players/login">
+        <input type="text" name="player[email]" class="input-small" placeholder="Email">
+        <input type="password" name="player[password]" class="input-small" placeholder="Password">
+        <button type="submit" class="btn btn-small btn-custom">Login</button>
+      </form>
+    <% end %>
+  <% else %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item "Logout", '/players/logout' %>
+    <% end %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item session[:player].email, "/players/#{session[:player].username}", :class => "brand" %></p>
     <% end %>
   <% end %>
 <% end %>

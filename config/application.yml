@@ -1,5 +1,5 @@
 # Configuration goes here in YAML
 # Tese can be called in code with CONFIG[:key]
 project_name: "Assassination"
-admin_password: "redhat"
+admin_email: "tiwillia@redhat.com"
 data_dir: "/home/tiwillia/Projects/assassination/"

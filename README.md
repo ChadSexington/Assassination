@@ -12,7 +12,9 @@
 
 ###TODO
 ------------------
-- Implement user authentication. 
+- Implement user authentication.
+  - Following most of http://www.aidanf.net/2006/05/28/rails-authentication-tutorial.html
+  - Note that the above is old. May need to be adapted 
 - Add multiple mailers
   - One to initiate/confirm new players
   - One to send out new targets

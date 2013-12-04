@@ -1,14 +1,17 @@
 RailsApp::Application.routes.draw do
 
-#  get "player/new"
-#  get "player/edit"
-#  get "player/index"
+  get "administration/index"
+  get "administration/players"
   get "welcome/index"
   get "welcome/handbook"
+  get "welcome/central"
 
+  match "administration" => "administration#index"
   match "sessions/logout" => "sessions#destroy"
   match "players/index" => "players#index"
   match "welcome/about" => "welcome#about"
+  match "players/login" => "players#login"
+  match "players/logout" => "players#logout"
 
   resources :players
   resources :sessions

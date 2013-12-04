@@ -3,3 +3,5 @@ config/application.yml.sample
 log
 public/system
 public/assets
+public/images
+*.swp
