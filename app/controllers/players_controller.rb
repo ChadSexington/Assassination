@@ -24,10 +24,10 @@ class PlayersController < ApplicationController
   def update
     @player = Player.find_by_username(params[:id])
     if @player.update_attributes(edit_player_params)
-      @player.save
       flash[:success] = "Updated #{@player.name} successfully!"
       redirect_to @player
     else
+      Rails.logger.info(@player.errors.messages.inspect)
       flash[:error] = "Unable to update player"
       redirect_to edit_player_path(@player)
     end
@@ -44,7 +44,7 @@ class PlayersController < ApplicationController
   def show
     if session[:player]
       if @player = Player.find_by_username(params[:id])
-        if not @player.username == session[:player].username
+        if not @player.username == session[:player].username || admin?
           flash[:error] = "You do not have access to this player's profile"
           redirect_to '/welcome/index'
         end
@@ -68,6 +68,10 @@ class PlayersController < ApplicationController
       flash[:error] = player + " could not be deleted"
       redirect_to :back
     end
+  end
+
+  def change_password
+    @player = Player.find_by_username(params[:id])
   end
 
   def login
@@ -100,7 +104,7 @@ private
   end
 
   def edit_player_params
-    params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo)
+    params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo)
   end
   
   def login_params

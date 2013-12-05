@@ -16,7 +16,12 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-  
+ 
+  def player_self?(player)
+    player.username == session[:player].username
+  end
+
+  helper_method :player_self? 
   helper_method :logged_in?
   helper_method :admin?
 

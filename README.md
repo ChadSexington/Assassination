@@ -12,12 +12,21 @@
 
 ###TODO
 ------------------
+- Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
-  - Add ability for user's to edit their own profile
-  - Add ability for user's to change their password
+  - Finish adding ability for user's to change their password
+  - Fix edit player not showing form errors
   - Add confirmation mailer (see below)
+  - Add a switch for a user to be an admin, instead of checking a configuration
+    - This will allow for multiple admins, which is necessary.
   - Following most of http://www.aidanf.net/2006/05/28/rails-authentication-tutorial.html
   - Note that the above is old. May need to be adapted 
+- Make the handbook a pdf
+  - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
+- Finish/create the player profile page.
+  - Pictures should be cropped to a standard size
+  - Maybe pull information from home.corp.redhat.com?
+  - Just keep it simple...
 - Add multiple mailers
   - One to initiate/confirm new players
   - One to send out new targets
@@ -30,3 +39,4 @@
 - Devise a method for kills to be recoreded in events controller via visiting a link in a QR code
 - Create a view for the actual card that will be printed out.
   - This should reflect what will be emailed in one of the mailers above
+- Devise a social model where players can 'message' each other and comment on kills

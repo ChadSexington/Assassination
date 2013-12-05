@@ -6,12 +6,12 @@ RailsApp::Application.routes.draw do
   get "welcome/handbook"
   get "welcome/central"
 
-  match "administration" => "administration#index"
-  match "sessions/logout" => "sessions#destroy"
-  match "players/index" => "players#index"
   match "welcome/about" => "welcome#about"
+  match "administration" => "administration#index"
   match "players/login" => "players#login"
   match "players/logout" => "players#logout"
+  match "players/change_password" => "players#change_password"
+  match "players/index" => "players#index"
 
   resources :players
   resources :sessions

@@ -17,10 +17,12 @@
         <%= f.text_field :name, :class => "span3", :placeholder => "Jim Whitehurst" %>
       <%= f.label "Red Hat Email" %>
         <%= f.text_field :email, :class => "span3", :placeholder => "jwhitehurst@redhat.com" %>
-      <%= f.label "Password" %>
-        <%= f.password_field 'password', :class => "span3", :placeholder => "*************" %>
-      <%= f.label "Confirm Password" %>
-        <%= f.password_field 'password_confirmation', :class => "span3", :placeholder => "*************" %>
+      <% if request.url.split("/").last == "new" %>
+        <%= f.label "Password" %>
+          <%= f.password_field 'password', :class => "span3", :placeholder => "*************" %>
+        <%= f.label "Confirm Password" %>
+          <%= f.password_field 'password_confirmation', :class => "span3", :placeholder => "*************" %>
+      <% end %>
       <%= f.label "Red Hat IRC Nickname" %>
         <%= f.text_field :irc_nick, :class => "span2", :placeholder => "jwhitehurst" %>
       <%= f.label "Photo" %>

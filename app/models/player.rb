@@ -17,14 +17,15 @@ has_attached_file :photo,
 # Validations to ensure uniqeness and... stuff
 validates_uniqueness_of :email, :name, :irc_nick
 validates_length_of :name, :within => 3..30
-validates_length_of :password, :within => 5..30 
+validates_length_of :password, :within => 5..30, :if => :password_validation_required?
 validates_confirmation_of :password
 validates_length_of :notes, :within => 0..250
 validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
-validates_presence_of :email, :name, :irc_nick, :photo, :password, :password_confirmation, :salt
+validates_presence_of :email, :name, :irc_nick, :photo
+validates_presence_of :password, :password_confirmation, :salt, :if => :password_validation_required?
 
 # Before the initial save, set attributes defined using other attributes
-before_save :define_username, :define_hashed_password
+before_save :define_username
 
   def password=(pass)
     @password=pass
@@ -44,8 +45,8 @@ before_save :define_username, :define_hashed_password
     return player if Player.encrypt(pass, player.salt) == player.hashed_password
   end
 
-  def define_hashed_password
-    puts "lolwut"
+  def password_validation_required?
+    hashed_password.blank? || !@password.blank?
   end
 
   def define_username

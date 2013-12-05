@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Red Hat <%= CONFIG[:project_name] %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<div class="wrapper">
+
+<%= nav_bar :responsive => true, :fixed => :top, :brand => CONFIG[:project_name], :brand_link => '/welcome/index' do %>
+  <%= menu_group do %>
+    <%= menu_item "Home", '/welcome/index' %>
+    <% if admin? %>
+      <%= menu_item "Administration", '/administration/index' %>
+    <% end %>
+    <%= menu_item "Central", '/welcome/central' %>
+    <%= menu_item "Handbook", '/welcome/handbook' %>
+    <%= menu_item "About", '/welcome/about' %>
+  <% end %>
+  <% if not logged_in? %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item "Register", '/players/new' %>
+    <% end %>
+  <% end %>
+  <% if not logged_in? %>
+    <%= menu_group :pull => :right do %>
+      <form class="form-inline navbar-form" action="/players/login">
+        <input type="text" name="player[email]" class="input-small" placeholder="Email">
+        <input type="password" name="player[password]" class="input-small" placeholder="Password">
+        <button type="submit" class="btn btn-small btn-custom">Login</button>
+      </form>
+    <% end %>
+  <% else %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item "Logout", '/players/logout' %>
+    <% end %>
+    <%= menu_group :pull => :right do %>
+      <%= menu_item session[:player].email, "/players/#{session[:player].username}", :class => "brand" %></p>
+    <% end %>
+  <% end %>
+<% end %>
+
+  <div class="container-fluid">
+    <% if flash[:success] || flash[:info] || flash[:error] %>
+      <div class="row">
+        <div class="span4">
+          <% if flash[:success] %>
+            <% alert_type = "success"; alert = flash[:success] %>
+          <% elsif flash[:info] %>
+            <% alert_type = "info"; alert = flash[:info] %>
+          <% elsif flash[:error] %>
+            <% alert_type = "error"; alert = flash[:error] %>
+          <% end %>
+            <div class="alert alert-<%= alert_type %>">
+                <strong><%= alert %></strong>
+            </div>
+        </div>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+<div class="push"></div>
+</div>
+<div class="footer">
+<div class="text-bottom span2 offset10">
+<p>
+<a href="http://openshift.com"><img src="/assets/powered-by-openshift.png"></a>
+</p>
+</div>
+</div>
+</body>
+
+</html>
