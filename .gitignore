@@ -1,6 +1,6 @@
 tmp
 config/application.yml.sample
-log
+log/*
 public/system
 public/assets
 public/images
