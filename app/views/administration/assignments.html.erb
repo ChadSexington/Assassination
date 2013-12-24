@@ -1,0 +1,33 @@
+<h1>Generate Assignments</h1>
+<br>
+<div class="well">
+
+<!-- 
+
+The idea here is to create a page,
+populate it with player names,
+and offer checkboxes per player
+in case someone is unavailable for a 
+given round.
+
+Once a "Create" button has been hit
+it will invoke some algorithm (in 
+assignment_controller.rb?) that will
+create a bracket for the week. This
+should take into account who their
+previous target was.
+
+-->
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+    	<ul class="list-group">
+    	<%=  @players do |p| %>
+      		<li class="list-group-item">
+      			<label class="checkbox"><input type="checkbox" value="p.name">
+      		</li>
+     	<% end %>
+     	</ul>	
+    </div><!-- /input-group -->
+</div>

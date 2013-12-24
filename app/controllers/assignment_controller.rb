@@ -1,7 +1,7 @@
 class AssignmentController < ApplicationController
   
   def new
-    
+    @assignment = Assignment.new
   end
   
   def create
