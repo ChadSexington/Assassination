@@ -6,7 +6,7 @@ attr_accessor :password, :password_confirmation
 require 'digest/sha1'
 
 # This defines the photo attachment.
-# DO NOT change the url and path. Took hours to get this right and it corelates with many other places in the code
+# DO NOT change the url and path. Took hours to get this right and it correlates with many other places in the code
 has_attached_file :photo, 
   :styles => {
     :thumb => "100x100#",
