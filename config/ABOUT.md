@@ -13,16 +13,25 @@ Assassination is a social elimiation or assassination game utilizing nerf guns. 
 
 
 ####Rules
-1. This is rule #1
-2. This is rule #2
-
+1. Do not 'kill' outside of the mandated killzones.
+2. Do not 'kill' those who are not playing the game. This includes by accident.
+3. Record your 'kills'. This will not be done for you and is your sole responsibility.
+4. Only nerf pistols and Rifles are allowed
+5. Damage to other's property is not allowed.
+6. Realistic weapons (Those that look like real guns) are not allowed.
+8. Do not impersonate authority figures (I.E. Managment or POLICE).
+9. Those who have been blacklisted are free game, kill away.
+10. Force is not permitted nor is it necessary
 
 ####Code of Conduct
-blah blah blah blah
+1. Respect others space, privacy, possesions, and bodies. 
+2. Be honest and accept death gracefully. You are not a juggernaut, do not ignore hits taken.
+3. Don't be a dick.
+4. No really, don't be a dick.  
 
 
 ####Leagal Mumbo Jumbo
-blah blah blah blah blah
+- Don't sue me. This goes along with not being a dick.
 
 
 ####Contact
