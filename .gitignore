@@ -5,3 +5,4 @@ public/system
 public/assets
 public/images
 *.swp
+db/development.sqlite3
