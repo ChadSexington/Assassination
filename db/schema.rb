@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(:version => 20131203230605) do
     t.datetime "photo_updated_at"
     t.string   "hashed_password"
     t.string   "salt"
+    t.string   "current_target"
+    t.string   "current_target_status"
+    t.text     "dna_times"  # DNA = Do Not Attack (meetings). Should this be a datetime field? What about multiple entries?
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "id"
+    t.string   "assassin"
+    t.string   "target"
+    t.integer  "status"    # 0 = in progress, 1 = finished
+    t.string   "elim_location"   # might be cool to track trends / see what areas of the floor are most vulnerable
   end
 
 end
