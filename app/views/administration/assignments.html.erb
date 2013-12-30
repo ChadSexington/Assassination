@@ -1,4 +1,4 @@
-<h1>Generate Assignments</h1>
+<h1>Administer Assignments</h1>
 <br>
 <div class="well">
 
@@ -20,10 +20,10 @@ previous target was.
 -->
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-md-6">
     <div class="input-group">
     	<ul class="list-group">
-    	<%=  @players do |p| %>
+    	<% @players.each do |p| %>
       		<li class="list-group-item">
       			<label class="checkbox"><input type="checkbox"><%= p.name %>
       		</li>

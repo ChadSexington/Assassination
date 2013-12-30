@@ -26,11 +26,29 @@ class AssignmentController < ApplicationController
   end
   
   def update
-    
+    if player_self? || admin?
+      @assignment = Assignment.find(assignment_params[:id])
+      if @assignment.update_attributes(assignment_params)
+        flash[:success] = "Assignment with id " + @assignment.id + " successfully updated."
+        redirect_to @assignment
+      else
+        flash[:error] = "Assignment could not be updated"
+        redirect_to @assignment
+      end
+    else
+      flash[:error] = "Must be an administrator to create new assignments."
+      redirect_to :back
+    end
+ 
   end
   
-  def edit
-    
+  def edit 
+    if player_self? || admin?
+      @assignment = Assignment.find(params[:id])
+    else
+      flash[:error] = "You are not authorized to edit this assignment."
+      redirect_to :back
+    end
   end
   
   def index
@@ -38,7 +56,12 @@ class AssignmentController < ApplicationController
   end
   
   def show
-    @assignment = Assignment.find(params[:id]) 
+    if player_self? || admin?
+      @assignment = Assignment.find(params[:id]) 
+    else
+      flash[:error] = "You are not authorized to view this assignment."
+      redirect_to :back
+    end
   end
   
   def destroy

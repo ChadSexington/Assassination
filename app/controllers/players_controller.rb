@@ -88,7 +88,7 @@ class PlayersController < ApplicationController
     if session[:player]
       reset_session
       flash[:success] = "Logged out"
-      redirect_to :back
+      redirect_to '/welcome/index'
     else
       flash[:error] = "Not currently logged in"
       redirect_to :back

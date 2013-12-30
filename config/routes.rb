@@ -2,6 +2,7 @@ RailsApp::Application.routes.draw do
 
   get "administration/index"
   get "administration/players"
+  get "administration/assignments"
   get "welcome/index"
   get "welcome/handbook"
   get "welcome/central"
