@@ -5,80 +5,81 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
-  <div class="wrapper">
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </a>
-        <a href="/welcome/index" class="brand">Assassination</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav ">
-            <li class="active"><a href="/welcome/index">Home</a></li>
-            <% if admin? %>
-              <li><a href="/administration/index">Administration</a>
-            <% end %>
-            <li><a href="/welcome/central">Central</a></li>
-            <li><a href="/welcome/handbook">Handbook</a></li>
-            <li><a href="/welcome/about">About</a></li>
-          </ul>
-          <% if not logged_in? %>    
-            <ul class="nav pull-right">
-              <li><a href="/players/new">Register</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <form class="form-inline navbar-form" action="/players/login">
-                <input type="text" name="player[email]" class="input-small" placeholder="Email">
-                <input type="password" name="player[password]" class="input-small" placeholder="Password">
-                <button type="submit" class="btn btn-small btn-custom">Login</button>
-              </form>
-            </ul>
-          <% else %>
-            <ul class="nav pull-right">
-              <li><a href="/players/<%= session[:player].username  %>"><%= session[:player].email  %></a></li>
-              <li><a href="/players/logout">Logout</a></li>
-            </ul> 
+  <!-- Nav-bar -->
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/welcome/index" class="navbar-brand"><%= CONFIG[:project_name]%></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/welcome/index">Home</a></li>
+          <% if admin? %>
+            <li><a href="/administration/index">Administration</a>
           <% end %>
-        </div>
+          <li><a href="/welcome/central">Central</a></li>
+          <li><a href="/welcome/handbook">Handbook</a></li>
+          <li><a href="/welcome/about">About</a></li>
+        </ul>
+        <% if not logged_in? %>    
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/players/new">Register</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="/players/login">
+            <div class="form-group">
+              <input type="text" name="player[email]" class="form-control input-sm" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="player[password]" class="form-control input-sm" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-sm btn-custom">Login</button>
+          </form>
+        <% else %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/players/<%= session[:player].username  %>"><%= session[:player].email  %></a></li>
+            <li><a href="/players/logout">Logout</a></li>
+          </ul> 
+        <% end %>
       </div>
     </div>
-  </div>
+  </nav>
 
-  <div class="container-fluid">
+  <!-- Body Container -->
+  <div class="container" style="padding-top: 55px">
+    
+    <!-- flash notices -->
     <% if flash[:success] || flash[:info] || flash[:error] %>
       <div class="row">
-        <div class="span4">
+        <div class="col-md-4">
           <% if flash[:success] %>
             <% alert_type = "success"; alert = flash[:success] %>
           <% elsif flash[:info] %>
             <% alert_type = "info"; alert = flash[:info] %>
           <% elsif flash[:error] %>
-            <% alert_type = "error"; alert = flash[:error] %>
+            <% alert_type = "danger"; alert = flash[:error] %>
           <% end %>
-            <div class="alert alert-<%= alert_type %>">
-                <strong><%= alert %></strong>
-            </div>
+          <div class="alert alert-<%= alert_type %> alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong><%= alert %></strong>
+          </div>
         </div>
       </div>
     <% end %>
-    <%= yield %>
-  </div>
-<div class="push"></div>
-</div>
-<div class="footer">
-<div class="text-bottom span2 offset10">
-<p>
-<a href="http://openshift.com"><img src="/assets/powered-by-openshift.png"></a>
-</p>
-</div>
-</div>
-</body>
 
+  <!-- Page Content -->
+  <%= yield %>
+
+  <!-- End Body Container -->
+  </div>
+
+</body>
 </html>

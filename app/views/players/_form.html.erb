@@ -1,4 +1,4 @@
-<%= form_for @player do |f| %>
+<%= form_for @player, :html => {:role => "form" } do |f| %>
   <% if @player.errors.any? %>
   <div id="errorExplanation" class="well well-small" style="border-color: #FF0000">
     <h4><%= pluralize(@player.errors.count, "error") %> prohibited your player from being created:</h4>
@@ -12,23 +12,35 @@
   </div>
   <% end %>
   <div class="row">
-    <div class="span6">
-      <%= f.label "Full Player Name" %>
-        <%= f.text_field :name, :class => "span3", :placeholder => "Jim Whitehurst" %>
-      <%= f.label "Red Hat Email" %>
-        <%= f.text_field :email, :class => "span3", :placeholder => "jwhitehurst@redhat.com" %>
-      <% if request.url.split("/").last == "new" %>
-        <%= f.label "Password" %>
-          <%= f.password_field 'password', :class => "span3", :placeholder => "*************" %>
-        <%= f.label "Confirm Password" %>
-          <%= f.password_field 'password_confirmation', :class => "span3", :placeholder => "*************" %>
-      <% end %>
-      <%= f.label "Red Hat IRC Nickname" %>
-        <%= f.text_field :irc_nick, :class => "span2", :placeholder => "jwhitehurst" %>
-      <%= f.label "Photo" %>
-        <%= f.file_field :photo %>
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label "Full Player Name", :class => "control-label" %>
+          <%= f.text_field :name, :class => "form-control", :placeholder => "Jim Whitehurst" %>
       </div>
-    <div class="span4">
+      <div class="form-group">
+        <%= f.label "Red Hat Email", :class => " control-label" %>
+          <%= f.text_field :email, :class => "form-control", :placeholder => "jwhitehurst@redhat.com" %>
+      </div>
+      <% if request.url.split("/").last == "new" %>
+        <div class="form-group">
+          <%= f.label "Password", :class => " control-label" %>
+            <%= f.password_field 'password', :class => "form-control", :placeholder => "*************" %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Confirm Password", :class => " control-label" %>
+            <%= f.password_field 'password_confirmation', :class => "form-control", :placeholder => "*************" %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label "Red Hat IRC Nickname", :class => " control-label" %>
+          <%= f.text_field :irc_nick, :class => "form-control", :placeholder => "jwhitehurst" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Photo", :class => " control-label" %>
+          <%= f.file_field :photo %>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="well well-small">
         <h4 class="text-center">All fields required except notes</h4>
         <p class="lead">
@@ -46,10 +58,9 @@
       </div>
     </div>
   </div>
-    <br>
-  <%= f.label "Notes (optional)" %>
-    <%= f.text_area :notes, :class => "span10", :rows => "5", :placeholder => "These notes will show up on your card that is given to the other players. Write something fun (no profanities)!" %>
-  <br><br>
-  <%#-= f.submit 'Register', :disabled => "true", :class => "btn btn-custom disabled" %>
+    <div class="form-group">
+      <%= f.label "Notes (optional)", :class => " control-label" %>
+        <%= f.text_area :notes, :class => "form-control", :rows => "5", :placeholder => "These notes will show up on your card that is given to the other players. Write something fun (no profanities)!" %>
+    </div>
   <%= f.submit 'Register', :class => "btn btn-custom" %>
 <% end %>
