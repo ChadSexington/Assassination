@@ -9,6 +9,11 @@ before_filter :authorize
   def players
     @players = Player.all
   end
+
+  def assignments
+    @players = Player.all
+    @assignments = Assignment.all 
+  end
   
   def authorize
     if not admin?
