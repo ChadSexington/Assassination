@@ -13,6 +13,8 @@ RailsApp::Application.routes.draw do
   match "players/logout" => "players#logout"
   match "players/change_password" => "players#change_password"
   match "players/index" => "players#index"
+  match "confirm/:confirmation_code" => "players#confirm"
+  match "players/:id/confirmation" => "players#confirmation"
 
   resources :players
   resources :sessions

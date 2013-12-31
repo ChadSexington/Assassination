@@ -9,9 +9,9 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(new_player_params)
     if @player.save
-      flash[:success] = "New player created! Welcome to the game!"
-      session[:player] = Player.authenticate(new_player_params[:email], new_player_params[:password])
-      redirect_to @player
+      flash[:success] = "New player created, confirm your account to log in."
+      PlayerMailer.confirmation_email(@player).deliver
+      redirect_to "/players/#{@player.username}/confirmation"
     else
       render 'new'
     end
@@ -76,8 +76,14 @@ class PlayersController < ApplicationController
 
   def login
     if session[:player] = Player.authenticate(login_params[:email], login_params[:password])
-      flash[:success] = "Login successful"
-      redirect_to :back
+      if session[:player].confirmed == true
+        flash[:success] = "Login successful"
+        redirect_to :back
+      else
+        reset_session
+        flash[:error] = "Account has not yet been confirmed."
+        redirect_to :back 
+      end
     else
       flash[:error] = "Incorrect credentials, please try again"
       redirect_to :back
@@ -92,6 +98,27 @@ class PlayersController < ApplicationController
     else
       flash[:error] = "Not currently logged in"
       redirect_to :back
+    end
+  end
+  
+  def confirmation
+    @player = Player.find_by_username(params[:id])
+  end
+
+  def confirm
+    if @player = Player.find_by_confirmation_code(params[:confirmation_code])
+      if @player.confirmed == false
+        @player.confirmed = true
+        @player.save
+        flash[:success] = "Account for " + @player.name + " confirmed! Welcome to the game!"
+        redirect_to '/welcome/index'
+      else
+        flash[:error] = "Account for " + @player.name + " has already been confirmed." 
+        redirect_to '/welcome/index'
+      end
+    else
+      flash[:error] = "Confirmation code \"" + params[:confirmation_code] + "\" not associated with any player"
+      redirect_to '/welcome/index'
     end
   end
 

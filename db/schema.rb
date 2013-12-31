@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230184305) do
+ActiveRecord::Schema.define(:version => 20131231220337) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20131230184305) do
     t.string   "email"
     t.string   "irc_nick"
     t.text     "notes"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(:version => 20131230184305) do
     t.string   "hashed_password"
     t.string   "salt"
     t.text     "dna_times"
+    t.boolean  "admin",              :default => false
+    t.string   "confirmation_code"
+    t.boolean  "confirmed",          :default => false
   end
 
 end

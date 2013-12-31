@@ -32,6 +32,16 @@ module RailsApp
 
     config.serve_static_assets = true
 
+    # Mailer configuration
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+    address:              'smtp.corp.redhat.com',
+    port:                 25,
+    domain:               'corp.redhat.com',
+    authentication:       'none',
+    enable_starttls_auto: false  }
+
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

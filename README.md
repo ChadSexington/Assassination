@@ -19,8 +19,6 @@
   - Add confirmation mailer (see below)
   - Add a switch for a user to be an admin, instead of checking a configuration
     - This will allow for multiple admins, which is necessary.
-  - Following most of http://www.aidanf.net/2006/05/28/rails-authentication-tutorial.html
-  - Note that the above is old. May need to be adapted 
 - Make the handbook a pdf
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Finish/create the player profile page.

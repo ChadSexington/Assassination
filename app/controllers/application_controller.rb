@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def admin?
     if session[:player]
-      session[:player].email == CONFIG[:admin_email]
+      session[:player].admin
     else
       false
     end

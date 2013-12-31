@@ -27,6 +27,8 @@ validates_presence_of :password, :password_confirmation, :salt, :if => :password
 
 # Before the initial save, set attributes defined using other attributes
 before_save :define_username
+before_save :check_admin
+before_save :generate_confirmation_code
 
   def password=(pass)
     @password=pass
@@ -54,6 +56,16 @@ before_save :define_username
     username = self.email.split("@").first
     self.username = username
   end
+
+  def check_admin
+    if self.email == CONFIG[:admin_email]
+      self.admin = true
+    end
+  end
+  
+  def generate_confirmation_code
+    self.confirmation_code = random_string(8)
+  end
  
 # use the username in the url instead of some integer id 
   def to_param
@@ -68,9 +80,9 @@ private
 
   def random_string(len)
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
-    newpass = ""
-    1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
-    return newpass
+    newstr = ""
+    1.upto(len) { |i| newstr << chars[rand(chars.size-1)] }
+    return newstr
   end
 
 end
