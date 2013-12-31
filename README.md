@@ -16,7 +16,7 @@
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
-  - Add confirmation mailer (see below)
+  - Fix registration password fields disappearing if there is an error
   - Add a switch for a user to be an admin, instead of checking a configuration
     - This will allow for multiple admins, which is necessary.
 - Make the handbook a pdf
@@ -27,9 +27,8 @@
   - Just keep it simple...
 - Add multiple mailers
   - One to initiate/confirm new players
-  - One to send out new targets
+  - One to send out new targets 
   - One to mass-mail event notices (starts and stops)
-  - Maybe more idk
 - Add 'events' controller that will handle all 'kills'
   - There should be a route to /events/feed that lists, in order, all kills
   - /events/index should contain a tree of sorts?
