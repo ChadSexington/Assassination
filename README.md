@@ -23,7 +23,6 @@
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Finish/create the player profile page.
   - Pictures should be cropped to a standard size
-  - Maybe pull information from home.corp.redhat.com?
   - Just keep it simple...
 - Add multiple mailers
   - One to initiate/confirm new players
