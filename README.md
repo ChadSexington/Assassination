@@ -12,7 +12,6 @@
 
 ###TODO
 ------------------
-- Add kills/deaths to player model
 - Add assignment model and controller
   - Should have the following views:
     - show (player accessible if owned)
