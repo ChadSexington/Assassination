@@ -12,6 +12,15 @@
 
 ###TODO
 ------------------
+- Add kills/deaths to player model
+- Add assignment model and controller
+  - Should have the following views:
+    - show (player accessible if owned)
+    - index (admin only)
+    - edit (admin only)
+    - new (admin only)
+  - Assignments should have a method to assign them by players chosen
+- In /some/ controller, have a 'start round' view where a list of players are selected that will participate in the round. When the round is started, an assignment is generated for each player.
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
