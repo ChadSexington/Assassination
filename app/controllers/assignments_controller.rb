@@ -26,8 +26,8 @@ class AssignmentsController < ApplicationController
   end
   
   def update
-    if player_self? || admin?
-      @assignment = Assignment.find(assignment_params[:id])
+    @assignment = Assignment.find(assignment_params[:id])
+    if player_self?(Player.find(@assignment.player_id)) || admin?
       if @assignment.update_attributes(assignment_params)
         flash[:success] = "Assignment with id " + @assignment.id + " successfully updated."
         redirect_to @assignment
@@ -43,9 +43,8 @@ class AssignmentsController < ApplicationController
   end
   
   def edit 
-    if player_self? || admin?
-      @assignment = Assignment.find(params[:id])
-    else
+    @assignment = Assignment.find(params[:id])
+    if not player_self?(Player.find(@assignment.player_id)) || admin?
       flash[:error] = "You are not authorized to edit this assignment."
       redirect_to :back
     end
