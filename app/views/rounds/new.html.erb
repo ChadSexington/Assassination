@@ -1,0 +1,29 @@
+<h1>Start a new round</h1>
+<p class="lead">Select players for this round below:</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Include</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>IRC nick</th>
+      <th>Admin</th>
+      <th>K/D ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= form_tag '/rounds/start' %>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= check_box_tag 'player_ids[]', player.id, true %></td>
+        <td><%= player.name %></td>
+        <td><%= player.email %></td>
+        <td><%= player.irc_nick %></td>
+        <td><%= if player.admin; "Yes"; else; "No"; end %></td>
+        <td><%= player.kills %>/<%= player.deaths %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= submit_tag 'Start Round', :class => "btn btn-default"%>
+

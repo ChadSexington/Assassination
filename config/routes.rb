@@ -6,7 +6,10 @@ RailsApp::Application.routes.draw do
   get "welcome/index"
   get "welcome/handbook"
   get "welcome/central"
-
+  post "rounds/start" 
+ 
+  match "rounds/current" => "rounds#current"
+  match "rounds/current/end" => "rounds#end_current"
   match "welcome/about" => "welcome#about"
   match "administration" => "administration#index"
   match "players/login" => "players#login"
@@ -16,6 +19,7 @@ RailsApp::Application.routes.draw do
   match "confirm/:confirmation_code" => "players#confirm"
   match "players/:id/confirmation" => "players#confirmation"
 
+  resources :rounds
   resources :players
   resources :sessions
   resources :assignments

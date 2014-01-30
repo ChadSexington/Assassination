@@ -1,6 +1,7 @@
 class Round < ActiveRecord::Base
-  attr_accessible :end_time, :start_time 
+  attr_accessible :end_time, :start_time, :active, :id 
   has_many :assignments
+  serialize :players
 
   before_save :parse_players
 

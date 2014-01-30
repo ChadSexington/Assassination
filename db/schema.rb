@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20140130174933) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.boolean  "active"
+    t.text     "players"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
