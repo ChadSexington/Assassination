@@ -13,6 +13,12 @@
   <% end %>
   <div class="row">
     <div class="col-md-8">
+      <% if admin? %>
+        <div class="form-group">
+          <%= f.label "Admin user", :class => "control-label" %>
+            <%= f.check_box :admin, :class => "form-control" %>
+        </div>
+      <% end %>
       <div class="form-group">
         <%= f.label "Full Player Name", :class => "control-label" %>
           <%= f.text_field :name, :class => "form-control", :placeholder => "Jim Whitehurst" %>

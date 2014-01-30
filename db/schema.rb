@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129155155) do
+ActiveRecord::Schema.define(:version => 20140130174933) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20140129155155) do
     t.text     "elim_location"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "round_id"
   end
 
   create_table "players", :force => true do |t|
@@ -42,6 +43,14 @@ ActiveRecord::Schema.define(:version => 20140129155155) do
     t.boolean  "confirmed",          :default => false
     t.integer  "kills"
     t.integer  "deaths"
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "active"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

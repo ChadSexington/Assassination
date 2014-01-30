@@ -1,33 +1,19 @@
-<h1>Administer Assignments</h1>
-<br>
-<div class="well">
-
-<!-- 
-
-The idea here is to create a page,
-populate it with player names,
-and offer checkboxes per player
-in case someone is unavailable for a 
-given round.
-
-Once a "Create" button has been hit
-it will invoke some algorithm (in 
-assignment_controller.rb?) that will
-create a bracket for the week. This
-should take into account who their
-previous target was.
-
--->
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="input-group">
-    	<ul class="list-group">
-    	<% @players.each do |p| %>
-      		<li class="list-group-item">
-      			<label class="checkbox"><input type="checkbox"><%= p.name %>
-      		</li>
-     	<% end %>
-     	</ul>	
-    </div><!-- /input-group -->
-</div>
+<h1>Administer assignments</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Owner</th>
+      <th>Target</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @assignments.each do |ass| %>
+      <tr>
+        <td><%= link_to Player.find(ass.player_id).name, edit_assignment_path(ass) %></td>
+        <td><%= ass.target %></td>
+        <td><%= ass.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

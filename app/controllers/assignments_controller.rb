@@ -1,4 +1,4 @@
-class AssignmentController < ApplicationController
+class AssignmentsController < ApplicationController
   
   def new
     if admin?
@@ -65,6 +65,22 @@ class AssignmentController < ApplicationController
   end
   
   def destroy
+    
+  end
+
+  # This should display a page where all players are listed
+  # Each should have a checkbox beside their name
+  # The ones that are picked will be given an assignment
+  def start_round
+    if admin?
+      @players = Player.all
+    else
+      flash[:error] = "You are not authorized to view this page"
+      redirect_to '/welcome/index'
+    end
+  end
+
+  def generate
     
   end
 

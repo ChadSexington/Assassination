@@ -14,6 +14,15 @@ class PlayerMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'Welcome to the OpenSource Assassination Organization!') 
   end
   
+  def round_start_email(round)
+    @round = round
+    round.players.each do |player_id|
+      @player = Player.find(player_id)
+      email_with_name = "#{@player.name} <#{@player.email}>"
+      mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Organization')
+    end
+  end
+  
   def new_assignment_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"

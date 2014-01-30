@@ -18,6 +18,7 @@ RailsApp::Application.routes.draw do
 
   resources :players
   resources :sessions
+  resources :assignments
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

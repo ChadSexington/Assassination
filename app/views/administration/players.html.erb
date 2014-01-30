@@ -1,2 +1,25 @@
-<h1>Administration#players</h1>
-<p>Find me in app/views/administration/players.html.erb</p>
+<h1>Administer players</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>IRC nick</th>
+      <th>Admin</th>
+      <th>Confirmed</th>
+      <th>K/D ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= link_to player.name, edit_player_path(player) %></td>
+        <td><%= player.email %></td>
+        <td><%= player.irc_nick %></td>
+        <td><%= if player.admin; "Yes"; else; "No"; end %></td>
+        <td><%= if player.confirmed; "Yes"; else; "No"; end %></td>
+        <td><%= player.kills %>/<%= player.deaths %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
