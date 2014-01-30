@@ -3,24 +3,32 @@ class Round < ActiveRecord::Base
   has_many :assignments
   serialize :players
 
-  before_save :parse_players
-
-  def end
-  
-  end
-
-  def start
-
-  end
+  after_create :generate_assignments
 
 private
   
-  def parse_players
-    players = []
-    self.assignments.each do |a|
-      players << a.player_id
+  def generate_assignments
+    if self.players.empty?
+      return nil
     end
-    self.players = players
+    targets = self.players.shuffle
+    self.players.each do |player_id|
+      tar = targets.pop
+      if tar == nil
+        tar = self.players.sample
+        while tar == player_id do
+          tar = self.players.sample
+        end
+      elsif tar == player_id
+        new_tar = targets.pop
+        targets.push(tar)
+        tar = new_tar
+      end
+      self.assignments.create(player_id: player_id,
+                            target: tar,
+                            status: 0,)    
+    end
+      
   end
 
 end

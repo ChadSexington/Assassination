@@ -24,6 +24,7 @@ class RoundsController < ApplicationController
       @round.active = false
       @round.save
       flash[:success] = "Round #{@round.id} ended."
+      redirect_to :back
     else
       flash[:error] = "There is currently no active round."
       redirect_to :back
