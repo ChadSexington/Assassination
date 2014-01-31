@@ -131,7 +131,11 @@ private
   end
 
   def edit_player_params
-    params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo)
+    if admin?
+      params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo, :admin)
+    else
+      params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo)
+    end
   end
   
   def login_params
