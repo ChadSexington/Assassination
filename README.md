@@ -12,14 +12,8 @@
 
 ###TODO
 ------------------
-- Add assignment model and controller
-  - Should have the following views:
-    - show (player accessible if owned)
-    - index (admin only)
-    - edit (admin only)
-    - new (admin only)
-  - Assignments should have a method to assign them by players chosen
-- In /some/ controller, have a 'start round' view where a list of players are selected that will participate in the round. When the round is started, an assignment is generated for each player.
+- Finish mailers
+- Add form to add/subtract kills from players
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
@@ -32,15 +26,16 @@
 - Finish/create the player profile page.
   - Pictures should be cropped to a standard size
   - Just keep it simple...
-- Add multiple mailers
-  - One to initiate/confirm new players
-  - One to send out new targets 
-  - One to mass-mail event notices (starts and stops)
-- Add 'events' controller that will handle all 'kills'
-  - There should be a route to /events/feed that lists, in order, all kills
-  - /events/index should contain a tree of sorts?
-  - /events/new will be a form for users to submit a kill
-- Devise a method for kills to be recoreded in events controller via visiting a link in a QR code
-- Create a view for the actual card that will be printed out.
+- Create a view for the actual card that will can printed out.
   - This should reflect what will be emailed in one of the mailers above
 - Devise a social model where players can 'message' each other and comment on kills
+  - This is absolutely last priority
+
+###List of mailers there should be:
+- Confirm new registrations
+- Welcome after confirmation
+- Round start/new target
+- New target
+- Round stop
+- Mass customized updates (needs a form)
+- Banhammer

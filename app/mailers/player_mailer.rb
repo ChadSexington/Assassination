@@ -46,7 +46,6 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This will send a customized update to all players in the round
-  # TODO may have to handle some markdown parsing here
   def update_email(round, message)
     @round = round
     @message = message
@@ -62,6 +61,16 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Organization')
+  end
+
+  # This email will send out to all confirmed players
+  def mass_email(subject, message)
+    @message = message
+    @players = Player.where(:confirmed => true)
+    @player.each do |player|
+      email_with_name = "#{player.name} <#{player.email}>"
+      mail(to: email_with_name, subject: subject)
+    end
   end
 
 end

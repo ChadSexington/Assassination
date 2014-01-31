@@ -1,0 +1,8 @@
+<h1>Send emails</h1>
+<h3>Send a round update email to all players of the current round</h3>
+<div class="well">
+  <%= form_tag '/administration/send_mail' do %>
+    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 30, :class => "form-control" %><br>
+    <%= submit_tag 'Submit', :class => "btn btn-default" %>
+  <% end %>
+</div>

@@ -3,10 +3,12 @@ RailsApp::Application.routes.draw do
   get "administration/index"
   get "administration/players"
   get "administration/assignments"
+  get "administration/emails"
   get "welcome/index"
   get "welcome/handbook"
   get "welcome/central"
   post "rounds/start" 
+  post "administration/send_mail"
  
   match "rounds/current" => "rounds#current"
   match "rounds/current/end" => "rounds#end_current"
