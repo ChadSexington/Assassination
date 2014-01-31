@@ -15,6 +15,10 @@
           <dd><%= link_to @player.username, "https://home.corp.redhat.com/user/#{@player.username}" %></dd>
           <dt>IRC Nick</dt>
           <dd><%= @player.irc_nick %></dd>
+          <dt>Kills</dt>
+          <dd><%= @player.kills %></dd>
+          <dt>Deaths</dt>
+          <dd><%= @player.deaths %></dd>
         </dl>
         <div class="well well-small">
           <%= @player.notes %>
