@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  player_id: 
+  deceased_id: 
+  recap: MyText
+  location: MyText
+
+two:
+  player_id: 
+  deceased_id: 
+  recap: MyText
+  location: MyText
