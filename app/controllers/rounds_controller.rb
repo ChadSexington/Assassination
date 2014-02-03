@@ -27,7 +27,7 @@ class RoundsController < ApplicationController
       redirect_to :back
     else
       flash[:error] = "There is currently no active round."
-      redirect_to :back
+      redirect_to '/administration/index'
     end
   end
 

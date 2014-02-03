@@ -1,8 +1,29 @@
 <h1>Send emails</h1>
-<h3>Send a round update email to all players of the current round</h3>
+<h3>General mass email</h3>
 <div class="well">
   <%= form_tag '/administration/send_mail' do %>
-    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 30, :class => "form-control" %><br>
-    <%= submit_tag 'Submit', :class => "btn btn-default" %>
+    <%= hidden_field_tag 'email_type', 'mass_update' %>
+    <h4>Send to:</h4>
+    <%= radio_button_tag 'recipients', 'round', true %> Current Round Participants<br>
+    <%= radio_button_tag 'recipients', 'all' %> All Registered Players<br><br>
+    <%= text_field_tag 'subject', "", :placeholder => "Subject", :class => "form-control" %>
+    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 15, :class => "form-control" %><br>
+    <%= submit_tag 'Send mass update', :class => "btn btn-default" %>
+  <% end %>
+</div>
+
+<h3>Individual player email</h3>
+<div class="well">
+  <%= form_tag '/administration/send_mail' do %>
+    <%= hidden_field_tag 'email_type', 'individual_email' %>
+    <h4>Send to:</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= select_tag 'recipients', options_from_collection_for_select(Player.where(:confirmed => true), "id", "name"), :class => " form-control" %>
+      </div>
+    </div><br>
+    <%= text_field_tag 'subject', "", :placeholder => "Subject", :class => "form-control" %>
+    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 15, :class => "form-control" %><br>
+    <%= submit_tag 'Send individual email', :class => "btn btn-default" %>
   <% end %>
 </div>

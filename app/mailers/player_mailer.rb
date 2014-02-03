@@ -46,10 +46,9 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This will send a customized update to all players in the round
-  def update_email(round, message)
-    @round = round
+  def update_email(subject, message)
     @message = message
-    round.players.each do |player_id|
+    current_round.players.each do |player_id|
       @player = Player.find(player_id)
       email_with_name = "#{@player.name} <#{@player.email}>"
       mail(to: email_with_name, subject: "Bulletin from the OpenSouce Assassination Organization")
@@ -67,7 +66,7 @@ class PlayerMailer < ActionMailer::Base
   def mass_email(subject, message)
     @message = message
     @players = Player.where(:confirmed => true)
-    @player.each do |player|
+    @players.each do |player|
       email_with_name = "#{player.name} <#{player.email}>"
       mail(to: email_with_name, subject: subject)
     end
