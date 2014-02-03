@@ -1,0 +1,16 @@
+<h1>Report a kill</h1>
+<div class="well">
+<%= form_tag '/kill/create' do %>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= label_tag 'deceased_id', 'Deceased party', :class => "control-label" %>
+        <%= select_tag 'deceased_id', options_from_collection_for_select(@players, :id, :name), :class => "form-control" %>
+    </div>
+  </div><br>
+  <%= label_tag 'location', 'Kill Location', :class => "control-label" %>
+    <%= text_field_tag 'location', "" , :placeholder => "Ex: The Hat Rack", :class => "form-control" %><br>
+  <%= label_tag 'recap', 'Kill Description', :class => "control-label" %>
+    <%= text_area_tag 'recap', "", :placeholder => "Recap the kill here, this will be included in kill updates", :class => "form-control", :rows => 15 %><br>
+  <%= submit_tag 'Submit Kill', :class => "btn btn-default" %>
+<% end %>
+</div>

@@ -21,10 +21,15 @@ class ApplicationController < ActionController::Base
     player.username == session[:player].username
   end
   
+  def current_player
+    session[:player]
+  end
+
   def current_round
     Round.where(:active => true).last
   end
 
+  helper_method :current_player
   helper_method :player_self? 
   helper_method :logged_in?
   helper_method :admin?

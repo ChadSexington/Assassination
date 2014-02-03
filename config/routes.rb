@@ -1,5 +1,7 @@
 RailsApp::Application.routes.draw do
 
+  get "kill/show"
+  get "kill/edit"
   get "administration/index"
   get "administration/players"
   get "administration/assignments"
@@ -9,7 +11,9 @@ RailsApp::Application.routes.draw do
   get "welcome/central"
   post "rounds/start" 
   post "administration/send_mail"
- 
+  post "kill/create"
+
+  match "central" => "welcome#central" 
   match "rounds/current" => "rounds#current"
   match "rounds/current/end" => "rounds#end_current"
   match "welcome/about" => "welcome#about"

@@ -1,0 +1,11 @@
+<h1>Kill feed</h1>
+<div class="list-group">
+  <% @kills.each do |kill| %>
+    <% assassin = Player.find(kill.player_id) %>
+    <% deceased = Player.find(kill.deceased_id) %>
+    <li class="list-group-item">
+      <h5 class="list-group-item-heading"><%= kill.created_at.strftime('%F') %> <%= assassin.name.split.first %> killed <%= deceased.name.split.first %></h5>
+      <span class="text-muted"><%= kill.recap %></span>
+    </li>
+  <% end %>
+</div>

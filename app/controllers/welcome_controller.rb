@@ -8,4 +8,10 @@ class WelcomeController < ApplicationController
     @contents = markdown.render(contents)
   end
 
+  def central
+    @kills = Kill.order('created_at DESC').limit(20).all
+    @kill = Kill.new
+    @players = Player.where(:confirmed => true)
+  end
+
 end

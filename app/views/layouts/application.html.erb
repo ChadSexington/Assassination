@@ -23,7 +23,9 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="/welcome/index">Home</a></li>
-          <li><a href="/welcome/central">Central</a></li>
+          <% if not session[:player].nil? %>
+            <li><a href="/welcome/central">Central</a></li>
+          <% end %>
           <li><a href="/welcome/handbook">Handbook</a></li>
           <li><a href="/welcome/about">About</a></li>
         </ul>
