@@ -67,22 +67,6 @@ class AssignmentsController < ApplicationController
     
   end
 
-  # This should display a page where all players are listed
-  # Each should have a checkbox beside their name
-  # The ones that are picked will be given an assignment
-  def start_round
-    if admin?
-      @players = Player.all
-    else
-      flash[:error] = "You are not authorized to view this page"
-      redirect_to '/welcome/index'
-    end
-  end
-
-  def generate
-    
-  end
-
 private
   def assignment_params
     params.require(:assignment).permit!
