@@ -27,7 +27,7 @@ validates_presence_of :password, :password_confirmation, :salt, :if => :password
 
 # Before the initial save, set attributes defined using other attributes
 before_save :define_username
-before_Save :define_nickname
+before_save :define_nickname
 before_save :check_admin
 before_save :generate_confirmation_code
 

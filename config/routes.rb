@@ -13,6 +13,7 @@ RailsApp::Application.routes.draw do
   post "administration/send_mail"
   post "kill/create"
 
+  match "administration/ban_player/:id" => "administration#ban_player"
   match "central" => "welcome#central" 
   match "rounds/current" => "rounds#current"
   match "rounds/current/end" => "rounds#end_current"

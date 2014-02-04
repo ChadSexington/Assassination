@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204202743) do
+ActiveRecord::Schema.define(:version => 20140204205320) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20140204202743) do
     t.string   "confirmation_code"
     t.boolean  "confirmed",          :default => false
     t.string   "nickname"
+    t.boolean  "banned",             :default => false
   end
 
   create_table "rounds", :force => true do |t|

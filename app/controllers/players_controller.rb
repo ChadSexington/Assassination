@@ -77,8 +77,13 @@ class PlayersController < ApplicationController
   def login
     if session[:player] = Player.authenticate(login_params[:email], login_params[:password])
       if session[:player].confirmed == true
-        flash[:success] = "Login successful"
-        redirect_to :back
+        if session[:player].banned == false
+          flash[:success] = "Login successful"
+          redirect_to :back
+        else
+          flash[:error] = "You have been banned. Check your email for reasoning and length of the ban"
+          redirect_to "/welcome/index"
+        end
       else
         reset_session
         flash[:error] = "Account has not yet been confirmed."

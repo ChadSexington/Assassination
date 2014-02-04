@@ -65,7 +65,7 @@ class PlayerMailer < ActionMailer::Base
   # This email will send out to all confirmed players
   def mass_email(subject, message)
     @message = message
-    @players = Player.where(:confirmed => true)
+    @players = Player.where(:confirmed => true, :banned => false)
     @players.each do |player|
       email_with_name = "#{player.name} <#{player.email}>"
       mail(to: email_with_name, subject: subject)

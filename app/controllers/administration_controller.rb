@@ -10,6 +10,18 @@ before_filter :authorize
     @players = Player.all
   end
 
+  def ban_player
+    @player = Player.find(params[:id])
+    @player.banned = true
+    if @player.save
+      flash[:success] = @player.name + " has been banned."
+      redirect_to "/administration/players"
+    else
+      flash[:error] = @player.name + " could not be banned."
+      redirect_to "/administration/players"
+    end
+  end
+
   def assignments
     @players = Player.all
     @assignments = Assignment.all 
