@@ -9,9 +9,14 @@ class WelcomeController < ApplicationController
   end
 
   def central
-    @kills = Kill.order('created_at DESC').limit(20).all
-    @kill = Kill.new
-    @players = Player.where(:confirmed => true)
+    if session[:player]
+      @kills = Kill.order('created_at DESC').limit(20).all
+      @kill = Kill.new
+      @players = Player.where(:confirmed => true)
+    else
+      flash[:error] = "You must be registered and logged in to visit central."
+      redirect_to '/welcome/index'
+    end
   end
 
 end
