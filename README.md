@@ -12,8 +12,19 @@
 
 ###TODO
 ------------------
+- Add 'nickname' to player.
+  - Should default to the players first name (Player.name.split.first)
+  - Should only be able to be changed by an administrator
+  - Kill-feed should use the nickname, however the report form should still use the full name for clarity.
+- Add a player-ban form for admin
 - Finish mailers
-- Add form to add/subtract kills from players
+  - html templates need to be completed
+    - Most messages will use a layout that I should defined as a partial
+  - Hooks need to be added in some places (such as round start)
+  - New assignment emails will have to generate a 'card' type thing.
+- Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?
+- Add an admin form to add news posts
+  - This will require creating a model + controller
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
@@ -23,10 +34,11 @@
     - This will allow for multiple admins, which is necessary.
 - Make the handbook a pdf
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
-- Finish/create the player profile page.
+- Finish the player profile page.
   - Pictures should be cropped to a standard size
+  - Allow players to view other player's profiles
+    - Need to add links in the kill-feed
   - Just keep it simple...
-- Create a view for the actual card that will can printed out.
   - This should reflect what will be emailed in one of the mailers above
 - Devise a social model where players can 'message' each other and comment on kills
   - This is absolutely last priority
@@ -37,5 +49,6 @@
 - Round start/new target
 - New target
 - Round stop
-- Mass customized updates (needs a form)
+- Mass customized updates (admin form)
+- Individual player email (admin form))
 - Banhammer
