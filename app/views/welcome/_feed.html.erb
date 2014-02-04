@@ -4,7 +4,7 @@
     <% assassin = Player.find(kill.player_id) %>
     <% deceased = Player.find(kill.deceased_id) %>
     <li class="list-group-item">
-      <h5 class="list-group-item-heading"><%= kill.created_at.strftime('%F') %> <%= assassin.name.split.first %> killed <%= deceased.name.split.first %></h5>
+      <h5 class="list-group-item-heading"><%= kill.created_at.strftime('%F') %> <%= assassin.nickname %> killed <%= deceased.nickname %></h5>
       <span class="text-muted"><%= kill.recap %></span>
     </li>
   <% end %>

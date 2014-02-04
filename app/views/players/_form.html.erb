@@ -18,6 +18,10 @@
           <%= f.label "Admin user", :class => "control-label" %>
             <%= f.check_box :admin, :class => "form-control" %>
         </div>
+        <div class="form-group">
+          <%= f.label "Nickname", :class => "control-label" %>
+            <%= f.text_field :nickname, :class => "form-control", :placeholer => "FIXME" %>
+        </div>
       <% end %>
       <div class="form-group">
         <%= f.label "Full Player Name", :class => "control-label" %>

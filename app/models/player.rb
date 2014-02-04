@@ -27,6 +27,7 @@ validates_presence_of :password, :password_confirmation, :salt, :if => :password
 
 # Before the initial save, set attributes defined using other attributes
 before_save :define_username
+before_Save :define_nickname
 before_save :check_admin
 before_save :generate_confirmation_code
 
@@ -55,6 +56,11 @@ before_save :generate_confirmation_code
   def define_username
     username = self.email.split("@").first
     self.username = username
+  end
+
+  def define_nickname
+    nickname = self.name.split(" ").first
+    self.nickname = nickname
   end
 
   def check_admin
