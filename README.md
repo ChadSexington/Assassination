@@ -19,10 +19,10 @@
 - Add a player-ban form for admin
 - Finish mailers
   - html templates need to be completed
-    - Most messages will use a layout that I should defined as a partial
+    - Most messages will use a layout that I should define as a partial
   - Hooks need to be added in some places (such as round start)
   - New assignment emails will have to generate a 'card' type thing.
-- Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?
+- Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?)
 - Add an admin form to add news posts
   - This will require creating a model + controller
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
@@ -30,8 +30,7 @@
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
   - Fix registration password fields disappearing if there is an error
-  - Add a switch for a user to be an admin, instead of checking a configuration
-    - This will allow for multiple admins, which is necessary.
+- *After the above is complete, the project should be usable, but likely buggy (alpha stage)*
 - Make the handbook a pdf
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Finish the player profile page.
@@ -50,5 +49,5 @@
 - New target
 - Round stop
 - Mass customized updates (admin form)
-- Individual player email (admin form))
+- Individual player email (admin form)
 - Banhammer
