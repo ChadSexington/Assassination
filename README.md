@@ -4,7 +4,6 @@
 - config/application.yml
   - This contains the globabl configuration
     - project_name: This is used in several places throughout the views, including the brand in the navbar and many of the welcome pages.
-    - admin_password: This is temporary, will be removed when user authentication is implemented.
     - data_dir: This should be set to the place you would like to keep images in your development environment. In Production, this will always be the $OPENSHIFT_DATA_DIR (see config/application.rb)
 - config/ABOUT.md
   - This defines the content in /welcome/about. It is a markdown file, which is rendered in the browser. 
@@ -12,11 +11,6 @@
 
 ###TODO
 ------------------
-- Add 'nickname' to player.
-  - Should default to the players first name (Player.name.split.first)
-  - Should only be able to be changed by an administrator
-  - Kill-feed should use the nickname, however the report form should still use the full name for clarity.
-- Add a player-ban form for admin
 - Finish mailers
   - html templates need to be completed
     - Most messages will use a layout that I should define as a partial
