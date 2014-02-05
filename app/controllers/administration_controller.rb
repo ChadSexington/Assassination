@@ -3,7 +3,7 @@ class AdministrationController < ApplicationController
 before_filter :authorize
 
   def index
-
+    redirect_to '/welcome/central'
   end
 
   def players
@@ -46,9 +46,13 @@ before_filter :authorize
     case email_params[:email_type]
     when "mass_update"
       if recipients == "all"
-        PlayerMailer.mass_email(subject, body).deliver
+        Player.where(:confirmed => true, :banned => false).each do |player|
+          PlayerMailer.update_email(player, subject, body).deliver
+        end
       elsif recipients == "round"
-        PlayerMailer.update_email(subject, body).deliver
+        current_round.players.each do |player|
+          PlayerMailer.update_email(player, subject, body).deliver
+        end
       else
         flash[:error] = "Hidden field missing from form. Contact somebody who has the power."
         redirect_to :back

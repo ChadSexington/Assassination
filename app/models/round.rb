@@ -27,8 +27,8 @@ private
       self.assignments.create(player_id: player_id,
                             target: tar,
                             status: 0,)   
-      PlayerMailer.new_assignment_email(@player).deliver
     end
+    PlayerMailer.round_start_email(self).deliver
       
   end
 

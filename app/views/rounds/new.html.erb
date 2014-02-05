@@ -20,7 +20,7 @@
         <td><%= player.email %></td>
         <td><%= player.irc_nick %></td>
         <td><%= if player.admin; "Yes"; else; "No"; end %></td>
-        <td><%= player.kills %>/<%= player.deaths %></td>
+        <td><%= Kill.where(:player_id => player.id).count %>/<%= Death.where(:player_id => player.id).count %></td>
       </tr>
     <% end %>
   </tbody>

@@ -26,50 +26,34 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This will notify players that a round has started.
-  def round_start_email(round)
+  def round_start_email(player, round)
     @round = round
-    round.players.each do |player_id|
-      @player = Player.find(player_id)
-      email_with_name = "#{@player.name} <#{@player.email}>"
-      mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Organization')
-    end
+    @player = player
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Organization')
   end
 
   # This will notify players that a round has started.
-  def round_end_email(round)
+  def round_end_email(player, round)
     @round = round
-    round.players.each do |player_id|
-      @player = Player.find(player_id)
-      email_with_name = "#{@player.name} <#{@player.email}>"
-      mail(to: email_with_name, subject: "A winner for round #{round.id} has been determined! - OpenSouce Assassination Organization")
-    end
+    @player = player
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: "A winner for round #{round.id} has been determined! - OpenSouce Assassination Organization")
   end
 
   # This will send a customized update to all players in the round
-  def update_email(subject, message)
+  def update_email(player, subject, body)
     @body = body
-    current_round.players.each do |player_id|
-      @player = Player.find(player_id)
-      email_with_name = "#{@player.name} <#{@player.email}>"
-      mail(to: email_with_name, subject: subject)
-    end
+    @player = player
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: subject)
   end
   
-  # This will notify players that a round has started.
+  # This will notify a player of the banhammer that just smashed his face into the ground.
   def ban_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Organization')
-  end
-
-  # This email will send out to all confirmed players
-  def mass_email(subject, body)
-    @body = body
-    @players = Player.where(:confirmed => true, :banned => false)
-    @players.each do |player|
-      email_with_name = "#{player.name} <#{player.email}>"
-      mail(to: email_with_name, subject: subject)
-    end
   end
 
   # This will send an email to an individual player
