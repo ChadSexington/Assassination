@@ -14,7 +14,6 @@
 ------------------
 - Finish mailers
   - html templates need to be completed
-    - Most messages will use a layout that I should define as a partial
   - New assignment emails will have to generate a 'card' type thing.
   - Ban email needs a form for an admin to type the message out.
 - Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?)
@@ -24,7 +23,11 @@
   - Fix registration password fields disappearing if there is an error
 
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
+- Add check box at player registration/edit to subscribe to news updates
+  - Will also need to add a news mailer for this, as well as a hook when new news posts are created
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
+- Handle when a player not part of the curent round attempts to report a kill
+- When a player is killed, send that player's assignment to the killer.
 - Prettify everything
   - Most admin-facing pages (with the addition of central) were done very quickly, with a focus on functionality over asthetics. Need to go back through and get a real theme going.
 - Finish the player profile page.

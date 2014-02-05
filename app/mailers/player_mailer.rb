@@ -29,6 +29,12 @@ class PlayerMailer < ActionMailer::Base
   def round_start_email(player, round)
     @round = round
     @player = player
+    begin
+      @target = Player.find(player.assignments.last.target) 
+    rescue
+      logger.error "Player with no target included in round."
+      return
+    end
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
   end

@@ -7,7 +7,7 @@ class RoundsController < ApplicationController
         redirect_to :back
       end
     end
-    @players = Player.where(:confirmed => true)
+    @players = Player.where(:confirmed => true, :banned => false)
     @round = Round.new
   end
 
@@ -24,10 +24,11 @@ class RoundsController < ApplicationController
       @round.active = false
       @round.save
       flash[:success] = "Round #{@round.id} ended."
-      @round.players.each do |player|
+      @round.players.each do |player_id|
+        player = Player.find(player_id)
         PlayerMailer.round_end_email(player, @round).deliver
       end
-      redirect_to :back
+      redirect_to '/administration/index'
     else
       flash[:error] = "There is currently no active round."
       redirect_to '/administration/index'

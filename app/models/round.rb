@@ -28,7 +28,10 @@ private
                             target: tar,
                             status: 0,)   
     end
-    PlayerMailer.round_start_email(self).deliver
+    self.players.each do |player_id|
+      player = Player.find(player_id)
+      PlayerMailer.round_start_email(player, self).deliver
+    end
       
   end
 
