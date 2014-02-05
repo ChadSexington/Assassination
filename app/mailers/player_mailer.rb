@@ -78,7 +78,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @body = body
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: "test")
+    mail(to: email_with_name, subject: subject)
   end
 
 end
