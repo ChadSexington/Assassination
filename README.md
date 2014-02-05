@@ -3,6 +3,7 @@
 -------------------
 - config/application.yml
   - This contains the globabl configuration
+    - admin_email: This should be the email used to register the first admin user. This must be set correctly or you will be unable to set any user as an administrator
     - project_name: This is used in several places throughout the views, including the brand in the navbar and many of the welcome pages.
     - data_dir: This should be set to the place you would like to keep images in your development environment. In Production, this will always be the $OPENSHIFT_DATA_DIR (see config/application.rb)
 - config/ABOUT.md
@@ -17,20 +18,24 @@
   - New assignment emails will have to generate a 'card' type thing.
   - Ban email needs a form for an admin to type the message out.
 - Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?)
-- Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
   - Fix registration password fields disappearing if there is an error
-- *After the above is complete, the project should be usable, but likely buggy (alpha stage)*
-- Make the handbook a pdf
-  - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
+**After the above is complete, the project should be usable, but likely buggy (alpha stage)**
+- Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
+- Prettify everything
+  - Most admin-facing pages (with the addition of central) were done very quickly, with a focus on functionality over asthetics. Need to go back through and get a real theme going.
 - Finish the player profile page.
   - Pictures should be cropped to a standard size
   - Allow players to view other player's profiles
     - Need to add links in the kill-feed
   - Just keep it simple...
   - This should reflect what will be emailed in one of the mailers above
+- Add error checking and validations to all forms
+  - Player registration/edit form is completed
+- Make the handbook a pdf
+  - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Devise a social model where players can 'message' each other and comment on kills
   - This is absolutely last priority
 
