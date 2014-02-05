@@ -16,9 +16,9 @@
           <dt>IRC Nick</dt>
           <dd><%= @player.irc_nick %></dd>
           <dt>Kills</dt>
-          <dd><%= @player.kills %></dd>
+          <dd><%= Kill.where(:player_id => @player.id).count %></dd>
           <dt>Deaths</dt>
-          <dd><%= @player.deaths %></dd>
+          <dd><%= Death.where(:player_id => @player.id).count %></dd>
         </dl>
         <div class="well well-small">
           <%= @player.notes %>
