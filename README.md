@@ -22,6 +22,7 @@
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
   - Fix registration password fields disappearing if there is an error
+
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Prettify everything
