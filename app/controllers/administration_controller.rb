@@ -39,8 +39,9 @@ before_filter :authorize
   end
 
   def send_mail
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :tables => true, :strikethrough => true, :fenced_code_blocks => true, :underline => true, :quote => true, :footnotes => true)
     subject = email_params[:subject]
-    body = email_params[:body]
+    body = markdown.render(email_params[:body])
     recipients = email_params[:recipients]
     case email_params[:email_type]
     when "mass_update"

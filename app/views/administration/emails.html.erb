@@ -7,7 +7,8 @@
     <%= radio_button_tag 'recipients', 'round', true %> Current Round Participants<br>
     <%= radio_button_tag 'recipients', 'all' %> All Registered Players<br><br>
     <%= text_field_tag 'subject', "", :placeholder => "Subject", :class => "form-control" %>
-    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 15, :class => "form-control" %><br>
+    <%= text_area_tag 'body', "", :placeholder => "The 'OSAS Bulletin' banner will be displayed above the text in this field. Markdown rendering is utilized. See below for a markdown cheat sheet.", :rows => 15, :class => "form-control" %><br>
+<div class="row"><div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div></div>
     <%= submit_tag 'Send mass update', :class => "btn btn-default" %>
   <% end %>
 </div>
@@ -23,7 +24,8 @@
       </div>
     </div><br>
     <%= text_field_tag 'subject', "", :placeholder => "Subject", :class => "form-control" %>
-    <%= text_area_tag 'body', "", :placeholder => "HTML is accepted and encouraged.", :rows => 15, :class => "form-control" %><br>
+    <%= text_area_tag 'body', "", :placeholder => "The 'OSAS Bulletin' banner will be displayed above the text in this field. Markdown rendering is utilized. See below for a markdown cheat sheet.", :rows => 15, :class => "form-control" %><br>
+<div class="row"><div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div></div>
     <%= submit_tag 'Send individual email', :class => "btn btn-default" %>
   <% end %>
 </div>
