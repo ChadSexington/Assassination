@@ -78,6 +78,8 @@ class PlayerMailer < ActionMailer::Base
     logger.info "Sending individual email to player #{player.name}, subject: #{subject}."
     @player = player
     @body = body
+    logger.info "Email body:"
+    logger.info @body
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: subject)
   end
