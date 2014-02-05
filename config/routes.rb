@@ -1,5 +1,11 @@
 RailsApp::Application.routes.draw do
 
+  get "news/new"
+
+  get "news/edit"
+
+  get "news/show"
+
   get "kill/show"
   get "kill/edit"
   get "administration/index"
@@ -70,6 +76,9 @@ RailsApp::Application.routes.draw do
   #       get 'recent', :on => :collection
   #     end
   #   end
+  scope '/administration' do
+    resources :news
+  end
 
   # Sample resource route within a namespace:
   #   namespace :admin do

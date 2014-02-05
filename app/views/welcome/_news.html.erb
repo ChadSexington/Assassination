@@ -1,1 +1,15 @@
-news
+<br>
+<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :tables => true, :strikethrough => true, :fenced_code_blocks => true, :underline => true, :quote => true, :footnotes => true) %>
+<% @news.each do |post| %>
+<div class="well">
+  <h2><%= post.title %></h2>
+  <hr>
+  <%= raw(markdown.render(post.body)) %>
+  <hr>
+  <span class="text-muted">
+    Date: <%= post.created_at %>  |  Author: <%= post.author %>
+  </span>
+</div>
+<hr>
+<% end %>
+

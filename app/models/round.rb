@@ -26,7 +26,8 @@ private
       end
       self.assignments.create(player_id: player_id,
                             target: tar,
-                            status: 0,)    
+                            status: 0,)   
+      PlayerMailer.new_assignment_email(@player) 
     end
       
   end

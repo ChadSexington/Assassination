@@ -14,11 +14,9 @@
 - Finish mailers
   - html templates need to be completed
     - Most messages will use a layout that I should define as a partial
-  - Hooks need to be added in some places (such as round start)
   - New assignment emails will have to generate a 'card' type thing.
+  - Ban email needs a form for an admin to type the message out.
 - Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?)
-- Add an admin form to add news posts
-  - This will require creating a model + controller
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password

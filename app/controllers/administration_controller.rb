@@ -15,6 +15,7 @@ before_filter :authorize
     @player.banned = true
     if @player.save
       flash[:success] = @player.name + " has been banned."
+      PlayerMailer.ban_email(@player)
       redirect_to "/administration/players"
     else
       flash[:error] = @player.name + " could not be banned."

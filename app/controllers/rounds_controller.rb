@@ -24,6 +24,7 @@ class RoundsController < ApplicationController
       @round.active = false
       @round.save
       flash[:success] = "Round #{@round.id} ended."
+      PlayerMailer.round_end_email(@round)
       redirect_to :back
     else
       flash[:error] = "There is currently no active round."
@@ -37,6 +38,7 @@ class RoundsController < ApplicationController
     @round.start_time = Time.now
     if @round.save
       flash[:success] = "Round created"
+      PlayerMailer.round_start_email(@round)
       redirect_to '/rounds/current'
     else
       flash[:error] = "Round could not be created."
