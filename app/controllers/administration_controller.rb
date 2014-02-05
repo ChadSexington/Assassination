@@ -54,8 +54,9 @@ before_filter :authorize
         redirect_to :back
       end
     when "individual_email"
-      player_id = email_params[:recpients]
-      PlayerMailer.individual_email(player_id, subject, body)
+      player_id = email_params[:recipients]
+      player = Player.find(player_id)
+      PlayerMailer.individual_email(player, subject, body)
     end
     flash[:success] = "Emails queued."
     redirect_to '/administration/index'

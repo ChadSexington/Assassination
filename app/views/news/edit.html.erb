@@ -8,7 +8,7 @@
     <div class="row"><div class="col-sm-12">
     <%= label_tag :body, "Body", :class => "control-label" %><br>
       <%= text_area_tag :body, @news_post.body, :rows => "20", :class => "form-control" %><br>
-    <div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Help</a></div>
+    <div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div>
     </div></div><br>
     <%= label_tag :public, "Public", :class => "control-label" %>
       <%= check_box_tag :public, "true", !@news_post.hidden, :class => "form-control" %><br>

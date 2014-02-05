@@ -47,11 +47,11 @@ class PlayerMailer < ActionMailer::Base
 
   # This will send a customized update to all players in the round
   def update_email(subject, message)
-    @message = message
+    @body = body
     current_round.players.each do |player_id|
       @player = Player.find(player_id)
       email_with_name = "#{@player.name} <#{@player.email}>"
-      mail(to: email_with_name, subject: "Bulletin from the OpenSouce Assassination Organization")
+      mail(to: email_with_name, subject: subject)
     end
   end
   
@@ -63,13 +63,23 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This email will send out to all confirmed players
-  def mass_email(subject, message)
-    @message = message
+  def mass_email(subject, body)
+    @body = body
     @players = Player.where(:confirmed => true, :banned => false)
     @players.each do |player|
       email_with_name = "#{player.name} <#{player.email}>"
       mail(to: email_with_name, subject: subject)
     end
+  end
+
+  # This will send an email to an individual player
+  # body is already rendered from markdown
+  def individual_email(player, subject, body)
+    @player = player
+    @body = body
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
+    mail(to: email_with_name, subject: subject)
   end
 
 end
