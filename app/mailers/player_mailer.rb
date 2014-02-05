@@ -5,7 +5,7 @@ class PlayerMailer < ActionMailer::Base
   def confirmation_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: 'Confirm your membership to the OpenSource Assassination Organization.')
+    mail(to: email_with_name, subject: 'Confirm your membership to the OpenSource Assassination Society.')
   end
   
   # Welcome a user after they confirm registration
@@ -14,7 +14,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     attachments['The_Assassins_Guide.odt'] = File.read("#{Rails.root}/public/The_Assassins_Guide.odt")
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: 'Welcome to the OpenSource Assassination Organization!') 
+    mail(to: email_with_name, subject: 'Welcome to the OpenSource Assassination Society!') 
   end
 
   # This will notify a single player of a new target that has been assigned to them.  
@@ -22,7 +22,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
     attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
-    mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Organization')
+    mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
   end
 
   # This will notify players that a round has started.
@@ -30,7 +30,7 @@ class PlayerMailer < ActionMailer::Base
     @round = round
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Organization')
+    mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
   end
 
   # This will notify players that a round has started.
@@ -38,7 +38,7 @@ class PlayerMailer < ActionMailer::Base
     @round = round
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: "A winner for round #{round.id} has been determined! - OpenSouce Assassination Organization")
+    mail(to: email_with_name, subject: "A winner for round #{round.id} has been determined! - OpenSouce Assassination Society")
   end
 
   # This will send a customized update to all players in the round
@@ -53,7 +53,7 @@ class PlayerMailer < ActionMailer::Base
   def ban_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Organization')
+    mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Society')
   end
 
   # This will send an email to an individual player
