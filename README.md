@@ -35,6 +35,7 @@
   - This should reflect what will be emailed in one of the mailers above
 - Add error checking and validations to all forms
   - Player registration/edit form is completed
+- Add error reporting for custom emails
 - Make the handbook a pdf
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Devise a social model where players can 'message' each other and comment on kills

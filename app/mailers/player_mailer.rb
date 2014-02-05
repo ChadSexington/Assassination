@@ -75,10 +75,10 @@ class PlayerMailer < ActionMailer::Base
   # This will send an email to an individual player
   # body is already rendered from markdown
   def individual_email(player, subject, body)
+    logger.info "Sending individual email to player #{player.name}, subject: #{subject}."
     @player = player
     @body = body
     email_with_name = "#{@player.name} <#{@player.email}>"
-    attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
     mail(to: email_with_name, subject: subject)
   end
 
