@@ -11,22 +11,25 @@ private
     if self.players.empty?
       return nil
     end
-    targets = self.players.shuffle
-    self.players.each do |player_id|
-      tar = targets.pop
-      if tar == nil
-        tar = self.players.sample
-        while tar == player_id do
-          tar = self.players.sample
+    finished = false
+    assignment_hash = Hash.new
+    while finished == false
+      target_ids = self.players.shuffle
+      self.players.each do |player_id|
+        new_target_id = target_ids.pop
+        if new_target_id == player_id
+          break
         end
-      elsif tar == player_id
-        new_tar = targets.pop
-        targets.push(tar)
-        tar = new_tar
+        assignment_hash[player_id] = new_target
       end
+      if assignment_hash.count = self.players
+        finished = true
+      end
+    end
+    assignment_hash.each do |player_id, target_id|
       self.assignments.create(player_id: player_id,
-                            target: tar,
-                            status: 0,)   
+                              target: target_id,
+                              status: 0,)   
     end
     self.players.each do |player_id|
       player = Player.find(player_id)

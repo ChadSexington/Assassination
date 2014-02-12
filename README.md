@@ -12,6 +12,9 @@
 
 ###TODO
 ------------------
+**STATUS**
+- Just changed the palyer -> assignment association to has_one from has_many. Need to mul this over and think what would be best.
+
 - Finish mailers
   - html templates need to be completed
   - New assignment emails will have to generate a 'card' type thing.
@@ -21,6 +24,7 @@
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
   - Fix registration password fields disappearing if there is an error
+- Add a way to unban a player
 
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
 - Add check box at player registration/edit to subscribe to news updates

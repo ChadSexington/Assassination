@@ -1,7 +1,9 @@
 class Player < ActiveRecord::Base
 
 attr_accessor :password, :password_confirmation
-has_many :assignments
+has_one :assignment
+has_many :kills
+has_many :deaths
 
 # This is necessary for authentication stuffs
 require 'digest/sha1'

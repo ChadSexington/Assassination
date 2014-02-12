@@ -15,7 +15,7 @@ class RoundsController < ApplicationController
     @round = Round.where(:active => true).first
     if @round.nil?
       flash[:error] = "There is currently no active round."
-      redirect_to :back
+      redirect_to '/administration/index'
     end 
   end
   
@@ -24,8 +24,7 @@ class RoundsController < ApplicationController
       @round.active = false
       @round.save
       flash[:success] = "Round #{@round.id} ended."
-      @round.players.each do |player_id|
-        player = Player.find(player_id)
+      @round.players.each do |player|
         PlayerMailer.round_end_email(player, @round).deliver
       end
       redirect_to '/administration/index'
@@ -37,7 +36,11 @@ class RoundsController < ApplicationController
 
   def start
     @round = Round.new(:active => true)
-    @round.players = start_params[:player_ids]
+    @round.players = Array.new
+    start_params[:player_ids].each do |player_id|
+      player = Player.find(player_id)
+      @round.players.push(player)
+    end
     @round.start_time = Time.now
     if @round.save
       flash[:success] = "Round created"
