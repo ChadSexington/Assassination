@@ -25,7 +25,7 @@ before_filter :authorize
 
   def assignments
     @players = Player.all
-    @assignments = Assignment.all 
+    @assignments = Assignment.where(round_id: current_round.id)
   end
   
   def authorize
