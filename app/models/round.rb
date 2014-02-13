@@ -15,9 +15,9 @@ private
     num_of_players = self.players.count
     assignment_hash = Hash.new
     while finished == false
-      target_ids = self.players.shuffle
+      targets = self.players.shuffle
       self.players.each do |player|
-        new_target_id = target_ids.pop
+        new_target_id = targets.pop.id
         if new_target_id == player.id
           break
         end

@@ -60,7 +60,7 @@ private
     params.permit!
   end
 
-  def deactive_all_assignments
+  def deactivate_all_assignments
     Assignment.where(:active => true).each do |ass|
       ass.update_attributes(:active => false)
     end

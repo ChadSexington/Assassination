@@ -22,7 +22,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @assignment = assignment
     email_with_name = "#{@player.name} <#{@player.email}>"
-    attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
+    #attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
     mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
   end
 
