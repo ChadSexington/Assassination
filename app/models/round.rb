@@ -30,9 +30,9 @@ private
       end
     end
     assignment_hash.each do |player_id, target_id|
-      self.assignments.create(player_id: player_id,
-                              target: target_id,
-                              status: 0,)   
+      self.assignments.create(:player_id => player_id,
+                              :target_id => target_id,
+                              :active => true)   
     end
     self.players.each do |player_id|
       player = Player.find(player_id)

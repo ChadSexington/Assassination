@@ -10,12 +10,35 @@ before_filter :authorize
     @players = Player.all
   end
 
+  def submit_ban
+    @player = Player.find(params[:id])
+    if @player.banned == true
+      flash[:error] = "Player is already banned"
+      redirect_to '/administration/index'
+    end
+  end
+  
+  def unban_player 
+    @player = Player.find(params[:id])
+    @player.banned = false
+    if @player.save
+      flash[:success] = @player.name + " has been un-banned."
+      PlayerMailer.unban_email(@player).deliver
+      redirect_to "/administration/players"
+    else
+      flash[:error] = @player.name + " could not be un-banned."
+      redirect_to "/administration/players"
+    end
+  end
+
   def ban_player
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :tables => true, :strikethrough => true, :fenced_code_blocks => true, :underline => true, :quote => true, :footnotes => true)
+    reason = markdown.render(ban_params[:reason])
     @player = Player.find(params[:id])
     @player.banned = true
     if @player.save
       flash[:success] = @player.name + " has been banned."
-      PlayerMailer.ban_email(@player).deliver
+      PlayerMailer.ban_email(@player, reason).deliver
       redirect_to "/administration/players"
     else
       flash[:error] = @player.name + " could not be banned."
@@ -25,7 +48,11 @@ before_filter :authorize
 
   def assignments
     @players = Player.all
-    @assignments = Assignment.where(round_id: current_round.id)
+    if current_round.nil?
+      @assignments = Assignment.all
+    else
+      @assignments = Assignment.where(round_id: current_round.id)
+    end
   end
   
   def authorize
@@ -71,5 +98,8 @@ private
   def email_params
     params.permit(:email_type, :body, :subject, :recipients)
   end
-
+  
+  def ban_params
+    params.permit(:id, :reason)
+  end
 end

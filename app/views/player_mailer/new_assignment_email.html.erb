@@ -1,5 +1,5 @@
 <%= render 'banner' %>
 <p>A new target has been assigned to you!
 
-Target: <%= @assignment.target %><br></p>
+Target: <%= Player.find(@assignment.target_id).name %><br></p>
 <%= render 'signature' %>

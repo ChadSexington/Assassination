@@ -24,6 +24,7 @@ class RoundsController < ApplicationController
       @round.active = false
       @round.save
       flash[:success] = "Round #{@round.id} ended."
+      deactivate_all_assignments
       @round.players.each do |player|
         PlayerMailer.round_end_email(player, @round).deliver
       end
@@ -57,6 +58,12 @@ private
   
   def start_params
     params.permit!
+  end
+
+  def deactive_all_assignments
+    Assignment.where(:active => true).each do |ass|
+      ass.update_attributes(:active => false)
+    end
   end
 
 end

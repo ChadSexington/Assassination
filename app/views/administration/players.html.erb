@@ -21,9 +21,9 @@
         <td><%= if player.confirmed; "Yes"; else; "No"; end %></td>
         <td><%= Kill.where(:player_id => player.id).count %>/<%= Death.where(:player_id => player.id).count %></td>
         <% if player.banned %>
-          <td><span class="text-danger">BANNED</td>
+          <td><%= link_to 'Un-ban Player', "/administration/unban_player/#{player.id}", data: { confirm: "Are you sure you would like to UN-ban #{player.name}?" }, :class => "btn btn-default" %></td>
         <% else %>
-          <td><%= link_to 'Ban Player', "/administration/ban_player/#{player.id}", data: { confirm: "Are you sure you would like to ban #{player.name}? This can be undone at any time." }, :class => "btn btn-custom" %>
+          <td><%= link_to 'Ban Player', "/administration/submit_ban/#{player.id}", :class => "btn btn-custom" %>
         <% end %>
       </tr>
     <% end %>

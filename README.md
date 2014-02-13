@@ -12,23 +12,32 @@
 
 ###TODO
 ------------------
-**STATUS**
-- Just changed the palyer -> assignment association to has_one from has_many. Need to mul this over and think what would be best.
-
+- Add feature - when a kill is reported, assassin should receive new_assignment_email with the deceased's assignment.
+  - This is going to take some back-end overhauling.
+  - worknotes:
+    - DONE First off, we need to change assignments to have an active:boolean attribute, instead of this integer bullshit.
+    - DONE Assignments should use a target's id, not the target's name. wtf.
+      - This will require changing a lot of existing code.
+    - Players **will** have multiple assignments, and that is okay. However, they will only have on active assignment.
+    - If the player is dead for the round, they should have no active assignments
+  - This should all be done. Currently running into a really odd issue that I think is a problem with rails caching. Says im calling the method 'target' on an Assignment object in models/round.rb at line 33. I /used/ to do that there, but changed it to target_id to match the db.
 - Finish mailers
   - html templates need to be completed
   - New assignment emails will have to generate a 'card' type thing.
   - Ban email needs a form for an admin to type the message out.
-- Add form for an administrator to verify/edit/delete kills/deaths (the hard part will be lining up the deaths w/ kills, since there is no association. Maybe there should be one?)
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
   - Fix registration password fields disappearing if there is an error
-- Add a way to unban a player
 
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
+- Add specific error messages to
+  - Player logins
+    - Player does not exist
+    - Player exists, password incorrect
 - Add check box at player registration/edit to subscribe to news updates
   - Will also need to add a news mailer for this, as well as a hook when new news posts are created
+- Have round ends/starts automatically create small news posts with the summary of the round
 - Make it so that if you screw up the player new/edit form, you don't have to re-upload the photo.
 - Handle when a player not part of the curent round attempts to report a kill
 - When a player is killed, send that player's assignment to the killer.

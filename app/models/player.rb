@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
 
 attr_accessor :password, :password_confirmation
-has_one :assignment
+has_many :assignments
 has_many :kills
 has_many :deaths
 

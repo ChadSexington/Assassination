@@ -18,8 +18,9 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This will notify a single player of a new target that has been assigned to them.  
-  def new_assignment_email(player)
+  def new_assignment_email(player, assignment)
     @player = player
+    @assignment = assignment
     email_with_name = "#{@player.name} <#{@player.email}>"
     attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
     mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
@@ -30,7 +31,7 @@ class PlayerMailer < ActionMailer::Base
     @round = round
     @player = player
     begin
-      @target = Player.find(player.assignments.last.target) 
+      @target = Player.find(player.assignments.last.target_id) 
     rescue
       logger.error "Player with no target included in round."
       return
@@ -56,10 +57,18 @@ class PlayerMailer < ActionMailer::Base
   end
   
   # This will notify a player of the banhammer that just smashed his face into the ground.
-  def ban_email(player)
+  def ban_email(player, reason)
     @player = player
+    @reason = reason
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Society')
+  end
+
+  # This will notify a player that they have been un-banned and can join the game again.
+  def unban_email(player)
+    @player = player
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: 'Your ban from OpenSouce Assassination Society has been repealed.')
   end
 
   # This will send an email to an individual player

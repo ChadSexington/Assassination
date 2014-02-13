@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204232353) do
+ActiveRecord::Schema.define(:version => 20140213011120) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
-    t.string   "target"
-    t.integer  "status"
     t.text     "elim_location"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "round_id"
+    t.boolean  "active",        :default => false
+    t.integer  "target_id"
   end
 
   create_table "deaths", :force => true do |t|

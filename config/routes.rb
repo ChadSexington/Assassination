@@ -1,11 +1,8 @@
 RailsApp::Application.routes.draw do
 
   get "news/new"
-
   get "news/edit"
-
   get "news/show"
-
   get "kill/show"
   get "kill/edit"
   get "administration/index"
@@ -19,6 +16,8 @@ RailsApp::Application.routes.draw do
   post "administration/send_mail"
   post "kill/create"
 
+  match "administration/submit_ban/:id" => "administration#submit_ban"
+  match "administration/unban_player/:id" => "administration#unban_player"
   match "administration/ban_player/:id" => "administration#ban_player"
   match "central" => "welcome#central" 
   match "rounds/current" => "rounds#current"
