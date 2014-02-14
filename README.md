@@ -19,7 +19,6 @@
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
-  - Fix registration password fields disappearing if there is an error
 
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
 - Add specific error messages to
