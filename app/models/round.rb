@@ -4,6 +4,26 @@ class Round < ActiveRecord::Base
   serialize :players
 
   after_create :generate_assignments
+  
+  def end(winner)
+    if self.active == true
+      self.players.each do |player|
+        PlayerMailer.round_end_email(player, self, winner).deliver
+      end
+      self.update_attributes(:active => false)
+      self.deactivate_assignments
+    else
+      Rails.logger.error "Tried to end active round"
+      Rails.logger.error self.inspect
+      return false
+    end
+  end
+
+  def deactivate_assignments
+    self.assignments.where(:active => true).each do |ass|
+      ass.update_attributes(:active => false)
+    end
+  end
 
 private
   

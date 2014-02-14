@@ -41,11 +41,12 @@ class PlayerMailer < ActionMailer::Base
   end
 
   # This will notify players that a round has started.
-  def round_end_email(player, round)
+  def round_end_email(player, round, winner)
     @round = round
     @player = player
+    @winner = winner
     email_with_name = "#{@player.name} <#{@player.email}>"
-    mail(to: email_with_name, subject: "A winner for round #{round.id} has been determined! - OpenSouce Assassination Society")
+    mail(to: email_with_name, subject: "A winner for round #{@round.id} has been determined! - OpenSouce Assassination Society")
   end
 
   # This will send a customized update to all players in the round

@@ -35,15 +35,16 @@ private
     deceased_assignment.update_attributes(:active => false)
     deceased_old_target_id = deceased_assignment.target_id
 
-    if deceased_told_target_id != assassin_id
+    if deceased_old_target_id != assassin_id
       new_assignment = Assignment.new(:player_id => assassin_id,
                                     :target_id => deceased_old_target_id,
                                     :active => true,
                                     :round_id => current_round.id)
       new_assignment.save
       PlayerMailer.new_assignment_email(Player.find(new_assignment.player_id), new_assignment).deliver
+    else
+      current_round.end(Player.find(assassin_id))
     end
-    # Should put an else statement here when a winner has been determined and the round ends
   end
 
 end
