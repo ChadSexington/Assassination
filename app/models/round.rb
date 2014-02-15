@@ -56,7 +56,8 @@ private
     end
     self.players.each do |player_id|
       player = Player.find(player_id)
-      PlayerMailer.round_start_email(player, self).deliver
+      assignment = self.assignments.where(:player_id => player_id).first
+      PlayerMailer.round_start_email(player, self, assignment).deliver
     end
       
   end

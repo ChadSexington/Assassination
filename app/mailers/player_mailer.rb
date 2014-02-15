@@ -21,21 +21,19 @@ class PlayerMailer < ActionMailer::Base
   def new_assignment_email(player, assignment)
     @player = player
     @assignment = assignment
+    @target = Player.find(assignment.target_id)
     email_with_name = "#{@player.name} <#{@player.email}>"
-    #attachments.inline['target_photo'] = "Target's image (or possible the whole thingamabob)"
+    attachments.inline['target_photo'] = File.read("#{Rails.root}/#{@player.photo.url(:card)}")
+    attachments.inline['osas_banner'] = File.read("#{Rails.root}/assets/OSAS_card_banner.png")
     mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
   end
 
   # This will notify players that a round has started.
-  def round_start_email(player, round)
+  def round_start_email(player, round, assignment)
     @round = round
     @player = player
-    begin
-      @target = Player.find(player.assignments.last.target_id) 
-    rescue
-      logger.error "Player with no target included in round."
-      return
-    end
+    @assignment = assignment
+    @target = Player.find(assignment.target_id)
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
   end

@@ -12,8 +12,8 @@ require 'digest/sha1'
 # DO NOT change the url and path. Took hours to get this right and it correlates with many other places in the code
 has_attached_file :photo, 
   :styles => {
-    :thumb => "100x100#",
-    :medium => "256x192" },
+    :thumb => "200x260",
+    :card => "140x160" },
   :url => "/images/:id.:extension",
   :path => "#{CONFIG[:data_dir]}public/images/:id.:extension"
 
