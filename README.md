@@ -15,8 +15,6 @@
 - Keep track of number of times a player has won
   - Add a hook in app/models/round.rb to assign it in Round.end
   - Add a 'wins' field to wherever a player is displayed
-- Finish mailers
-  - New assignment emails will have to generate a 'card' type thing.
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
