@@ -24,7 +24,7 @@ class PlayerMailer < ActionMailer::Base
     @target = Player.find(assignment.target_id)
     email_with_name = "#{@player.name} <#{@player.email}>"
     attachments.inline['target_photo'] = File.read("#{CONFIG[:data_dir]}public/#{@player.photo.url.split("?").first}")
-    attachments.inline['osas_banner'] = File.read("#{Rails.root}/assets/OSAS_card_banner.png")
+    attachments.inline['osas_banner'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
     mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
   end
 
@@ -35,7 +35,7 @@ class PlayerMailer < ActionMailer::Base
     @assignment = assignment
     @target = Player.find(assignment.target_id)
     attachments.inline['target_photo'] = File.read("#{CONFIG[:data_dir]}public/#{@player.photo.url.split("?").first}")
-    attachments.inline['osas_banner'] = File.read("#{Rails.root}/assets/OSAS_card_banner.png")
+    attachments.inline['osas_banner'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
   end
