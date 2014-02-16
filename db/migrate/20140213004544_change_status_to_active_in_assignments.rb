@@ -1,6 +1,9 @@
 class ChangeStatusToActiveInAssignments < ActiveRecord::Migration
-  def change
-    remove_column :assignments, :status
+  def up
     add_column :assignments, :active, :boolean, :default => false
+  end
+
+  def down
+    remove_column :assignments, :active
   end
 end
