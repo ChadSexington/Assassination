@@ -1,4 +1,4 @@
-class AddTargetIdToAssignments < ActiveRecord::Migration
+class RemoveTargetIdFromAssignments < ActiveRecord::Migration
   def up
     remove_column :assignments, :target
   end
