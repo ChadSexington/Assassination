@@ -22,6 +22,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @assignment = assignment
     @target = Player.find(assignment.target_id)
+    @target_kd_ratio = kd_ratio(@target)
     email_with_name = "#{@player.name} <#{@player.email}>"
     attachments.inline['target_photo'] = File.read("#{CONFIG[:data_dir]}public/#{@player.photo.url.split("?").first}")
     attachments.inline['osas_banner'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
@@ -34,6 +35,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @assignment = assignment
     @target = Player.find(assignment.target_id)
+    @target_kd_ratio = kd_ratio(@target)
     attachments.inline['target_photo'] = File.read("#{CONFIG[:data_dir]}public/#{@player.photo.url.split("?").first}")
     attachments.inline['osas_banner'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
     email_with_name = "#{@player.name} <#{@player.email}>"
