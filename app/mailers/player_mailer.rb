@@ -83,4 +83,12 @@ class PlayerMailer < ActionMailer::Base
     mail(to: email_with_name, subject: subject)
   end
 
+private
+
+  def kd_ratio(player)
+    kill_count = Kill.where(:player_id => player.id).count
+    death_count = Death.where(:player_id => player.id).count
+    "#{kill_count}/#{death_count}"
+  end
+
 end
