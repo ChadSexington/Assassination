@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215172716) do
+ActiveRecord::Schema.define(:version => 20140217164453) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20140215172716) do
     t.text     "title"
     t.text     "body"
     t.string   "author"
-    t.boolean  "hidden"
+    t.boolean  "public"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

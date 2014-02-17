@@ -1,8 +1,5 @@
 RailsApp::Application.routes.draw do
 
-  get "news/new"
-  get "news/edit"
-  get "news/show"
   get "kill/show"
   get "kill/edit"
   get "administration/index"
@@ -12,19 +9,24 @@ RailsApp::Application.routes.draw do
   get "welcome/index"
   get "welcome/handbook"
   get "welcome/central"
-  post "rounds/start" 
   post "administration/send_mail"
+  post "rounds/start" 
   post "kill/create"
 
+  match "administration" => "administration#index"
   match "administration/submit_ban/:id" => "administration#submit_ban"
   match "administration/unban_player/:id" => "administration#unban_player"
   match "administration/ban_player/:id" => "administration#ban_player"
+  match "administration/news" => "news#index"
+  match "administration/news/new" => "news#new"
+  match "administration/news/:id/edit" => "news#edit"
+  match "administration/news/update" => "news#update", via: :post
+  match "administration/news/create" => "news#create", via: :post
   match "central" => "welcome#central" 
   match "rounds/current" => "rounds#current"
   match "rounds/current/end" => "rounds#end_round"
   match "rounds/current/end_current" => "rounds#end_current"
   match "welcome/about" => "welcome#about"
-  match "administration" => "administration#index"
   match "players/login" => "players#login"
   match "players/logout" => "players#logout"
   match "players/change_password" => "players#change_password"
@@ -76,9 +78,6 @@ RailsApp::Application.routes.draw do
   #       get 'recent', :on => :collection
   #     end
   #   end
-  scope '/administration' do
-    resources :news
-  end
 
   # Sample resource route within a namespace:
   #   namespace :admin do

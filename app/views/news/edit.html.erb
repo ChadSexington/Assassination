@@ -1,6 +1,6 @@
 <h1>Edit News Post</h1>
 <div class="well">
-  <%= form_tag "/administration/news" do %>
+  <%= form_tag "/administration/news/update" do %>
     <div class="row"><div class="col-sm-4">
     <%= label_tag :title, "Title", :class => "control-label" %>
       <%= text_field_tag :title, @news_post.title, :class => "form-control" %>
@@ -11,7 +11,8 @@
     <div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div>
     </div></div><br>
     <%= label_tag :public, "Public", :class => "control-label" %>
-      <%= check_box_tag :public, "true", !@news_post.hidden, :class => "form-control" %><br>
+      <%= check_box_tag :public, "true", @news_post.public, :class => "form-control" %><br>
+    <%= hidden_field_tag :id, @news_post.id %>
     <%= submit_tag 'Submit changes', :class => "btn btn-default" %>
   <% end %>
 </div>

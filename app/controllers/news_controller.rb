@@ -9,14 +9,8 @@ class NewsController < ApplicationController
   end
 
   def create
-    @news_post = NewsPost.new(:title => new_post_params[:title],
-                                 :body => new_post_params[:body])
+    @news_post = NewsPost.new(new_post_params)
     @news_post.author = session[:player].name
-    if new_post_params[:public] == "true"
-      @news_post.hidden = false
-    else
-      @news_post.hidden = true
-    end
     if @news_post.save
       flash[:success] = "Successfully saved news post."
       redirect_to '/administration/news'
@@ -32,12 +26,9 @@ class NewsController < ApplicationController
 
   def update
     @news_post = NewsPost.find(params[:id])
-    if new_post_params[:public] == "true"
-      is_public = false
-    else
-      is_public = true
+    if new_post_params[:public].nil?
+      params[:public] = "false"
     end
-    new_post_params.delete(:public)
     if @news_post.update_attributes(new_post_params) 
       flash[:success] = "Successfully saved news post."
       redirect_to '/administration/news'
