@@ -39,7 +39,14 @@ class NewsController < ApplicationController
   end
 
   def destroy
-  
+    @news_post = NewsPost.find(params[:id])
+    if @news_post.destroy 
+      flash[:success] = "Successfully deleted news post."
+      redirect_to '/administration/news'
+    else
+      flash[:error] = "Could not delete news post."
+      redirect_to 'administration/news'
+    end
   end
 
 private

@@ -22,6 +22,7 @@ RailsApp::Application.routes.draw do
   match "administration/news/:id/edit" => "news#edit"
   match "administration/news/update" => "news#update", via: :post
   match "administration/news/create" => "news#create", via: :post
+  match "administration/news/:id/destroy" => "news#destroy"
   match "central" => "welcome#central" 
   match "rounds/current" => "rounds#current"
   match "rounds/current/end" => "rounds#end_round"
