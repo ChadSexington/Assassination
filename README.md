@@ -12,23 +12,12 @@
 
 ###TODO
 ------------------
-- Add feature - when a kill is reported, assassin should receive new_assignment_email with the deceased's assignment.
-  - This is going to take some back-end overhauling.
-  - worknotes:
-    - DONE First off, we need to change assignments to have an active:boolean attribute, instead of this integer bullshit.
-    - DONE Assignments should use a target's id, not the target's name. wtf.
-      - This will require changing a lot of existing code.
-    - Players **will** have multiple assignments, and that is okay. However, they will only have on active assignment.
-    - If the player is dead for the round, they should have no active assignments
-  - This should all be done. Currently running into a really odd issue that I think is a problem with rails caching. Says im calling the method 'target' on an Assignment object in models/round.rb at line 33. I /used/ to do that there, but changed it to target_id to match the db.
-- Finish mailers
-  - html templates need to be completed
-  - New assignment emails will have to generate a 'card' type thing.
-  - Ban email needs a form for an admin to type the message out.
+- Keep track of number of times a player has won
+  - Add a hook in app/models/round.rb to assign it in Round.end
+  - Add a 'wins' field to wherever a player is displayed
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
-  - Fix registration password fields disappearing if there is an error
 
 **After the above is complete, the project should be usable, but likely buggy (alpha stage)**
 - Add specific error messages to

@@ -9,7 +9,7 @@ class KillController < ApplicationController
                          :recap => kill_params[:recap],
                          :location => kill_params[:location])
       @death.save
-      pass_on_assignment(kill_params[:assassin_id], kill_params[:deceased_id])
+      pass_on_assignment(current_player.id, kill_params[:deceased_id])
       flash[:success] = "Kill reported!"
       redirect_to '/central'
     else
@@ -29,19 +29,22 @@ private
   end
   
   def pass_on_assignment(assassin_id, deceased_id)
-    assassin_assignment = Assignment.where(:player_id => assassin_id, :active => true).last
-    deceased_assignment = Assignment.where(:player_id => deceased_id, :active => true).last
-    assassin_assignmnet.update_attributes(:active => false)
+    assassin_assignment = Player.find(assassin_id).assignments.where(:active => true).last
+    deceased_assignment = Player.find(deceased_id).assignments.where(:active => true).last
+    assassin_assignment.update_attributes(:active => false)
     deceased_assignment.update_attributes(:active => false)
-    
     deceased_old_target_id = deceased_assignment.target_id
-    new_assignment = Assignment.new(:player_id => assassin_id,
+
+    if deceased_old_target_id != assassin_id
+      new_assignment = Assignment.new(:player_id => assassin_id,
                                     :target_id => deceased_old_target_id,
                                     :active => true,
                                     :round_id => current_round.id)
-    new_assignment.save
-    Player_mailer.new_assignment_email(Player.find(new_assignment.player_id), new_assignment).deliver
-    
+      new_assignment.save
+      PlayerMailer.new_assignment_email(Player.find(new_assignment.player_id), new_assignment).deliver
+    else
+      current_round.end(Player.find(assassin_id))
+    end
   end
 
 end

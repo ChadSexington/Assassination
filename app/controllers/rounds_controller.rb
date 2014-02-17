@@ -18,21 +18,28 @@ class RoundsController < ApplicationController
       redirect_to '/administration/index'
     end 
   end
-  
-  def end_current
+ 
+  def end_round
     if @round = Round.where(:active => true).first
-      @round.active = false
-      @round.save
-      flash[:success] = "Round #{@round.id} ended."
-      deactivate_all_assignments
-      @round.players.each do |player|
-        PlayerMailer.round_end_email(player, @round).deliver
+      @round = current_round
+      @players = Array.new
+      current_round.players.each do |player_id|
+        @players << Player.find(player_id)
       end
-      redirect_to '/administration/index'
     else
       flash[:error] = "There is currently no active round."
       redirect_to '/administration/index'
     end
+  end
+ 
+  def end_current
+    @round = current_round
+    if current_round.end(Player.find(end_params[:winner]))
+      flash[:success] = "Round #{@round.id} ended."
+    else
+      flash[:error] = "Could not end Round #{@round.id}."
+    end
+    redirect_to '/administration/index'
   end
 
   def start
@@ -45,9 +52,6 @@ class RoundsController < ApplicationController
     @round.start_time = Time.now
     if @round.save
       flash[:success] = "Round created"
-      @round.players.each do |player|
-        PlayerMailer.round_start_email(player, @round).deliver
-      end
       redirect_to '/rounds/current'
     else
       flash[:error] = "Round could not be created."
@@ -59,11 +63,9 @@ private
   def start_params
     params.permit!
   end
-
-  def deactive_all_assignments
-    Assignment.where(:active => true).each do |ass|
-      ass.update_attributes(:active => false)
-    end
+  
+  def end_params
+    params.permit(:winner)
   end
 
 end

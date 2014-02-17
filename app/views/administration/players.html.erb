@@ -19,7 +19,7 @@
         <td><%= player.irc_nick %></td>
         <td><%= if player.admin; "Yes"; else; "No"; end %></td>
         <td><%= if player.confirmed; "Yes"; else; "No"; end %></td>
-        <td><%= Kill.where(:player_id => player.id).count %>/<%= Death.where(:player_id => player.id).count %></td>
+        <td><%= kd_ratio(player) %></td>
         <% if player.banned %>
           <td><%= link_to 'Un-ban Player', "/administration/unban_player/#{player.id}", data: { confirm: "Are you sure you would like to UN-ban #{player.name}?" }, :class => "btn btn-default" %></td>
         <% else %>

@@ -11,7 +11,7 @@
     <% @assignments.each do |ass| %>
       <tr>
         <td><%= link_to Player.find(ass.player_id).name, edit_assignment_path(ass) %></td>
-        <td><%= Player.find(ass.target_id).name %></td>
+        <td><%= link_to Player.find(ass.target_id).name %></td>
         <td><%= if ass.active; "Ongoing"; else; "Completed"; end%></td>
       </tr>
     <% end %>

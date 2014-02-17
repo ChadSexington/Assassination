@@ -4,6 +4,26 @@ class Round < ActiveRecord::Base
   serialize :players
 
   after_create :generate_assignments
+  
+  def end(winner)
+    if self.active == true
+      self.players.each do |player|
+        PlayerMailer.round_end_email(player, self, winner).deliver
+      end
+      self.update_attributes(:active => false)
+      self.deactivate_assignments
+    else
+      Rails.logger.error "Tried to end active round"
+      Rails.logger.error self.inspect
+      return false
+    end
+  end
+
+  def deactivate_assignments
+    self.assignments.where(:active => true).each do |ass|
+      ass.update_attributes(:active => false)
+    end
+  end
 
 private
   
@@ -15,9 +35,9 @@ private
     num_of_players = self.players.count
     assignment_hash = Hash.new
     while finished == false
-      target_ids = self.players.shuffle
+      targets = self.players.shuffle
       self.players.each do |player|
-        new_target_id = target_ids.pop
+        new_target_id = targets.pop.id
         if new_target_id == player.id
           break
         end
@@ -36,7 +56,8 @@ private
     end
     self.players.each do |player_id|
       player = Player.find(player_id)
-      PlayerMailer.round_start_email(player, self).deliver
+      assignment = self.assignments.where(:player_id => player_id).first
+      PlayerMailer.round_start_email(player, self, assignment).deliver
     end
       
   end

@@ -1,0 +1,8 @@
+<h1>End Round <%= @round.id %></h1>
+<div class="well">
+  <%= form_tag '/rounds/current/end_current' do %>
+    <%= label_tag 'winner', "Winner of the Round:", :class => "control-label" %>
+    <%= select_tag 'winner', options_from_collection_for_select(@players, :id, :name), :class => "form-control" %><br>
+    <%= submit_tag 'End Round', :class => "btn btn-custom" %>
+  <% end %>
+</div>

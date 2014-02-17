@@ -49,7 +49,8 @@ before_filter :authorize
   def assignments
     @players = Player.all
     if current_round.nil?
-      @assignments = Assignment.all
+      flash[:error] = "There are no active assignments"
+      redirect_to '/administration/index'
     else
       @assignments = Assignment.where(round_id: current_round.id)
     end

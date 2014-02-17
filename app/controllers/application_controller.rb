@@ -28,11 +28,18 @@ class ApplicationController < ActionController::Base
   def current_round
     Round.where(:active => true).last
   end
+  
+  def kd_ratio(player)
+    kill_count = Kill.where(:player_id => player.id).count
+    death_count = Death.where(:player_id => player.id).count
+    "#{kill_count}/#{death_count}"
+  end
 
   helper_method :current_player
   helper_method :player_self? 
   helper_method :logged_in?
   helper_method :admin?
   helper_method :current_round
+  helper_method :kd_ratio
 
 end

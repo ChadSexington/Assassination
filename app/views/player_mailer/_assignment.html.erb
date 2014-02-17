@@ -1,0 +1,32 @@
+<style type="text/css">
+  dt { float:left; clear:left; width:150px; text-align:right; font-weight: bold; }
+  dt:after { content: ":"; }
+  dd { width:350px;text-align:right; }
+</style>
+<%= image_tag attachments['osas_banner.png'].url %>
+<br>
+<table style="width:608px">
+  <tr>
+    <td><%= image_tag attachments["target_photo.#{@image_ext}"].url %></td>
+    <td style="width:468">
+      <h2 style="text-align:center"><%= @target.name %></h2>
+      <dl>
+        <dt>Location
+          <dd>Red Hat Tower 
+        <dt>Email
+          <dd><%= @target.email %>
+        <dt>IRC nickname
+          <dd><%= @target.irc_nick %>
+        <dt>K/D ratio
+          <dd><%= @target_kd_ratio %>
+        <dt>Number of Wins
+          <dd><%= @target.wins %>
+      </dl>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td style="background-color:#000000;width:608px;height:10px"></td>
+  </tr>
+</table>
