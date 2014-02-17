@@ -3,11 +3,11 @@
   dt:after { content: ":"; }
   dd { width:350px;text-align:right; }
 </style>
-<%= image_tag attachments['osas_banner'].url %>
+<%= image_tag attachments['osas_banner.png'].url %>
 <br>
 <table style="width:608px">
   <tr>
-    <td><%= image_tag attachments['target_photo'].url %></td>
+    <td><%= image_tag attachments["target_photo#{@image_ext}"].url %></td>
     <td style="width:468">
       <h2 style="text-align:center"><%= @target.name %></h2>
       <dl>
