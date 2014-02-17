@@ -10,6 +10,8 @@ class Round < ActiveRecord::Base
       self.players.each do |player|
         PlayerMailer.round_end_email(player, self, winner).deliver
       end
+      new_wins = winner.wins + 1
+      winner.update_attributes(:wins => new_wins)
       self.update_attributes(:active => false)
       self.deactivate_assignments
     else
