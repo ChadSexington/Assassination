@@ -14,3 +14,18 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+$(document).ready(function() {
+	// find the first container
+	var bodyContainer = $("body").children().eq(1);
+	var childs = $("body").children();
+
+	console.log("Found this many children: " + childs.length);
+	console.log("First child: " + childs[0]);
+
+	console.log("Does navbar-inverse have a length: " + $(".navbar-inverse").length);
+	// if an admin is logged in (meaning the second navbar is rendered) adjust the body padding
+	if ($(".navbar-inverse").length != 0) {
+		bodyContainer.css({"padding-top":"100px"});
+		console.log("Changed the top padding")
+	}
+});
