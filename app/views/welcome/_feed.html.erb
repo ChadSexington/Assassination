@@ -1,11 +1,17 @@
-<h1>Kill feed</h1>
-<div class="list-group">
-  <% @kills.each do |kill| %>
-    <% assassin = Player.find(kill.player_id) %>
-    <% deceased = Player.find(kill.deceased_id) %>
-    <li class="list-group-item">
-      <h5 class="list-group-item-heading"><%= kill.created_at.strftime('%F') %> <%= assassin.nickname %> killed <%= deceased.nickname %></h5>
-      <span class="text-muted"><%= kill.recap %></span>
-    </li>
-  <% end %>
-</div>
+<% @kills.each do |kill| %>
+	<% assassin = Player.find(kill.player_id) %>
+	<% deceased = Player.find(kill.deceased_id) %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Assassin <%= assassin.nickname %> has struck again...</h3>
+		</div>
+		<div class="panel-body">
+			<%= image_tag assassin.photo.url, :class => "float-left col-md-3" %>
+			<p><%= kill.recap %></p>
+		</div>
+		<div class="panel-footing">	
+			<span class="text-muted"><%= kill.created_at.strftime('%F') %></span>
+		</div>
+	</div>
+<% end %>
+
