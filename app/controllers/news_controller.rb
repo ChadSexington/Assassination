@@ -33,12 +33,12 @@ class NewsController < ApplicationController
   def update
     @news_post = NewsPost.find(params[:id])
     if new_post_params[:public] == "true"
-      @news_post.hidden = false
+      is_public = false
     else
-      @news_post.hidden = true
+      is_public = true
     end
-    if @news_post.update_attributes(:title => new_post_params[:title],
-                                 :body => new_post_params[:body]) 
+    new_post_params.delete(:public)
+    if @news_post.update_attributes(new_post_params) 
       flash[:success] = "Successfully saved news post."
       redirect_to '/administration/news'
     else
