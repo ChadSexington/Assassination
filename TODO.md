@@ -1,5 +1,6 @@
 ###TODO
 ------------------
+- Change user first + last name to uppercase BEFORE saving a nickname
 - Keep track of number of times a player has won
   - Add a 'wins' field to wherever a player is displayed
 - Finish implementing user authentication.
