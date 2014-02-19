@@ -74,13 +74,17 @@ before_filter :authorize
     case email_params[:email_type]
     when "mass_update"
       if recipients == "all"
-        Player.where(:confirmed => true, :banned => false).each do |player|
-          PlayerMailer.update_email(player, subject, body).deliver
+        Thread.new {
+          Player.where(:confirmed => true, :banned => false).each do |player|
+            PlayerMailer.update_email(player, subject, body).deliver
+        }
         end
       elsif recipients == "round"
-        current_round.players.each do |player|
-          PlayerMailer.update_email(player, subject, body).deliver
-        end
+        Thread.new {
+          current_round.players.each do |player|
+            PlayerMailer.update_email(player, subject, body).deliver
+          end
+        }
       else
         flash[:error] = "Hidden field missing from form. Contact somebody who has the power."
         redirect_to :back
