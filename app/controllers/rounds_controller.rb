@@ -56,6 +56,10 @@ class RoundsController < ApplicationController
     else
       flash[:error] = "Round could not be created."
     end
+  rescue Timeout::Error => e
+    @error = e
+    flash[:error] = "Request took too long, try again"
+    redirect_to '/rounds/new'
   end
 
 private
