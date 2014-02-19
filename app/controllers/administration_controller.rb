@@ -77,12 +77,14 @@ before_filter :authorize
         Thread.new {
           Player.where(:confirmed => true, :banned => false).each do |player|
             PlayerMailer.update_email(player, subject, body).deliver
+            sleep(1)
         }
         end
       elsif recipients == "round"
         Thread.new {
           current_round.players.each do |player|
             PlayerMailer.update_email(player, subject, body).deliver
+            sleep(1)
           end
         }
       else
