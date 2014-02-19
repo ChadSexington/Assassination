@@ -56,12 +56,20 @@ private
                               :target_id => target_id,
                               :active => true)   
     end
+    Thread.new { send_assignment_emails } 
+  end
+
+  def send_assignment_emails
     self.players.each do |player_id|
       player = Player.find(player_id)
       assignment = self.assignments.where(:player_id => player_id).first
-      PlayerMailer.round_start_email(player, self, assignment).deliver
+      begin
+        PlayerMailer.round_start_email(player, self, assignment).deliver
+      rescue => e
+        Rails.logger.error "Email failed to send"
+        Rails.logger.error e.inspect
+      end
     end
-      
   end
 
 end
