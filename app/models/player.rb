@@ -28,10 +28,11 @@ validates_presence_of :email, :name, :irc_nick, :photo
 validates_presence_of :password, :password_confirmation, :salt, :if => :password_validation_required?
 
 # Before the initial save, set attributes defined using other attributes
+before_save :prettify
 before_save :define_username
-before_save :define_nickname
-before_save :check_admin
-before_save :generate_confirmation_code
+before_create :define_nickname
+before_create :check_admin
+before_create :generate_confirmation_code
 
   def password=(pass)
     @password=pass
@@ -47,8 +48,16 @@ before_save :generate_confirmation_code
   # if it is incorrect, it will RETURN NIL
   def self.authenticate(email, pass)
     player = find(:first, :conditions => ["email = ?", email])
-    return nil if not player
-    return player if Player.encrypt(pass, player.salt) == player.hashed_password
+    if player
+      if Player.encrypt(pass, player.salt) == player.hashed_password
+        player
+      else
+        nil
+      end
+    else
+      Rails.logger.error "Player with email #{email} tried to log in and failed because the email does not exist"
+      nil
+    end
   end
 
   def password_validation_required?
@@ -57,7 +66,7 @@ before_save :generate_confirmation_code
 
   def define_username
     username = self.email.split("@").first
-    self.username = username
+    self.username = username.downcase.gsub(' ', '-').gsub('.','-')
   end
 
   def define_nickname
@@ -81,6 +90,10 @@ before_save :generate_confirmation_code
   end
 
 private
+
+  def prettify
+    self.name = self.name.titleize
+  end
   
   def self.encrypt(pass, salt)
     Digest::SHA1.hexdigest(pass+salt)

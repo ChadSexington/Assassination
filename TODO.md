@@ -9,8 +9,7 @@
 - Add a 'Current Assignment' page accessible by the player.
   - Should show the player their current assignment
   - This should alleviate any email issues that arise
-- Change user first + last name to uppercase BEFORE saving a nickname
-- Create a 'Polls' page where people can suggest 
+- Create a 'Polls' page where people can suggest changes to the game and vote on them
 - Add a 'confirmed' checkbox to admin player edit page
 
 **Less Important**
@@ -42,14 +41,3 @@
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Devise a social model where players can 'message' each other and comment on kills
   - This is absolutely last priority
-
-###List of mailers there should be:
-- Confirm new registrations
-- Welcome after confirmation
-- Round start/new target
-- New target
-- Round stop
-- Mass customized updates (admin form)
-- Individual player email (admin form)
-- Banhammer
-
