@@ -11,7 +11,7 @@
   - This should alleviate any email issues that arise
 - Change user first + last name to uppercase BEFORE saving a nickname
 - Create a 'Polls' page where people can suggest 
-
+- Add a 'confirmed' checkbox to admin player edit page
 
 **Less Important**
 - Finish implementing user authentication.
