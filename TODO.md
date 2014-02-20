@@ -1,5 +1,8 @@
 ###TODO
 ------------------
+- Add a 'Current Assignment' page accessible by the player.
+  - Should show the player their current assignment
+  - This should alleviate any email issues that arise
 - Change user first + last name to uppercase BEFORE saving a nickname
 - Keep track of number of times a player has won
   - Add a 'wins' field to wherever a player is displayed
