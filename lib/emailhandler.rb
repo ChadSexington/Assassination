@@ -21,11 +21,15 @@ class EmailHandler
   
   def start
     @thread = Thread.new do
-      Rails.logger.info "Waiting for next email in queue. Current queue: #{@queue.inspect}"
-      email = @queue.pop
-      puts "Got #{email.inspect} out of queue"
-      safe_mail(email[:method_name], email[:args])
-      sleep 10
+      loop do
+        while @queue.empty? do    
+          Rails.logger.info "Waiting for next email in queue. Current queue: #{@queue.inspect}"
+          sleep 60
+        end
+        email = @queue.pop
+        safe_mail(email[:method_name], email[:args])
+        sleep 10
+      end
     end
   end
 
