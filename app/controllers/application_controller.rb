@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  require 'emailhandler'
+
   def logged_in?
     if session[:player]
       return true
@@ -36,26 +38,8 @@ class ApplicationController < ActionController::Base
   end
 
   def safe_mail(method_name, args)
-    Thread.new {
-      attempts = 1
-      logger.info "Sending email \"#{method_name}\" with arguments: \"#{args.to_s}\"."
-      begin
-        PlayerMailer.send(method_name, *args).deliver
-      rescue Timeout::Error => e
-        logger.error "Email timed out on attempt ##{attempts}."
-        logger.error e.inspect
-        if attempts < 5
-          attempts += 1
-          retry
-        else
-          FailedEmailHandler.add({:method_name => method_name, :args => args})
-          logger.error "Giving up on sending email \"#{method_name}\" after #{attempts} attempts. Adding to queue to attempt at a later time."
-        end
-      rescue => e
-        raise e
-        logger.error "Email \"#{method_name}\" failed to send due to \"#{e.inspect}\""
-      end
-    }
+    @email_handler ||= EmailHandler.new
+    @email_handler.enqueue({:method_name => method_name, :args => args})
   end
 
   helper_method :current_player
@@ -65,4 +49,5 @@ class ApplicationController < ActionController::Base
   helper_method :current_round
   helper_method :kd_ratio
   helper_method :safe_mail
+
 end
