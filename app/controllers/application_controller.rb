@@ -35,11 +35,31 @@ class ApplicationController < ActionController::Base
     "#{kill_count}/#{death_count}"
   end
 
+  def safe_mail(method_name, args)
+      attempts = 1
+      logger.info "Sending email \"#{method_name}\" with arguments: \"#{args.to_s}\"."
+      begin
+        PlayerMailer.send(method_name, *args).deliver
+      rescue Timeout::Error => e
+        logger.error "Email timed out on attempt ##{attempts}."
+        logger.error e.inspect
+        if attempts < 5
+          attempts += 1
+          retry
+        else
+          logger.error "Giving up on sending email \"#{method_name}\" after #{attempts} attempts."
+        end
+      rescue => e
+        raise e
+        logger.error "Email \"#{method_name}\" failed to send due to \"#{e.inspect}\""
+      end
+  end
+
   helper_method :current_player
   helper_method :player_self? 
   helper_method :logged_in?
   helper_method :admin?
   helper_method :current_round
   helper_method :kd_ratio
-
+  helper_method :safe_mail
 end

@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
     @player = Player.new(new_player_params)
     if @player.save
       flash[:success] = "New player created, confirm your account to log in."
-      PlayerMailer.confirmation_email(@player).deliver
+      safe_mail("confirmation_email", @player)
       redirect_to "/players/#{@player.username}/confirmation"
     else
       render 'new'
@@ -116,7 +116,7 @@ class PlayersController < ApplicationController
         @player.confirmed = true
         @player.save
         flash[:success] = "Account for " + @player.name + " confirmed! Welcome to the game!"
-        PlayerMailer.welcome_email(@player).deliver
+        safe_mail("welcome_email", @player)
         redirect_to '/welcome/index'
       else
         flash[:error] = "Account for " + @player.name + " has already been confirmed." 

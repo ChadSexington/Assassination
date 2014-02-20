@@ -41,7 +41,7 @@ private
                                     :active => true,
                                     :round_id => current_round.id)
       new_assignment.save
-      PlayerMailer.new_assignment_email(Player.find(new_assignment.player_id), new_assignment).deliver
+      safe_mail("new_assignment_email", [Player.find(new_assignment.player_id), new_assignment])
     else
       current_round.end(Player.find(assassin_id))
     end

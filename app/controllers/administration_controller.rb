@@ -23,7 +23,7 @@ before_filter :authorize
     @player.banned = false
     if @player.save
       flash[:success] = @player.name + " has been un-banned."
-      PlayerMailer.unban_email(@player).deliver
+      safe_mail("unban_email", @player)
       redirect_to "/administration/players"
     else
       flash[:error] = @player.name + " could not be un-banned."
@@ -38,7 +38,7 @@ before_filter :authorize
     @player.banned = true
     if @player.save
       flash[:success] = @player.name + " has been banned."
-      PlayerMailer.ban_email(@player, reason).deliver
+      safe_mail("ban_email", [@player, reason])
       redirect_to "/administration/players"
     else
       flash[:error] = @player.name + " could not be banned."
@@ -74,17 +74,13 @@ before_filter :authorize
     case email_params[:email_type]
     when "mass_update"
       if recipients == "all"
-        Thread.new {
           Player.where(:confirmed => true, :banned => false).each do |player|
-            PlayerMailer.update_email(player, subject, body).deliver 
+            safe_mail("update_email", [player, subject, body])
           end
-        }
       elsif recipients == "round"
-        Thread.new {
           current_round.players.each do |player|
-            PlayerMailer.update_email(player, subject, body).deliver
+            safe_mail("update_email", [player, subject, body])
           end
-        }
       else
         flash[:error] = "Hidden field missing from form. Contact somebody who has the power."
         redirect_to :back
@@ -92,7 +88,7 @@ before_filter :authorize
     when "individual_email"
       player_id = email_params[:recipients]
       player = Player.find(player_id)
-      PlayerMailer.individual_email(player, subject, body).deliver
+      safe_mail("individual_email", [player, subject, body])
     end
     flash[:success] = "Emails queued."
     redirect_to '/administration/index'
