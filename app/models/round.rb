@@ -8,7 +8,7 @@ class Round < ActiveRecord::Base
   def end(winner)
     if self.active == true
       self.players.each do |player|
-        safe_mail("round_end_email", [player, self, winner])
+        ApplicationController.helpers.safe_mail("round_end_email", [player, self, winner])
       end
       new_wins = winner.wins + 1
       winner.update_attributes(:wins => new_wins)
@@ -63,7 +63,7 @@ private
     self.players.each do |player_id|
       player = Player.find(player_id)
       assignment = self.assignments.where(:player_id => player_id).first
-      safe_mail("round_start_email", [player, self, assignment])  
+      ApplicationController.helpers.safe_mail("round_start_email", [player, self, assignment])  
     end
   end
 
