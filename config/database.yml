@@ -27,7 +27,7 @@ defaults: &defaults
   <<: *<%= ENV['RAILS_DB'] || "mysql" %>
 
 development:
-  <<: *defaults
+  <<: *<%= "sqlite" %>
 
 test: &test
   <<: *defaults
