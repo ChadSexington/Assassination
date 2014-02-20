@@ -23,7 +23,7 @@ class EmailHandler
     @thread = Thread.new do
       loop do
         while @queue.empty? do    
-          sleep 120
+          sleep 30
         end
         email = @queue.pop
         safe_mail(email[:method_name], email[:args])
@@ -40,7 +40,7 @@ class EmailHandler
     rescue Timeout::Error => e
       Rails.logger.error "Email timed out on attempt ##{attempts}."
       Rails.logger.error e.inspect
-      if attempts < 5
+      if attempts < 2
         attempts += 1
         retry
       else
