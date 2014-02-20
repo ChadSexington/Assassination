@@ -24,10 +24,10 @@ defaults: &defaults
   pool: 5
   timeout: 5000
   encoding: utf8
-  <<: *<%= ENV['RAILS_DB'] || "mysql" %>
+  <<: *<%= if ENV['OPENSHIFT_APP_NAME']; "mysql"; else; "sqlite"; end %>
 
 development:
-  <<: *<%= "sqlite" %>
+  <<: *defaults
 
 test: &test
   <<: *defaults
