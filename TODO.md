@@ -2,6 +2,7 @@
 ------------------
 **Most Important**
 
+- Add check box at player registration/edit to auto-enroll in each round or not.
 - Add a no_display field to the kill model so that Kills and deaths with no recap/location/deceased_id/assassin_id can be created
   - Reasoning for this is to move all the existing stats over. If a new one is ever started, this will be unnecessary, but it will not get in the way.
 - Keep track of number of times a player has won
@@ -29,14 +30,11 @@
 - Prettify everything
   - Most admin-facing pages (with the addition of central) were done very quickly, with a focus on functionality over asthetics. Need to go back through and get a real theme going.
 - Finish the player profile page.
-  - Pictures should be cropped to a standard size
   - Allow players to view other player's profiles
     - Need to add links in the kill-feed
-  - Just keep it simple...
   - This should reflect what will be emailed in one of the mailers above
 - Add error checking and validations to all forms
   - Player registration/edit form is completed
-- Add error reporting for custom emails
 - Make the handbook a pdf
   - Maybe make the handbook page read a text file (in markdown) which will be displayed and also offered as a downloadable pdf. Theres a gem for that somewhere...
 - Devise a social model where players can 'message' each other and comment on kills
