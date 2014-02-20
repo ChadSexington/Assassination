@@ -1,16 +1,22 @@
 ###TODO
 ------------------
+**Most Important**
+
+- Add a no_display field to the kill model so that Kills and deaths with no recap/location/deceased_id/assassin_id can be created
+  - Reasoning for this is to move all the existing stats over. If a new one is ever started, this will be unnecessary, but it will not get in the way.
+- Keep track of number of times a player has won
+  - Add a 'wins' field to wherever a player is displayed
 - Add a 'Current Assignment' page accessible by the player.
   - Should show the player their current assignment
   - This should alleviate any email issues that arise
 - Change user first + last name to uppercase BEFORE saving a nickname
-- Keep track of number of times a player has won
-  - Add a 'wins' field to wherever a player is displayed
+- Create a 'Polls' page where people can suggest 
+
+
+**Less Important**
 - Finish implementing user authentication.
   - Finish adding ability for user's to change their password
   - Fix edit player not showing form errors
-
-**After the above is complete, the project should be usable, but likely buggy (alpha stage)**
 - Add specific error messages to
   - Player logins
     - Player does not exist
