@@ -23,8 +23,7 @@ class EmailHandler
     @thread = Thread.new do
       loop do
         while @queue.empty? do    
-          Rails.logger.info "Waiting for next email in queue. Current queue: #{@queue.inspect}"
-          sleep 60
+          sleep 120
         end
         email = @queue.pop
         safe_mail(email[:method_name], email[:args])
