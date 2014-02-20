@@ -5,7 +5,12 @@ RailsApp::Application.configure do
   config.action_mailer.perform_deliveries = true
 
   # Code is not reloaded between requests
-  config.cache_classes = true
+  #   config.cache_classes = true
+  #   Commented, as this is included in threadsafe
+
+  # Make the application safe for threads
+  # see http://tenderlovemaking.com/2012/06/18/removing-config-threadsafe.html
+  config.threadsafe!
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
