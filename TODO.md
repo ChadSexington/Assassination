@@ -6,11 +6,11 @@
   - Reasoning for this is to move all the existing stats over. If a new one is ever started, this will be unnecessary, but it will not get in the way.
 - Keep track of number of times a player has won
   - Add a 'wins' field to wherever a player is displayed
-- Add a 'Current Assignment' page accessible by the player.
-  - Should show the player their current assignment
-  - This should alleviate any email issues that arise
+- Re-do the central page so that everything is one page, no tabs. [wgd3]
+  - Add a 'Current Assignment' page accessible by the player.
+    - Should show the player their current assignment
+    - This should alleviate any email issues that arise
 - Create a 'Polls' page where people can suggest changes to the game and vote on them
-- Add a 'confirmed' checkbox to admin player edit page
 
 **Less Important**
 - Finish implementing user authentication.
