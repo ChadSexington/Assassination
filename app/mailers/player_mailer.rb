@@ -1,11 +1,11 @@
 class PlayerMailer < ActionMailer::Base
-  default from: "no-reply@assassination-gssos.itos.redhat.com"
+  default from: "no-reply@redhat.com"
 
   # Confirm new registrations  
   def confirmation_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: 'Confirm your membership to the OpenSource Assassination Society.')
+    safe_mail(email_with_name,'Confirm your membership to the OpenSource Assassination Society.')
   end
   
   # Welcome a user after they confirm registration
@@ -14,7 +14,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     attachments['The_Assassins_Guide.odt'] = File.read("#{Rails.root}/public/The_Assassins_Guide.odt")
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: 'Welcome to the OpenSource Assassination Society!') 
+    safe_mail(email_with_name,'Welcome to the OpenSource Assassination Society!') 
   end
 
   # This will notify a single player of a new target that has been assigned to them.  
@@ -27,7 +27,7 @@ class PlayerMailer < ActionMailer::Base
     email_with_name = "#{@player.name} <#{@player.email}>"
     attachments.inline["target_photo.#{@image_ext}"] = File.read("#{CONFIG[:data_dir]}public/#{@target.photo.url.split("?").first}")
     attachments.inline['osas_banner.png'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
-    safe_mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
+    safe_mail(email_with_name,'New assignment from the OpenSource Assassination Society')
   end
 
   # This will notify players that a round has started.
@@ -41,7 +41,7 @@ class PlayerMailer < ActionMailer::Base
     attachments.inline["target_photo.#{@image_ext}"] = File.read("#{CONFIG[:data_dir]}public/#{@target.photo.url.split("?").first}")
     attachments.inline['osas_banner.png'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
+    safe_mail(email_with_name,'New round and assignment from the OpenSouce Assassination Society')
   end
 
   # This will notify players that a round has started.
@@ -50,7 +50,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @winner = winner
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: "A winner for round #{@round.id} has been determined! - OpenSouce Assassination Society")
+    safe_mail(email_with_name,"A winner for round #{@round.id} has been determined! - OpenSouce Assassination Society")
   end
 
   # This will send a customized update to all players in the round
@@ -58,7 +58,7 @@ class PlayerMailer < ActionMailer::Base
     @body = body
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: subject)
+    safe_mail(email_with_name,subject)
   end
   
   # This will notify a player of the banhammer that just smashed his face into the ground.
@@ -66,14 +66,14 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @reason = reason
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: 'You have been banned from the OpenSouce Assassination Society')
+    safe_mail(email_with_name,'You have been banned from the OpenSouce Assassination Society')
   end
 
   # This will notify a player that they have been un-banned and can join the game again.
   def unban_email(player)
     @player = player
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: 'Your ban from OpenSouce Assassination Society has been repealed.')
+    safe_mail(email_with_name,'Your ban from OpenSouce Assassination Society has been repealed.')
   end
 
   # This will send an email to an individual player
@@ -82,7 +82,7 @@ class PlayerMailer < ActionMailer::Base
     @player = player
     @body = body
     email_with_name = "#{@player.name} <#{@player.email}>"
-    safe_mail(to: email_with_name, subject: subject)
+    safe_mail(email_with_name,subject)
   end
 
 private
