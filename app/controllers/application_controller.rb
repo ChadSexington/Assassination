@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def safe_mail(method_name, args)
-    Thread {
+    Thread.new {
       attempts = 1
       logger.info "Sending email \"#{method_name}\" with arguments: \"#{args.to_s}\"."
       begin
