@@ -37,7 +37,7 @@ module RailsApp
     config.action_mailer.smtp_settings = {
     address:              'smtp.corp.redhat.com',
     port:                 25,
-    domain:               'corp.redhat.com',
+#    domain:               'corp.redhat.com',
     authentication:       'none',
     enable_starttls_auto: false  }
 
