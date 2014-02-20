@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def safe_mail(method_name, args)
+    Thread {
       attempts = 1
       logger.info "Sending email \"#{method_name}\" with arguments: \"#{args.to_s}\"."
       begin
@@ -53,6 +54,7 @@ class ApplicationController < ActionController::Base
         raise e
         logger.error "Email \"#{method_name}\" failed to send due to \"#{e.inspect}\""
       end
+    }
   end
 
   helper_method :current_player
