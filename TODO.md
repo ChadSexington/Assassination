@@ -11,6 +11,7 @@
   - Add a 'Current Assignment' page accessible by the player.
     - Should show the player their current assignment
     - This should alleviate any email issues that arise
+  - Add a button or link to opt-in/opt-out of the next round (depending on player.auto_enroll)
 - Create a 'Polls' page where people can suggest changes to the game and vote on them
 
 **Less Important**

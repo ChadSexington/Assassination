@@ -69,6 +69,7 @@
             <ul>
               <li>This will make your card look much better
             </ul>
+            <li>Auto-enroll in new rounds will automatically add you to every round. You must opt-out manually if you select this. If you do not select this, you must opt in manually.
           </ul>
         </p>
       </div>
@@ -77,6 +78,10 @@
     <div class="form-group">
       <%= f.label "Notes (optional)", :class => " control-label" %>
         <%= f.text_area :notes, :class => "form-control", :rows => "5", :placeholder => "These notes will show up on your card that is given to the other players. Write something fun (no profanities)!" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label "Auto-enroll in new rounds", :class => "control-label" %>
+        <%= f.check_box :auto_enroll, :class => "form-control" %>
     </div>
   <%= f.submit 'Register', :class => "btn btn-custom" %>
 <% end %>

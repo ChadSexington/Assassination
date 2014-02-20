@@ -14,8 +14,17 @@
   <tbody>
     <%= form_tag '/rounds/start' %>
     <% @players.each do |player| %>
+      <% if player.auto_enroll %>
+        <% checked = true %>
+      <% else %>
+        <% if player.enroll_in_next %>
+          <% checked = true %>
+        <% else %>
+          <% checked = false %>
+        <% end %>
+      <% end %>
       <tr>
-        <td><%= check_box_tag 'player_ids[]', player.id, true %></td>
+        <td><%= check_box_tag 'player_ids[]', player.id, checked %></td>
         <td><%= player.name %></td>
         <td><%= player.email %></td>
         <td><%= player.irc_nick %></td>

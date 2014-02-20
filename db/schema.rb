@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217164453) do
+ActiveRecord::Schema.define(:version => 20140220210705) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(:version => 20140217164453) do
     t.integer  "deceased_id"
     t.text     "recap"
     t.text     "location"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "no_display",  :default => false
   end
 
   create_table "news_posts", :force => true do |t|
@@ -71,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20140217164453) do
     t.string   "nickname"
     t.boolean  "banned",             :default => false
     t.integer  "wins",               :default => 0
+    t.boolean  "auto_enroll",        :default => true
+    t.boolean  "enroll_in_next"
   end
 
   create_table "rounds", :force => true do |t|

@@ -131,7 +131,7 @@ class PlayersController < ApplicationController
 private
   
   def new_player_params
-    params.require(:player).permit!
+    params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo, :auto_enroll, :password, :password_confirm)
     # temp allowing all while authentication is worked out.
     #params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo)
   end
