@@ -63,20 +63,7 @@ private
     self.players.each do |player_id|
       player = Player.find(player_id)
       assignment = self.assignments.where(:player_id => player_id).first
-      attempts = 1
-      logger.info "Sending email to #{player.name}..."
-      begin
-        PlayerMailer.round_start_email(player, self, assignment).deliver
-      rescue Timeout::Error => e
-        logger.error "Email failed to #{player.email} send on attempt ##{attempts}."
-        logger.error e.inspect
-        if attempts < 5
-          attempts += 1
-          retry
-        else
-          logger.error "Giving up on sending email to #{player.email}."
-        end
-      end
+      PlayerMailer.round_start_email(player, self, assignment).deliver  
     end
   end
 
