@@ -48,7 +48,8 @@ class ApplicationController < ActionController::Base
           attempts += 1
           retry
         else
-          logger.error "Giving up on sending email \"#{method_name}\" after #{attempts} attempts."
+          FailedEmailHandler.add({:method_name => method_name, :args => args})
+          logger.error "Giving up on sending email \"#{method_name}\" after #{attempts} attempts. Adding to queue to attempt at a later time."
         end
       rescue => e
         raise e
