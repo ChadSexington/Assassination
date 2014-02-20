@@ -7,8 +7,12 @@ class EmailHandler
   def enqueue(email)
     Rails.logger.info "Adding email to queue: #{email.inspect}."
     @queue << email
-#    start unless running?
-    start
+    if running?
+      Rails.logger.info "Thread already started, not starting again"
+    else
+      Rails.logger.info "Starting email handler thread..."
+      start
+    end
   end
   
   def running?
@@ -16,13 +20,13 @@ class EmailHandler
   end
   
   def start
-#    @thread = Thread.new do
+    @thread = Thread.new do
       Rails.logger.info "Waiting for next email in queue. Current queue: #{@queue.inspect}"
       email = @queue.pop
       puts "Got #{email.inspect} out of queue"
       safe_mail(email[:method_name], email[:args])
       sleep 10
-#    end
+    end
   end
 
   def safe_mail(method_name, args)
