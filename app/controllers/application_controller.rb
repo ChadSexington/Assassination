@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
   end
 
   def safe_mail(method_name, args)
-    @email_handler ||= EmailHandler.new
-    @email_handler.enqueue({:method_name => method_name, :args => args})
+    @@email_handler ||= EmailHandler.new
+    @@email_handler.enqueue({:method_name => method_name, :args => args})
   end
 
   helper_method :current_player

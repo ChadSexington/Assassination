@@ -1,4 +1,7 @@
 class Round < ActiveRecord::Base
+
+  require 'emailhandler'
+
   attr_accessible :end_time, :start_time, :active, :id 
   has_many :assignments
   serialize :players
@@ -8,7 +11,7 @@ class Round < ActiveRecord::Base
   def end(winner)
     if self.active == true
       self.players.each do |player|
-        ApplicationController.helpers.safe_mail("round_end_email", [player, self, winner])
+        safe_mail("round_end_email", [player, self, winner])
       end
       new_wins = winner.wins + 1
       winner.update_attributes(:wins => new_wins)
@@ -63,8 +66,16 @@ private
     self.players.each do |player_id|
       player = Player.find(player_id)
       assignment = self.assignments.where(:player_id => player_id).first
-      ApplicationController.helpers.safe_mail("round_start_email", [player, self, assignment])  
+      safe_mail("round_start_email", [player, self, assignment])  
     end
   end
+
+private
+
+  def safe_mail(method_name, args)
+    @@email_handler ||= EmailHandler.new
+    @@email_handler.enqueue({:method_name => method_name, :args => args})
+  end
+
 
 end
