@@ -6,8 +6,8 @@ class EmailHandler
 
   def enqueue(email)
     Rails.logger.info "Adding email to queue: #{email.inspect}."
-    start unless running?
     @queue << email
+    start unless running?
   end
   
   def running?
