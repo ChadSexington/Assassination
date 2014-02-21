@@ -2,4 +2,4 @@
 # Tese can be called in code with CONFIG[:key]
 project_name: "Assassination"
 admin_email: "tiwillia@redhat.com"
-data_dir: "/home/tiwillia/Projects/Assassination"
+data_dir: "/home/tiwillia/Projects/Assassination/"
