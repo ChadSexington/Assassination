@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(:version => 20140220210705) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
+    t.string   "target"
+    t.integer  "status"
     t.text     "elim_location"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false

@@ -26,6 +26,7 @@ validates_length_of :notes, :within => 0..250
 validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 validates_presence_of :email, :name, :irc_nick, :photo
 validates_presence_of :password, :password_confirmation, :salt, :if => :password_validation_required?
+validates_attachment_content_type :photo, :content_type => %w(image/jpeg image/jpg image/png image/gif)
 
 # Before the initial save, set attributes defined using other attributes
 before_save :prettify

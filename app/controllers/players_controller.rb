@@ -131,16 +131,16 @@ class PlayersController < ApplicationController
 private
   
   def new_player_params
-    params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo, :auto_enroll, :password, :password_confirm)
+    params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo, :auto_enroll, :password, :password_confirmation, :auto_enroll)
     # temp allowing all while authentication is worked out.
     #params.require(:player).permit(:name, :email, :irc_nick, :notes, :photo)
   end
 
   def edit_player_params
     if admin?
-      params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo, :admin, :confirmed)
+      params.require(:player).permit(:name, :email, :password, :password_confirmation, :irc_nick, :notes, :photo, :admin, :confirmed, :auto_enroll)
     else
-      params.require(:player).permit(:name, :email, :password, :password_confirm, :irc_nick, :notes, :photo)
+      params.require(:player).permit(:name, :email, :password, :password_confirmation, :irc_nick, :notes, :photo, :auto_enroll)
     end
   end
   

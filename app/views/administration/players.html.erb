@@ -8,18 +8,40 @@
       <th>Admin</th>
       <th>Confirmed</th>
       <th>K/D ratio</th>
+      <th>Wins</th>
+      <th>Auto-enroll</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @players.each do |player| %>
       <tr>
-        <td><%= link_to player.name, edit_player_path(player) %></td>
+        <td class="center"><%= link_to player.name, edit_player_path(player) %></td>
         <td><%= player.email %></td>
         <td><%= player.irc_nick %></td>
-        <td><%= if player.admin; "Yes"; else; "No"; end %></td>
-        <td><%= if player.confirmed; "Yes"; else; "No"; end %></td>
+        <td>
+            <% if player.admin %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %> 
+        </td>
+        <td>
+            <% if player.confirmed %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %> 
+        </td>
         <td><%= kd_ratio(player) %></td>
+        <td><%= player.wins %></td>
+        <td>
+            <% if player.auto_enroll %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %> 
+        </td>
         <% if player.banned %>
           <td><%= link_to 'Un-ban Player', "/administration/unban_player/#{player.id}", data: { confirm: "Are you sure you would like to UN-ban #{player.name}?" }, :class => "btn btn-default" %></td>
         <% else %>
