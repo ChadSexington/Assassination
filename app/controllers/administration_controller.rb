@@ -3,6 +3,7 @@ class AdministrationController < ApplicationController
 before_filter :authorize
 
   def index
+    flash[:error] = flash[:error]
     redirect_to '/welcome/central'
   end
 
