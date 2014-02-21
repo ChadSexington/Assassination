@@ -4,6 +4,7 @@ before_filter :authorize
 
   def index
     flash[:error] = flash[:error]
+    flash[:success] = flash[:success]
     redirect_to '/welcome/central'
   end
 
