@@ -1,7 +1,7 @@
-<h1>Ban <%= @player.name %></h1>
+<h1>Ban Player</h1>
 <div class="well">
   <%= form_tag "/administration/ban_player/#{@player.id}" do %>
-    <h3>Player to ban: <%= @player.name %></h3>
+    <h3>Player to ban: <font color="#DF0101"><%= @player.name %></font></h3>
     <%= text_area_tag 'reason', "", :placeholder => "Reason the player is to be banned. NOTE: This will be emailed to the player.", :rows => 15, :class => "form-control" %><br>
     <div class="row"><div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div></div>
     <%= submit_tag "Ban #{@player.name}", data: { confirm: "Are you sure you would like to ban #{@player.name}? This can be undone at any time." }, :class => "btn btn-custom" %>

@@ -2,17 +2,37 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Completed</th>
       <th>Owner</th>
       <th>Target</th>
-      <th>Status</th>
+      <th>Completed Time</th>
+      <th>Location</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @assignments.each do |ass| %>
+      <% player = Player.find(ass.player_id) %>
+      <% target = Player.find(ass.target_id) %>
       <tr>
-        <td><%= link_to Player.find(ass.player_id).name, edit_assignment_path(ass) %></td>
-        <td><%= link_to Player.find(ass.target_id).name %></td>
-        <td><%= if ass.active; "Ongoing"; else; "Completed"; end%></td>
+        <td>
+            <% if not ass.active %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %> 
+        </td>
+        <td><%= link_to player.name, player_path(player) %></td>
+        <td><%= link_to target.name, player_path(target) %></td>
+        <td><% if not ass.active %>
+              <%= player.kills.last.created_at %>
+            <% end %>
+        </td>
+        <td><% if not ass.active %>
+              <%= player.kills.last.location %>
+            <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_assignment_path(ass), :class => "btn btn-default" %>
       </tr>
     <% end %>
   </tbody>
