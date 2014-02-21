@@ -9,6 +9,8 @@
       <th>IRC nick</th>
       <th>Admin</th>
       <th>K/D ratio</th>
+      <th>Wins</th>
+      <th>Auto-enroll</th>
     </tr>
   </thead>
   <tbody>
@@ -28,8 +30,22 @@
         <td><%= player.name %></td>
         <td><%= player.email %></td>
         <td><%= player.irc_nick %></td>
-        <td><%= if player.admin; "Yes"; else; "No"; end %></td>
-        <td><%= Kill.where(:player_id => player.id).count %>/<%= Death.where(:player_id => player.id).count %></td>
+        <td>
+            <% if player.admin %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+        </td>
+        <td><%= kd_ratio(player) %></td>
+        <td><%= player.wins %></td>
+        <td>
+            <% if player.auto_enroll %>
+              <span class="glyphicon glyphicon-ok"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
