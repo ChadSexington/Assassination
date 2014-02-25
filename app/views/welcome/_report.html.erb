@@ -4,7 +4,11 @@
   <div class="row">
     <div class="col-sm-4">
       <%= label_tag 'deceased_id', 'Deceased party', :class => "control-label" %>
-        <%= select_tag 'deceased_id', options_from_collection_for_select(@players, :id, :name, session[:player].assignments.where(:active => true).first.target_id), :class => "form-control" %>
+        <% if session[:player].assignments.where(:active => true).empty? %>
+          <%= select_tag 'deceased_id', options_from_collection_for_select(@players, :id, :name, :class => "form-control" %>
+        <% else %>
+          <%= select_tag 'deceased_id', options_from_collection_for_select(@players, :id, :name, session[:player].assignments.where(:active => true).first.target_id), :class => "form-control" %>
+        <% end %>
     </div>
   </div><br>
   <%= label_tag 'location', 'Kill Location', :class => "control-label" %>
