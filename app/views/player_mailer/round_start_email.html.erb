@@ -1,5 +1,8 @@
 <%= render 'banner' %>
-<p>Round <%= @round.id %> is underway.
+<% if @round.start_time > DateTime.now %>
+  <p>Round <%= @round.id %> is underway!</p>
+<% else %>
+  <p>Round <%= @round.id %> will being at <%= @round.start_time %>. Please note this time, as no kills before this time will be counted.</p>
 <br><br>
 Below is your new target:
 <br>

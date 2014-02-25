@@ -4,8 +4,12 @@
   <%= form_tag '/administration/send_mail' do %>
     <%= hidden_field_tag 'email_type', 'mass_update' %>
     <h4>Send to:</h4>
-    <%= radio_button_tag 'recipients', 'round', true %> Current Round Participants<br>
-    <%= radio_button_tag 'recipients', 'all' %> All Registered Players<br><br>
+    <% if current_round.nil? %>
+      <%= radio_button_tag 'recipients', 'round', false, :disabled => true %> <span class="text-muted">Current Round Participants</span><br>
+    <% else %>
+      <%= radio_button_tag 'recipients', 'round', false, :disabled => false %> Current Round Participants<br>
+    <% end %>
+    <%= radio_button_tag 'recipients', 'all', true %> All Registered Players<br><br>
     <%= text_field_tag 'subject', "", :placeholder => "Subject", :class => "form-control" %>
     <%= text_area_tag 'body', "", :placeholder => "The 'OSAS Bulletin' banner will be displayed above the text in this field. Markdown rendering is utilized. See below for a markdown cheat sheet.", :rows => 15, :class => "form-control" %><br>
 <div class="row"><div class="col-sm-offset-8 text-muted">Rendered with markdown | <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">Markdown Help</a></div></div>

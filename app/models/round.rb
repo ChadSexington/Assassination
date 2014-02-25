@@ -7,16 +7,42 @@ class Round < ActiveRecord::Base
   serialize :players
 
   after_create :generate_assignments
-  
+
+  def start_round
+    self.update_attributes(:started => true)
+  end
+
+  def started?
+    self.started
+  end
+ 
+  def end_round
+    ass = assignments.where(:active => true)
+    case
+    when ass.count > 1
+      self.end("NOWINNER")
+    when ass.count == 1
+      self.end(Player.find(ass.first.player_id))
+    end      
+  end
+ 
   def end(winner)
     if self.active == true
-      self.players.each do |player|
-        safe_mail("round_end_email", [player, self, winner])
+      if winner.class == "String".class
+        self.players.each do |player|
+          safe_mail("round_end_email_no_winner", [player, self])
+        end
+        self.update_attributes(:active => false)
+        self.deactivate_assignments
+      else
+        self.players.each do |player|
+          safe_mail("round_end_email", [player, self, winner])
+        end
+        new_wins = winner.wins + 1
+        winner.update_attributes(:wins => new_wins)
+        self.update_attributes(:active => false)
+        self.deactivate_assignments
       end
-      new_wins = winner.wins + 1
-      winner.update_attributes(:wins => new_wins)
-      self.update_attributes(:active => false)
-      self.deactivate_assignments
     else
       Rails.logger.error "Tried to end active round"
       Rails.logger.error self.inspect
@@ -31,7 +57,8 @@ class Round < ActiveRecord::Base
   end
 
 private
-  
+
+ 
   def generate_assignments
     if self.players.empty?
       return nil

@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
@@ -28,4 +29,5 @@ $(document).ready(function() {
 		bodyContainer.css({"padding-top":"100px"});
 		console.log("Changed the top padding")
 	}
+  $('#round_start_datetime').datetimepicker();
 });

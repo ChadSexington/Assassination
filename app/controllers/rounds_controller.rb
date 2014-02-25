@@ -1,26 +1,25 @@
 class RoundsController < ApplicationController
 
+before_filter :authorize
+
   def new
-    Round.all.each do |round|
-      if round.active?
-        flash[:error] = "There is already an active round with id: #{round.id}"
-        redirect_to :back
-      end
+    if current_round
+      flash[:error] = "There is already an active round with id: #{round.id}"
+      redirect_to :back
     end
     @players = Player.where(:confirmed => true, :banned => false)
     @round = Round.new
   end
 
   def current
-    @round = Round.where(:active => true).first
-    if @round.nil?
+    if current_round.nil?
       flash[:error] = "There is currently no active round."
       redirect_to '/administration/index'
     end 
   end
  
   def end_round
-    if @round = Round.where(:active => true).first
+    if current_round 
       @round = current_round
       @players = Array.new
       current_round.players.each do |player_id|
@@ -49,7 +48,8 @@ class RoundsController < ApplicationController
       player = Player.find(player_id)
       @round.players.push(player)
     end
-    @round.start_time = Time.now
+    @round.start_time = parse_date(start_params[:start_time])
+    @round.end_time = parse_date(start_params[:end_time])
     if @round.save
       flash[:success] = "Round created"
       redirect_to '/rounds/current'
@@ -70,6 +70,13 @@ private
   
   def end_params
     params.permit(:winner)
+  end
+
+  def authorize
+    if not admin?
+      flash[:error] = "You are not an administrator"
+      redirect_to '/welcome/index'
+    end
   end
 
 end

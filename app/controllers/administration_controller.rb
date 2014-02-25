@@ -51,10 +51,15 @@ before_filter :authorize
   def assignments
     @players = Player.all
     if current_round.nil?
-      flash[:error] = "There are no active assignments"
+      flash[:error] = "There is no active round."
       redirect_to '/administration/index'
-    else
-      @assignments = Assignment.where(round_id: current_round.id)
+    else 
+      if current_round.started?
+        @assignments = Assignment.where(round_id: current_round.id)
+      else
+        flash[:error] = "The round #{current_round.id} has not yet started. Round #{current_round.id} will start at #{current_round.start_time}"
+        redirect_to '/administration/index'
+      end
     end
   end
   
