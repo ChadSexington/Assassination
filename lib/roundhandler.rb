@@ -5,12 +5,12 @@ class RoundHandler
   end
 
   def enqueue(work)
-    Rails.logger.info "Adding email to queue: #{email.inspect}."
-    @queue << email
+    Rails.logger.info "Adding work to queue: #{work.inspect}."
+    @queue << work
     if running?
       Rails.logger.info "Thread already started, not starting again"
     else
-      Rails.logger.info "Starting email handler thread..."
+      Rails.logger.info "Starting round handler thread..."
       start
     end
   end

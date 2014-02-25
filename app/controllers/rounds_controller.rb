@@ -4,7 +4,7 @@ before_filter :authorize
 
   def new
     if current_round
-      flash[:error] = "There is already an active round with id: #{round.id}"
+      flash[:error] = "There is already an active round with id: #{current_round.id}"
       redirect_to :back
     end
     @players = Player.where(:confirmed => true, :banned => false)
@@ -15,7 +15,10 @@ before_filter :authorize
     if current_round.nil?
       flash[:error] = "There is currently no active round."
       redirect_to '/administration/index'
-    end 
+    else
+      @round = current_round
+    end
+    
   end
  
   def end_round

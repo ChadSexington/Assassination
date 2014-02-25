@@ -11,12 +11,15 @@
     <%= render 'feed' %>
   </div>
   <div class="tab-pane" id="report">
-    <% if current_round %>
+    <% if current_round && current_round.started? %>
       <%= render 'report' %>
     <% else %>
       <h1>Report a Kill</h1>
       <p class="lead">
-        You do not currently have an active assignment.
+        The round has not started yet.<br>
+        <% if current_round %>
+          The next round will start at <%= current_round.start_time %>
+        <% end %>
       </p>
     <% end %>
   </div>

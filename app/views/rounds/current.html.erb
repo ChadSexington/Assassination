@@ -1,4 +1,15 @@
 <h1>Round <%= @round.id %></h1>
 <div class="well">
-  <h4>Start date: </h4><%= @round.created_at %><br>
+  <dl class="dl-horizontal">
+    <dt>Activation date:</dt>
+      <dd><%= @round.created_at %></dd>
+    <dt>Start date:</dt>
+      <dd><%= @round.start_time %></dd>
+    <dt>End date:</dt>
+      <dd><%= @round.end_time %></dd>
+    <dt>Number of players:</dt>
+      <dd><%= @round.players.count %></dd>
+    <dt>Active Assignments:</dt>
+      <dd><%= @round.assignments.where(:active => true).count %></dd>
+  </dl>
 </div>
