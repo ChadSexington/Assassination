@@ -7,6 +7,7 @@ class Round < ActiveRecord::Base
   serialize :players
 
   after_create :generate_assignments
+  after_create :add_handler
 
   def start_round
     self.update_attributes(:started => true)
@@ -97,11 +98,15 @@ private
     end
   end
 
-private
-
   def safe_mail(method_name, args)
     @@email_handler ||= EmailHandler.new
     @@email_handler.enqueue({:method_name => method_name, :args => args})
+  end
+
+  def add_handler
+    @@round_handler ||= RoundHandler.new
+    @@round_handler.enqueue({:action => "start", :time => self.start_time, :round_id => self.id})
+    @@round_handler.enqueue({:action => "stop", :time => self.end_time, :round_id => self.id})
   end
 
 

@@ -27,7 +27,7 @@ class RoundHandler
         end
         work = @queue.pop
         if work[:time] > DateTime.now
-          do_work(work[:action], work[:time])
+          do_work(work[:action], work[:time], work[:round_id])
         else
           @queue.push(work)
         end
@@ -35,7 +35,7 @@ class RoundHandler
     end
   end
 
-  def do_work(action, time)
+  def do_work(action, time, round_id)
     case action
     when "start"
       Rails.logger.info "ROUNDHANDLER: Starting round"
