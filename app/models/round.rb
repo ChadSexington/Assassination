@@ -23,7 +23,7 @@ class Round < ActiveRecord::Base
     self.started
   end
  
-  def end_round
+  def stop_round
     ass = assignments.where(:active => true)
     case
     when ass.count > 1
