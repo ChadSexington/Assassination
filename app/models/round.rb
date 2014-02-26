@@ -11,7 +11,12 @@ class Round < ActiveRecord::Base
   after_create :add_handler
 
   def start_round
-    self.update_attributes(:started => true)
+    self.update_attributes(:started => true) 
+    self.players.each do |player_id|
+      player = Player.find(player_id)
+      assignment = self.assignments.where(:player_id => player_id).first
+      safe_mail("round_start_email", [player, self, assignment])  
+    end
   end
 
   def started?
@@ -88,26 +93,20 @@ private
                               :target_id => target_id,
                               :active => true)   
     end
-    Thread.new { send_assignment_emails } 
-  end
-
-  def send_assignment_emails
     self.players.each do |player_id|
       player = Player.find(player_id)
       assignment = self.assignments.where(:player_id => player_id).first
-      safe_mail("round_start_email", [player, self, assignment])  
+      safe_mail("round_activate_email", [player, self, assignment])  
     end
   end
 
   def safe_mail(method_name, args)
-    @@email_handler ||= EmailHandler.new
-    @@email_handler.enqueue({:method_name => method_name, :args => args})
+    EMAIL_HANDLER.enqueue({:method_name => method_name, :args => args})
   end
 
   def add_handler
-    @@round_handler ||= RoundHandler.new
-    @@round_handler.enqueue({:action => "start", :time => self.start_time, :round_id => self.id})
-    @@round_handler.enqueue({:action => "stop", :time => self.end_time, :round_id => self.id})
+    ROUND_HANDLER.enqueue({:action => "start", :time => self.start_time, :round_id => self.id})
+    ROUND_HANDLER.enqueue({:action => "stop", :time => self.end_time, :round_id => self.id})
   end
 
 

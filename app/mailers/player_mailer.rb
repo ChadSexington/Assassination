@@ -30,8 +30,23 @@ class PlayerMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'New assignment from the OpenSource Assassination Society')
   end
 
-  # This will notify players that a round has started.
+  # This will notify player that a round has started
   def round_start_email(player, round, assignment)
+    @round = round
+    @player = player
+    @assignment = assignment
+    @target = Player.find(assignment.target_id)
+    @target_kd_ratio = kd_ratio(@target)
+    @image_ext = @player.photo.url.split("?").first.split(".").last
+    attachments.inline["target_photo.#{@image_ext}"] = File.read("#{CONFIG[:data_dir]}public/#{@target.photo.url.split("?").first}")
+    attachments.inline['osas_banner.png'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: 'A new round has begun! | OpenSouce Assassination Society')
+  end
+
+  # This will notify players that a round has been activated.
+  # This is different from started because the round is not actually running until the start_time has passed.
+  def round_activate_email(player, round, assignment)
     @round = round
     @player = player
     @assignment = assignment
@@ -44,13 +59,21 @@ class PlayerMailer < ActionMailer::Base
     mail(to: email_with_name, subject: 'New round and assignment from the OpenSouce Assassination Society')
   end
 
-  # This will notify players that a round has started.
+  # This will notify players that a round has ended.
   def round_end_email(player, round, winner)
     @round = round
     @player = player
     @winner = winner
     email_with_name = "#{@player.name} <#{@player.email}>"
     mail(to: email_with_name, subject: "A winner for round #{@round.id} has been determined! - OpenSouce Assassination Society")
+  end
+
+  # This will notify players that a round has ended, without a winner.
+  def round_end_email_no_winner(player, round)
+    @round = round
+    @player = player
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: "Round #{@round.id} has ended! - OpenSouce Assassination Society")
   end
 
   # This will send a customized update to all players in the round

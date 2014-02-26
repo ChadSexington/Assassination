@@ -38,8 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def safe_mail(method_name, args)
-    @@email_handler ||= EmailHandler.new
-    @@email_handler.enqueue({:method_name => method_name, :args => args})
+    EMAIL_HANDLER.enqueue({:method_name => method_name, :args => args})
   end
   
   # Returns a date object from a given string
