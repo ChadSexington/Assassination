@@ -12,7 +12,7 @@
     </div>
   </div><br>
   <%= label_tag 'location', 'Kill Location', :class => "control-label" %>
-    <%= text_field_tag 'location', "" , :placeholder => "Ex: The Hat Rack", :class => "form-control" %><br>
+    <%= select_tag 'location', options_for_select(CONFIG[:location_list], CONFIG[:location_list].first), :class => "form-control" %><br>
   <%= label_tag 'recap', 'Kill Description', :class => "control-label" %>
     <%= text_area_tag 'recap', "", :placeholder => "Recap the kill here, this will be included in kill updates", :class => "form-control", :rows => 15 %><br>
   <%= submit_tag 'Submit Kill', :class => "btn btn-default" %>

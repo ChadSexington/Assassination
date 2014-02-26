@@ -3,3 +3,8 @@
 project_name: "Assassination"
 admin_email: "tiwillia@redhat.com"
 data_dir: "/home/tiwillia/Projects/Assassination/"
+location_list:
+  - "In the hallway"
+  - "Near a desk"
+  - "In the Hat Rack"
+  - "In a meeting"

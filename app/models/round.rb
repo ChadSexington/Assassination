@@ -3,7 +3,7 @@ class Round < ActiveRecord::Base
   require 'emailhandler'
   require 'roundhandler'
 
-  attr_accessible :end_time, :start_time, :active, :id 
+  attr_accessible :end_time, :start_time, :active, :id, :started 
   has_many :assignments
   serialize :players
 

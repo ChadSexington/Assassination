@@ -30,4 +30,5 @@ $(document).ready(function() {
 		console.log("Changed the top padding")
 	}
   $('#round_start_datetime').datetimepicker();
+  $('#round_end_datetime').datetimepicker();
 });

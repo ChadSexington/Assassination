@@ -53,10 +53,10 @@
 <div class="row">
   <div class="col-sm-4">
     <%= label_tag :start_time, "Date and time to start round", :class => "control-label" %>
-    <%= text_field_tag :start_time, (Time.now + 5.minutes).strftime('%m/%d/%y %H:%M'), :id => "round_start_datetime", :class => "form-control" %> 
+    <%= text_field_tag :start_time, (Time.now + 5.minutes).strftime('%m/%d/%Y %H:%M'), :id => "round_start_datetime", :class => "form-control" %> 
     <span class="help-block">Default: 5 minutes from when this page was loaded.</span>
     <%= label_tag :end_time, "Date and time to end round", :class => "control-label" %>
-    <%= text_field_tag :end_time, (Time.now + 1.week ).strftime('%m/%d/%y %H:%M') , :id => "round_start_datetime", :class => "form-control" %>
+    <%= text_field_tag :end_time, (Time.now + 1.week ).strftime('%m/%d/%Y %H:%M') , :id => "round_end_datetime", :class => "form-control" %>
     <span class="help-block">Default: 1 week from when this page was loaded.</span>
   <div id="round_start_datetime">
   </div> 

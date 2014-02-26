@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   #   mm/dd/yy hh:mm
   def parse_date(date_s)
     date = "#{date_s} -0500"
-    DateTime.strptime(date, "%m/%d/%y %H:%M %z")
+    DateTime.strptime(date, "%m/%d/%Y %H:%M %z")
   end
 
   helper_method :current_player

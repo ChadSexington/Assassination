@@ -5,12 +5,12 @@ class RoundHandler
   end
 
   def enqueue(work)
-    Rails.logger.info "Adding work to queue: #{work.inspect}."
+    Rails.logger.info "ROUNDHANDLER: Adding work to queue: #{work.inspect}."
     @queue << work
     if running?
-      Rails.logger.info "Thread already started, not starting again"
+      Rails.logger.info "ROUNDHANDLER: Thread already started, not starting again"
     else
-      Rails.logger.info "Starting round handler thread..."
+      Rails.logger.info "ROUNDHANDLER: Starting round handler thread..."
       start
     end
   end
@@ -26,10 +26,12 @@ class RoundHandler
           sleep 30
         end
         work = @queue.pop
-        if work[:time] > DateTime.now
+        if work[:time] < DateTime.now
           do_work(work[:action], work[:time], work[:round_id])
         else
+          Rails.logger.info "ROUNDHANDLER: Work in the queue but not ready. Waiting..."
           @queue.push(work)
+          sleep 30
         end
       end
     end
@@ -39,10 +41,14 @@ class RoundHandler
     case action
     when "start"
       Rails.logger.info "ROUNDHANDLER: Starting round"
-      current_round.start_round
+      begin
+        Round.find(round_id).start_round
+      rescue => e
+        Rails.logger.error "ROUNDHANDLER: ERROR could not start round #{e.inspect}"
+      end
     when "stop"
       Rails.logger.info "ROUNDHANDLER: Stopping round"
-      current_round.stop_round
+      Round.find(round_id).stop_round
     end
   end
 
