@@ -48,7 +48,11 @@ class RoundHandler
       end
     when "stop"
       Rails.logger.info "ROUNDHANDLER: Stopping round"
-      Round.find(round_id).stop_round
+      begin
+        Round.find(round_id).stop_round
+      rescue => e
+        Rails.logger.error "ROUNDHANDLER: ERROR could not stop round #{e.inspect}"
+      end
     end
   end
 
