@@ -1,4 +1,13 @@
 <h1>Administer assignments</h1>
+<h4>Round <%= @assignments.last.round_id %>
+<% if current_round.nil? %>
+  <span class="text-danger">(ENDED)</span>
+<% elsif current_round.started? %>
+  <span class="text-muted">(Ongoing)</span>
+<% else %>
+  <span class="text-muted">(Not Started)</span>
+<% end %>
+</h4>
 <table class="table table-striped">
   <thead>
     <tr>
