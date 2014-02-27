@@ -74,3 +74,6 @@ gem 'redcarpet'
 # Requires rmagick
 gem 'paperclip' 
 gem 'rmagick'
+
+# Extra debugging abilities
+gem 'pry', :group => :development

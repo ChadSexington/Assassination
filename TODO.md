@@ -2,11 +2,7 @@
 ------------------
 **Most Important**
 
-- Handle rounds being started at a Round.start_time
-  - Add a round_end_email_no_winner
-- Test all of the new round stuff that was implemented.
-  - Still need to add when starting rounds to use the roundhandler instead of manually doing shit.
-- Set the 'kill location' as a drop-down from a per-determined list of options (set options in config/application.yml)
+- Add a parse_date helper method that outputs the date from DateTime in a pretty string
 - Re-do the central page so that everything is one page, no tabs. [wgd3]
   - Add a 'Current Assignment' page accessible by the player.
     - Should show the player their current assignment
@@ -14,6 +10,7 @@
   - Add a button or link to opt-in/opt-out of the next round (depending on player.auto_enroll)
 
 **Less Important**
+- Set the 'kill location' as a drop-down from a per-determined list of options (set options in config/application.yml)
 - Add a login page
   - Change all "you are not logged in" redirects to this page
 - Create a 'Polls' page where people can suggest changes to the game and vote on them
