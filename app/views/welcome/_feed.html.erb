@@ -10,7 +10,7 @@
 			<p><%= kill.recap %></p>
 		</div>
 		<div class="panel-footing">	
-			<span class="text-muted"><%= kill.created_at.strftime('%F') %></span>
+			<span class="text-muted"><%= parse_date kill.created_at %></span>
 		</div>
 	</div>
 <% end %>

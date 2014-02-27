@@ -44,13 +44,18 @@ class ApplicationController < ActionController::Base
   # Returns a date object from a given string
   # This expects the date to be in the format:
   #   mm/dd/yy hh:mm
-  def parse_date(date_s)
+  def parse_date_s(date_s)
     date = "#{date_s} -0500"
     DateTime.strptime(date, "%m/%d/%Y %H:%M %z")
   end
 
+  def parse_date(date)
+    date.strftime("%m/%d/%Y %H:%M") 
+  end
+
   helper_method :current_player
   helper_method :parse_date
+  helper_method :parse_date_s
   helper_method :player_self? 
   helper_method :logged_in?
   helper_method :admin?

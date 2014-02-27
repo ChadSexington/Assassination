@@ -51,8 +51,8 @@ before_filter :authorize
       player = Player.find(player_id)
       @round.players.push(player)
     end
-    @round.start_time = parse_date(start_params[:start_time])
-    @round.end_time = parse_date(start_params[:end_time])
+    @round.start_time = parse_date_s(start_params[:start_time])
+    @round.end_time = parse_date_s(start_params[:end_time])
     if @round.save
       flash[:success] = "Round created"
       redirect_to '/rounds/current'
