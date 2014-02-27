@@ -33,7 +33,7 @@
         <td><%= link_to player.name, player_path(player) %></td>
         <td><%= link_to target.name, player_path(target) %></td>
         <td><% if not ass.active %>
-              <%= ass.updated_at %>
+              <%= parse_date ass.updated_at %>
             <% end %>
         </td>
         <td><%= link_to 'Edit', edit_assignment_path(ass), :class => "btn btn-default" %>
