@@ -2,6 +2,7 @@
 ------------------
 **Most Important**
 
+- News post show in the reverse order by date. This needs to be fixed.
 - Add a way to view old assignments. The assignment view should show assignments from the previous round instead of nothing if there is no round.
 - Add a parse_date helper method that outputs the date from DateTime in a pretty string
 - Re-do the central page so that everything is one page, no tabs. [wgd3]
