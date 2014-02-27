@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 
   def central
     if session[:player]
-      @news = NewsPost.where(:public => true)
+      @news = NewsPost.order('created_at DESC').limit(10).where(:public => true)
       @kills = Kill.order('created_at DESC').limit(20).where(:no_display => false)
       @kill = Kill.new
       @players = Player.where(:confirmed => true)

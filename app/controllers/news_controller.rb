@@ -1,7 +1,8 @@
 class NewsController < ApplicationController
 
   def index
-    @news = NewsPost.all
+    @news = NewsPost.order('created_at DESC').limit(10).all
+
   end
 
   def new
