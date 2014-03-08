@@ -2,8 +2,6 @@ class PlayersController < ApplicationController
 
   def new
     @player = Player.new()
-    #TODO delete this flash when the game goes live
-    flash[:success] = "The game is not live. Registration will not carry over when the game starts."
   end
 
   def create
