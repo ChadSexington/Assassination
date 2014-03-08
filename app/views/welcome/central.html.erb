@@ -18,7 +18,7 @@
       <p class="lead">
         The round has not started yet.<br>
         <% if current_round %>
-          The next round will start at <%= current_round.start_time %>
+          The next round will start at <%= parse_date current_round.start_time %>
         <% end %>
       </p>
     <% end %>
