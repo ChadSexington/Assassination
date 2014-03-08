@@ -74,11 +74,12 @@ private
     num_of_players = self.players.count
     assignment_hash = Hash.new
     while finished == false
-      targets = self.players.shuffle
-      self.players.each do |player|
-        new_target_id = targets.pop.id
-        if new_target_id == player.id
-          break
+      players = self.players.shuffle
+      players.each_with_index do |player,index|
+        if index != (num_of_players - 1)
+          new_target_id = players[index + 1].id
+        else
+          new_target_id = players[0].id
         end
         assignment_hash[player.id] = new_target_id
       end

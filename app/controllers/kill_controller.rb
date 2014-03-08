@@ -9,7 +9,13 @@ class KillController < ApplicationController
                          :recap => kill_params[:recap],
                          :location => kill_params[:location])
       @death.save
-      pass_on_assignment(current_player.id, kill_params[:deceased_id])
+
+      assassin_assignment = Player.find(current_player.id).assignments.where(:active => true).last
+      if assassin_assignment.target_id == kill_params[:deceased_id]
+        pass_on_normal_assignment(current_player.id, kill_params[:deceased_id])
+      else
+        pass_on_extra_assignment(current_player.id, kill_params[:deceased_id])
+      end
       flash[:success] = "Kill reported!"
       redirect_to '/central'
     else
@@ -27,8 +33,9 @@ private
   def kill_params
     params.permit(:deceased_id, :location, :recap)
   end
-  
-  def pass_on_assignment(assassin_id, deceased_id)
+
+  # This will pass on an assignment when the killer finished his assigned target
+  def pass_on_normal_assignment(assassin_id, deceased_id)
     assassin_assignment = Player.find(assassin_id).assignments.where(:active => true).last
     deceased_assignment = Player.find(deceased_id).assignments.where(:active => true).last
     assassin_assignment.update_attributes(:active => false)
@@ -43,6 +50,26 @@ private
       new_assignment.save
       safe_mail("new_assignment_email", [Player.find(new_assignment.player_id), new_assignment])
     else
+      current_round.end(Player.find(assassin_id))
+    end
+  end
+
+  # This will pass on an assignment when the killer kills someone other than their assignment.
+  def pass_on_extra_assignment(assassin_id, deceased_id)
+    deceased_assignment = Player.find(deceased_id).assignments.where(:active => true).last
+    affected_assignment = Assignment.where(:active => true, :target_id => deceased_id).last
+    deceased_assignment.update_attributes(:active => false)
+    affected_assignment.update_attributes(:active => false)
+    
+    if deceased_assignment.target_id != affected_assignment.player_id
+      new_assignment = Assignment.new(:player_id => affected_assignment.player_id,
+                                      :target_id => deceased_assignment.target_id,
+                                      :active => true,
+                                      :round_id => current_round.id)
+      new_assignment.save
+      safe_mail("new_assignment_email", [Player.find(new_assignment.player_id), new_assignment])
+    else
+      # This may need additional tuning. Tests need to be run.
       current_round.end(Player.find(assassin_id))
     end
   end
