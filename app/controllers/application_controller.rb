@@ -28,7 +28,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_round
-    Round.where(:active => true).last
+    if not Round.where(:active => true).empty?
+      Round.where(:active => true).last
+    else
+      nil
+    end
   end
   
   def kd_ratio(player)

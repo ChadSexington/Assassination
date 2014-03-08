@@ -44,6 +44,13 @@
           </form>
         <% else %>
           <ul class="nav navbar-nav navbar-right">
+            <% if current_round  %>
+              <% if current_round.started? %>
+              <li><p class="navbar-text" style="color:#000000">Round <%= current_round.id %> is in progress!</p></li>
+              <% else %>
+              <li><p class="navbar-text" style="color:#000000">Round <%= current_round.id %> begins <%= parse_date current_round.start_time %></p></li> 
+              <% end %>
+            <% end %>
             <li><a href="/players/<%= session[:player].username  %>"><%= session[:player].email  %></a></li>
             <li><a href="/players/logout">Logout</a></li>
           </ul> 
@@ -74,9 +81,12 @@
               <li><%= link_to 'Send Emails', '/administration/emails' %></li>
               <li><%= link_to 'Players', '/administration/players' %></li>
               <li><%= link_to 'Assignments', '/administration/assignments' %></li>
-              <li><%= link_to 'Current Round', '/rounds/current' %></li>
-              <li><%= link_to 'End Current Round', '/rounds/current/end' %></li>
-              <li><%= link_to 'Start New Round', '/rounds/new' %></li>
+              <% if current_round %>
+                <li><%= link_to 'Current Round', '/rounds/current' %></li>
+                <li><%= link_to 'End Current Round', '/rounds/current/end' %></li>
+              <% else %>
+                <li><%= link_to 'Start New Round', '/rounds/new' %></li>
+              <% end %>
 	</ul>
       </div>
  
