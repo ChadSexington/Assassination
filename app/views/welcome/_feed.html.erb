@@ -3,7 +3,7 @@
 	<% deceased = Player.find(kill.deceased_id) %>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Assassin <%= assassin.nickname %> has struck again...</h3>
+			<h3 class="panel-title">Assassin <%= assassin.nickname %> has killed <%= deceased.nickname %>...</h3>
 		</div>
 		<div class="panel-body">
 			<%= image_tag assassin.photo.url, :class => "float-left col-md-3" %>
