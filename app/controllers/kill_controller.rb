@@ -20,11 +20,11 @@ class KillController < ApplicationController
           other_kill = Kill.new(:player_id => kill_params[:deceased_id], 
                                 :deceased_id => current_player.id, 
                                 :location => kill_params[:location], 
-                                :recap => "(From other player) " + kill_params[:recap])
+                                :recap => kill_params[:recap])
           other_kill.save
           other_death = Death.new(:assassin_id => kill_params[:deceased_id],
                                   :player_id => current_player.id,
-                                  :recap => "(From other player) " + kill_params[:recap],
+                                  :recap => kill_params[:recap],
                                   :location => kill_params[:location])
           other_death.save
 
@@ -74,7 +74,6 @@ private
 
     if assassin_old_target_id == deceased_id && deceased_old_target_id != assassin_id
       # give player with assassin as target the decaseds old target
-      Rails.logger.info "double_kill FIRST"
       assignment_with_assassin_as_target = Assignment.where(:target_id => assassin_id, :active => true).last
       assignment_with_assassin_as_target.update_attributes(:active => false)
       new_assignment = Assignment.new(:player_id => assignment_with_assassin_as_target.player_id,
@@ -83,7 +82,6 @@ private
                                     :round_id => current_round.id)
       new_assignment.save
     elsif deceased_old_target_id == assassin_id && assassin_old_target_id != deceased_id
-      Rails.logger.info "double_kill SECOND"
       # give player with decased as target the assisgin's old target
       assignment_with_deceased_as_target = Assignment.where(:target_id => deceased_id, :active => true).first
       assignment_with_deceased_as_target.update_attributes(:active => false)
@@ -93,10 +91,8 @@ private
                                     :round_id => current_round.id)
       new_assignment.save
     elsif assassin_old_target_id == deceased_id && deceased_old_target_id == assassin_id && Assignment.where(:active => true).empty?
-      Rails.logger.info "double_kill THIRD"
       current_round.end(false)
     elsif assassin_old_target_id == deceased_id && deceased_old_target_id == assassin_id
-      Rails.logger.info "double_kill LAST"
       Rails.logger.info "Double kill happened with both players having each other as assignment, two other assignments still exist"
       # Do nothing, other assignments should be fine.
     end 
