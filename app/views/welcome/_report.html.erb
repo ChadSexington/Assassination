@@ -13,6 +13,9 @@
   </div><br>
   <%= label_tag 'location', 'Kill Location', :class => "control-label" %>
     <%= select_tag 'location', options_for_select(CONFIG[:location_list], CONFIG[:location_list].first), :class => "form-control" %><br>
+  <%= label_tag 'double_kill', 'Double Kill?', :class => "control-label" %>
+    <%= check_box_tag 'double_kill', true, false, :class => "from-control" %>
+  <p class="help-block">A double kill is when both parties kill each other at the same time.</p>
   <%= label_tag 'recap', 'Kill Description', :class => "control-label" %>
     <%= text_area_tag 'recap', "", :placeholder => "Recap the kill here, this will be included in kill updates", :class => "form-control", :rows => 15 %><br>
   <%= submit_tag 'Submit Kill', :class => "btn btn-default" %>

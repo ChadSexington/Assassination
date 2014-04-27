@@ -34,8 +34,8 @@ class Round < ActiveRecord::Base
   end
  
   def end(winner)
-    if self.active == true
-      if winner.class == "String".class
+    if self.active
+      if winner.class != Player
         self.players.each do |player|
           safe_mail("round_end_email_no_winner", [player, self])
         end
@@ -51,7 +51,7 @@ class Round < ActiveRecord::Base
         self.deactivate_assignments
       end
     else
-      Rails.logger.error "Tried to end active round"
+      Rails.logger.error "Tried to end inactive round"
       Rails.logger.error self.inspect
       return false
     end

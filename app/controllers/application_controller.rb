@@ -49,8 +49,9 @@ class ApplicationController < ActionController::Base
   # This expects the date to be in the format:
   #   mm/dd/yy hh:mm
   def parse_date_s(date_s)
-    date = "#{date_s} -0500"
-    DateTime.strptime(date, "%m/%d/%Y %H:%M %z")
+    date = "#{date_s} -0400"
+    datetime = DateTime.strptime(date, "%m/%d/%Y %H:%M %z")
+    datetime
   end
 
   def parse_date(date)
