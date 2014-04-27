@@ -72,8 +72,6 @@ private
     deceased_old_target_id = deceased_assignment.target_id
     assassin_old_target_id = assassin_assignment.target_id
 
-    binding.pry
-
     if assassin_old_target_id == deceased_id && deceased_old_target_id != assassin_id
       # give player with assassin as target the decaseds old target
       Rails.logger.info "double_kill FIRST"
