@@ -53,6 +53,7 @@ class PlayerMailer < ActionMailer::Base
     @target = Player.find(assignment.target_id)
     @target_kd_ratio = kd_ratio(@target)
     @image_ext = @player.photo.url.split("?").first.split(".").last
+    @start_time = @round.start_time.strftime("%m/%d/%Y %H:%M") 
     attachments.inline["target_photo.#{@image_ext}"] = File.read("#{CONFIG[:data_dir]}public/#{@target.photo.url.split("?").first}")
     attachments.inline['osas_banner.png'] = File.read("#{Rails.root}/app/assets/images/OSAS_card_banner.png")
     email_with_name = "#{@player.name} <#{@player.email}>"
