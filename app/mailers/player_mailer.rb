@@ -1,5 +1,6 @@
 class PlayerMailer < ActionMailer::Base
-  default from: "no-reply@assassination-gssos.itos.redhat.com"
+
+  default from: "gss-assassination-game@redhat.com"
 
   # Confirm new registrations  
   def confirmation_email(player)
