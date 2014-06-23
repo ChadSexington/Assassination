@@ -30,10 +30,15 @@ class KillController < ApplicationController
 
           pass_on_double_kill_assignment(current_player.id, kill_params[:deceased_id])
         else
-          if assassin_assignment.target_id == kill_params[:deceased_id]
-            pass_on_normal_assignment(current_player.id, kill_params[:deceased_id])
+          if assassin_assignment.nil?
+            # If the assassin has no assignment, just kill the player and move on.
+            pass_on_extra_assignment(current_player.id, kill_params[:deceased_id]) 
           else
-            pass_on_extra_assignment(current_player.id, kill_params[:deceased_id])
+            if assassin_assignment.target_id == kill_params[:deceased_id]
+              pass_on_normal_assignment(current_player.id, kill_params[:deceased_id])
+            else
+              pass_on_extra_assignment(current_player.id, kill_params[:deceased_id])
+            end
           end
         end
         flash[:success] = "Kill reported!"
