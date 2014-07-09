@@ -2,6 +2,9 @@
 ------------------
 **Most Important**
 
+- Players cannot access other player's pages
+- Add ability for player in double kill that didn't report the kill to edit the recap given.
+ - That, or change the way double kills are displayed on the kill feed (easier 4 sure)
 - Re-do the central page so that everything is one page, no tabs. [wgd3]
   - Add a 'Current Assignment' page accessible by the player.
     - Should show the player their current assignment
