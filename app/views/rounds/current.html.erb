@@ -9,6 +9,12 @@
           <dd><%= parse_date @round.start_time %></dd>
         <dt>End date:</dt>
           <dd><%= parse_date @round.end_time %></dd>
+        <dt>Kill -9 start:</dt>
+          <% if @round.kill9 %>
+          <dd><%= parse_date @round.kill9_start_time %></dd>
+          <% else %>
+          <dd>-</dd>
+          <% end %>
         <dt>Number of players:</dt>
           <dd><%= @round.players.count %></dd>
         <dt>Active Assignments:</dt>

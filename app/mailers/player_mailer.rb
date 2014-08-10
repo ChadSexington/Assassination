@@ -78,6 +78,14 @@ class PlayerMailer < ActionMailer::Base
     mail(to: email_with_name, subject: "Round #{@round.id} has ended! - OpenSouce Assassination Society")
   end
 
+  def kill9_start_email(player, round, live_players)
+    @round = round
+    @player = player
+    @live_players = live_players
+    email_with_name = "#{@player.name} <#{@player.email}>"
+    mail(to: email_with_name, subject: "Kill -9 rule now in affect for Round #{@round.id} - OpenSouce Assassination Society")
+  end
+
   # This will send a customized update to all players in the round
   def update_email(player, subject, body)
     @body = body
@@ -113,8 +121,7 @@ class PlayerMailer < ActionMailer::Base
 private
 
   def kd_ratio(player)
-    kill_count = Kill.where(:player_id => player.id).count
-    death_count = Death.where(:player_id => player.id).count
+    kill_count, death_count = player.kd_ratio
     "#{kill_count}/#{death_count}"
   end
 
