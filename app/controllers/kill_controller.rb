@@ -36,7 +36,6 @@ class KillController < ApplicationController
                           :recorded => record_kill)
     if !Assignment.where(:target_id => @kill.deceased_id, :active => true).empty? || !current_round.kill9_players.empty?
       if @kill.save
-        Rails.logger.debug "FINDME Killing player"
         current_round.player_killed(kill_params[:deceased_id])
         @death = Death.new(:assassin_id => current_player.id,
                            :player_id => kill_params[:deceased_id],
@@ -54,6 +53,7 @@ class KillController < ApplicationController
                                 :location => kill_params[:location], 
                                 :recap => kill_params[:recap])
           other_kill.save
+          current_round.player_killed(current_player.id)
           other_death = Death.new(:assassin_id => kill_params[:deceased_id],
                                   :player_id => current_player.id,
                                   :recap => kill_params[:recap],
