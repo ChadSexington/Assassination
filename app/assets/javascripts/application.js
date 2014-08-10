@@ -31,4 +31,15 @@ $(document).ready(function() {
 	}
   $('#round_start_datetime').datetimepicker();
   $('#round_end_datetime').datetimepicker();
+
+  $('#kill9').on ('change', enableKill9Options);
+  
+  function enableKill9Options() {
+    if ($('#kill9').is(':checked') ){
+      $('#kill9_start_time').prop("disabled", false);
+    } else {
+      $('#kill9_start_time').prop("disabled", true);
+    }
+  }
+
 });

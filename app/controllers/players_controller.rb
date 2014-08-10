@@ -46,6 +46,7 @@ class PlayersController < ApplicationController
           flash[:error] = "You do not have access to this player's profile"
           redirect_to '/welcome/index'
         end
+        @kills, @deaths = @player.kd_ratio
       else
         flash[:error] = "The player #{params[:id]} does not exist"
         redirect_to '/welcome/index'  

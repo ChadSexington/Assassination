@@ -18,9 +18,9 @@
           <dt>Wins</dt>
           <dd><%= @player.wins %></dd>
           <dt>Kills</dt>
-          <dd><%= Kill.where(:player_id => @player.id).count %></dd>
+          <dd><%= @kills %></dd>
           <dt>Deaths</dt>
-          <dd><%= Death.where(:player_id => @player.id).count %></dd>
+          <dd><%= @deaths %></dd>
         </dl>
         <div class="well well-small">
           <%= @player.notes %>

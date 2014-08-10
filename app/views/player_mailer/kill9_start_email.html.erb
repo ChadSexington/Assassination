@@ -1,0 +1,11 @@
+<h1>Kill -9 in effect!</h1><br><br>
+<p>Starting now, all dead players have been revived! If you were dead, you are now allowed to kill the live players! If you are a live player, beware! The dead have risen and are thirsty for a kill.</p>
+<p>The following is a list of players that are still alive:</p>
+<ul>
+  <% @live_players.each do |player| %>
+    <li><%= player.name %></li>
+  <% end %>
+</ul>
+<p>Please be sure to follow the rules. Below is an excerpt from the Assassin's Handbook:</p>
+<code>To keep rounds moving faster than the 14 day time limit and to allow players that have been killed something to do while waiting, the kill -9 Initiative will be invoked after 7 days from start of the round. All dead players will be given a list of active players and will be allowed to target them, still following normal game and round rules.  They will not be able to claim victory of the round or add to their current stats however. If killed again from a defending active player they are out for the remaining round.</code>
+<%= render 'signature' %>

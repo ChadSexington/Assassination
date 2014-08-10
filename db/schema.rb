@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225020326) do
+ActiveRecord::Schema.define(:version => 20140810184730) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "player_id"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(:version => 20140225020326) do
     t.string   "assassin_id"
     t.text     "recap"
     t.text     "location"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "recorded",    :default => true
   end
 
   create_table "kills", :force => true do |t|
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20140225020326) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "no_display",  :default => false
+    t.boolean  "recorded",    :default => true
   end
 
   create_table "news_posts", :force => true do |t|
@@ -83,9 +85,14 @@ ActiveRecord::Schema.define(:version => 20140225020326) do
     t.datetime "end_time"
     t.boolean  "active"
     t.text     "players"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "started",    :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "started",          :default => false
+    t.boolean  "kill9"
+    t.datetime "kill9_start_time"
+    t.text     "kill9_players"
+    t.text     "live_player_ids"
+    t.integer  "winner_id"
   end
 
 end

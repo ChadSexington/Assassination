@@ -53,6 +53,10 @@ before_filter :authorize
     end
     @round.start_time = parse_date_s(start_params[:start_time])
     @round.end_time = parse_date_s(start_params[:end_time])
+    if start_params[:kill9]
+      @round.kill9_start_time = parse_date_s(start_params[:kill9_start_time])
+      @round.kill9 = true
+    end
     if @round.save
       flash[:success] = "Round created"
       redirect_to '/rounds/current'

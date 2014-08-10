@@ -90,6 +90,12 @@ before_create :generate_confirmation_code
     self.username  
   end
 
+  def kd_ratio
+    kills = Kill.where(:player_id => self.id, :recorded => true).count
+    deaths = Death.where(:player_id => self.id, :recorded => true).count
+    return kills, deaths
+  end
+
 private
 
   def prettify

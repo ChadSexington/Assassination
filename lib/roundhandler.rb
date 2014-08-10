@@ -53,7 +53,15 @@ class RoundHandler
       rescue => e
         Rails.logger.error "ROUNDHANDLER: ERROR could not stop round #{e.inspect}"
       end
+    when "activate_kill9"
+      Rails.logger.info "ROUNDHANDLER: Enabling kill9 for round."
+      begin
+        Round.find(round_id).activate_kill9
+      rescue => e
+        Rails.logger.error "ROUNDHANDLER: ERROR could not enable kill9 for round #{e.inspect}"
+      end
     end
+    
   end
 
 end
